@@ -29,6 +29,7 @@ services:
     depends_on:
       - nginx
       - web
+
   django:
     build: BackEnd/.
     command: python3 /app/CodeMatter/manage.py runserver 0.0.0.0:8000
