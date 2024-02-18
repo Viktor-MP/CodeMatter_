@@ -1,0 +1,180 @@
+main {
+    background-color: black;
+}
+
+.instruction-case {
+    position: relative;
+    background-color: black;
+    height: 80vh;
+}
+
+.qr-instruction {
+    color: white;
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    margin-top: 45rem;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+}
+
+.text-top, .text-bottom {
+    height: 50%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+
+.instruction {
+    padding: 2rem 0;
+    position: absolute;
+}
+
+.instruction p {
+    margin-top: .7rem;
+    font-size: 3rem;
+    display: block;
+}
+
+.text-top {
+    border-bottom: .5rem solid white;
+}
+
+
+.instruction {
+    animation: showTopText 1.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    bottom: 0;
+    transform: translate(0, 100%);
+}
+
+.text-top p:first-child {
+    color: var(--my-color);
+    font-size: 4rem;
+}
+
+.text-bottom {
+    font-size: 4rem;
+    bottom: 0;
+}
+
+.text-bottom p {
+    margin-top: .25rem;
+    animation: showBottomText .8s;
+    animation-delay: 1.75s;
+    animation-fill-mode: forwards;
+    top: 0;
+    transform: translate(0, -100%);
+}
+
+.button-ui {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 65%;
+    width: 80vw;
+}
+
+.ui-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    box-sizing: border-box;
+    padding: 2rem 1.6rem;
+    color: #fff;
+    font: 600 2rem Menlo, Roboto Mono, monospace;
+    background: var(--my-color);
+    border: none;
+    border-radius: calc(var(--my-border-radius) * 4);
+    cursor: pointer;
+    transition: box-shadow .3s ease; /* Добавляем плавный переход для анимации */
+    overflow: hidden;
+    margin-top: 3rem;
+}
+
+.ui-btn:hover {
+    box-shadow: 0 0 2rem rgba(255, 255, 255, 0.43); /* Добавляем тень при наведении */
+}
+
+.ui-btn img {
+    height: 5.5rem;
+    margin-right: 2rem;
+    filter: invert(1000);
+}
+
+.ui-btn a {
+    text-decoration: none;
+    font-size: 3rem;
+    color: white;
+    letter-spacing: .1rem;
+    box-sizing: border-box;
+    position: relative;
+    background: inherit;
+    margin-right: 2rem;
+}
+
+.ui-btn a::before {
+    box-sizing: border-box;
+    position: absolute;
+    content: "";
+}
+
+.ui-btn:hover, .ui-btn:focus {
+    background: rgb(51, 51, 51);
+}
+
+.ui-btn:hover a, .ui-btn:focus a {
+    color: white;
+}
+
+.ui-btn:hover a::before, .ui-btn:focus a::before {
+    animation: chitchat linear both 1.2s;
+}
+
+.whatsapp_btn {
+    background-color: #25D366;
+}
+.telegram_btn {
+    background-color: #229ED9;
+}
+
+.img_post_qr {
+    width: 100%;
+}
+
+@keyframes showTopText {
+    0% { transform: translate3d(0, 100%, 0)}
+    100% { transform: translate3d(0, 0, 0)}
+}
+@keyframes showBottomText {
+    0% { transform: translate3d(0, -100%, 0)}
+    100% { transform: translate3d(0, 0, 0)}
+}
+
+@keyframes chitchat {
+    0% {content: "#ø";}
+    5% {content: ".ã¬";}
+    10% {content: "^{ø";}
+    15% {content: "-…≈ƒ";}
+    20% {content: "$_ç¢©";}
+    25% {content: "№:0•†ƒ";}
+    30% {content: "#{+¶•¥†";}
+    35% {content: "@}-?∞®¥?"}
+    40% {content: "?{4%†¥§¶*";}
+    45% {content: "@}?¢∞®¥¶&^";}
+    50% {content: "?@%¨ˆ?¢¶&";}
+    55% {content: ";1}µ &≤…"; right: 0;}
+    60% {content: "?{%:%∫√"; right: 0;}
+    65% {content: "|{f[4@"; right: 0;}
+    70% {content: "{4%0%"; right: 0;}
+    75% {content: "'1_0"; right: 0;}
+    80% {content: "{0%"; right: 0;}
+    85% {content: "]>"; right: 0;}
+    90% {content: "∫"; right: 0;}
+    95% {content: "¡"; right: 0;}
+    100% {content: ""; right: 0;}
+}
+

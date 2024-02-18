@@ -1,0 +1,561 @@
+/*========================Code Matter img content=========================== */
+
+/*EVENTS###############*/
+.remove-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
+.show-not-news {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: fadeInOpacity 3s forwards;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.show-not-news-h {
+  font-size: 7rem;
+  color: #a2a2a2;
+}
+
+.show-event {
+  display: none;
+  position: absolute;
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+  background-color: rgba(175, 174, 174, 0.08);
+}
+
+.event {
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vw;
+  height: 40vw;
+  border-radius: calc(var(--my-border-radius) * 4);
+}
+
+.cursesSection {
+  margin: 0 1vw;
+}
+
+.closed-event {
+  position: absolute;
+  cursor: pointer;
+  color: white;
+  z-index: 2;
+  font-size: 4rem;
+  bottom: 94%;
+  left: 94.5%;
+  transition: 0.5s;
+}
+
+/*###############*/
+
+.about_company {
+  position: relative;
+}
+
+.about_company img {
+  width: 100vw;
+}
+
+.imgContent {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 40%;
+  transform: translateY(-25%);
+  color: white;
+  padding: 0 2vw;
+  font-family: var(--my-font);
+}
+.about_company h1 {
+  font-size: 3.5rem;
+}
+
+.about_company h2 {
+  font-size: 3rem;
+}
+
+.about_company p {
+  margin-top: 1rem;
+  line-height: 2.5rem;
+  font-size: 2rem;
+  text-align: left;
+  color: #a4a4a4;
+}
+
+/*========================curses=========================== */
+
+.curses {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.post-box {
+  width: 45%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.content_img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.content_img img {
+  width: 100%;
+}
+
+.boxContent {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.box_image {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.textCont > :first-child {
+  /* white-space: nowrap; */
+  font-size: 3.5rem;
+  margin-bottom: 4rem;
+}
+
+.boxContent .coursType {
+  font-size: 2.5rem;
+}
+
+.boxContent p {
+  line-height: 3rem;
+  font-size: 2rem;
+}
+
+.prev,
+.next {
+  z-index: 1;
+  width: 6rem;
+  height: 8rem;
+  color: var(--my-color);
+  font-weight: bold;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.6s ease;
+  top: calc(50% - 5rem);
+  border-radius: calc(var(--my-border-radius) / 2);
+  position: absolute;
+}
+
+.prev {
+  left: -2rem;
+}
+
+.next {
+  right: -2rem;
+}
+
+.dot-box {
+  position: absolute;
+  top: 0;
+  right: -2rem;
+  align-self: flex-start;
+  width: max-content;
+}
+
+.dot {
+  height: 2rem;
+  width: 2rem;
+  margin: 0.4vh 0.1vh;
+  background-color: #717171;
+  border-radius: 50%;
+  display: flex;
+  transition: all 0.6s ease;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++*/
+
+@property --progress-value {
+  inherits: false;
+  syntax: "<integer>";
+  initial-value: 0;
+}
+
+@keyframes html-progress {
+  to {
+    --progress-value: calc(
+      var(--animation-start-curses) / var(--my-peples-max) *
+        var(--my-peples-min)
+    );
+  }
+}
+
+.progress_bar_containe {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: space-between;
+}
+
+.progress_bar_containe a {
+  text-decoration: none;
+}
+.progress-bar {
+  height: 8rem;
+  min-width: 8rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2rem;
+}
+
+.progress-bar::before {
+  counter-reset: percentage var(--progress-value);
+  content: counter(percentage) "%";
+  font-size: 2rem;
+}
+
+.progress-html {
+  background: radial-gradient(closest-side, white 79%, transparent 80%),
+    conic-gradient(
+      var(--my-color) calc(var(--progress-value) * 1%),
+      rgba(96, 96, 96, 0.2) 0
+    );
+  animation: html-progress 4s 1 forwards;
+}
+
+.progress-html::before {
+  animation: html-progress 4s 1 forwards;
+}
+
+.progress_bar_containe .pa {
+  margin-bottom: 4rem;
+  font-size: 2.7rem;
+  width: min-content;
+}
+
+progress {
+  width: 0;
+  height: 0;
+}
+
+.more-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 6rem;
+  border: 0.5rem solid;
+  border-color: transparent;
+  font-size: 2.5rem;
+  background-color: inherit;
+  border-radius: calc(var(--my-border-radius) * 2);
+  font-weight: 600;
+  color: var(--my-color);
+  box-shadow: 0 0 0 0.2rem var(--my-color);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.more-button svg {
+  position: absolute;
+  width: 3rem;
+  fill: var(--my-color);
+  z-index: 1;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.more-button .arr-1 {
+  right: 2rem;
+}
+
+.more-button .arr-2 {
+  left: -25%;
+}
+
+.more-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--my-color);
+  border-radius: calc(var(--my-border-radius) * 2);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.more-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-1.5rem);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/*_____________________*/
+
+.trainers {
+  display: flex;
+  justify-content: space-evenly;
+  font-family: var(--my-font);
+  align-items: center;
+  height: max-content;
+  background-color: var(--my-background-collor);
+  margin: 0 3rem;
+  border-radius: calc(var(--my-border-radius) * 4);
+  padding: 5rem 0;
+}
+
+.card {
+  transform: translate(0%);
+  background: #000;
+  width: clamp(150px, 40vw, 400px);
+  overflow: hidden;
+  border-radius: calc(var(--my-border-radius) * 3);
+  box-shadow: -0.1rem 3rem 4rem 1rem rgba(127, 126, 126, 0.92);
+  transition: 1s;
+}
+
+.card .image {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--my-font);
+}
+
+.card .image img {
+  width: 100%;
+  height: 100%;
+}
+
+.details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  transition: 0.4s;
+  transform-origin: left;
+  transform: perspective(1000px) rotateY(-90deg);
+  border-radius: var(--my-border-radius);
+}
+
+.card ul {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  background-color: #000;
+}
+
+.card li {
+  font-size: clamp(12px, 2rem, 28px);
+  list-style: none;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 2rem;
+  padding: 1rem 0;
+  margin: -1px 0;
+  background-color: var(--my-color);
+}
+.card :first-child {
+  font-size: 2.5rem;
+}
+
+.card a {
+  padding: 1rem;
+  font-size: 1rem;
+  color: #fff;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--my-border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: 0.5s;
+  background-color: #262626;
+}
+
+.card img {
+  width: 2rem;
+}
+
+.feedbacks {
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  background-color: black;
+}
+
+.feedbacks::-webkit-scrollbar {
+  height: 0;
+}
+
+.scroll-bar {
+  display: flex;
+  width: max-content;
+  transition: translate 3s;
+  translate: 90vw;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  position: relative;
+  height: 45rem;
+  width: 55rem;
+  border-radius: calc(var(--my-border-radius) * 4);
+  margin: 0 2vw;
+}
+
+.feed-name {
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  font-size: 2rem;
+}
+
+.feed-name:before {
+  content: "";
+  display: inline-block;
+  align-content: center;
+  border: black solid 0.1rem;
+  width: 1rem;
+  margin: 0 0.2rem 0.5rem 0;
+}
+
+.feed-text {
+  font-size: 2rem;
+  padding: 4rem;
+}
+
+/* if hover posibel */
+
+@media (hover: hover) {
+  .closed-event:hover {
+    color: var(--my-color);
+    transition: 0.5s;
+  }
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(120, 118, 118, 0.8);
+  }
+  .dot:hover {
+    cursor: pointer;
+    background-color: var(--my-color);
+  }
+
+  .more-button:hover {
+    box-shadow: 0 0 0 1.5rem transparent;
+    color: black;
+  }
+  .more-button:hover .arr-1 {
+    right: -25%;
+  }
+  .more-button:hover .arr-2 {
+    left: 2rem;
+  }
+  .more-button:hover .text {
+    transform: translateX(2rem);
+  }
+  .more-button:hover svg {
+    fill: black;
+  }
+  .more-button:hover .circle {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+  }
+
+  .post_choose_we:hover .post_choose_we_img {
+    border-bottom: 4px solid var(--my-color);
+  }
+}
+.card:hover {
+  transform: translateY(-3%) rotateX(20deg) translateZ(0);
+  box-shadow: -0.1rem 5rem 10rem 1rem rgba(127, 126, 126, 0.92);
+}
+
+.card:hover .image > img {
+  opacity: 0.5;
+}
+.card:hover .details {
+  transition: 0.5s;
+  transform: perspective(1000px) rotateY(0deg);
+}
+.card a:hover {
+  background: inherit;
+}
+
+/* if hover is not posibel `espesali for phones */
+@media (hover: none) {
+  .closed-event:active {
+    color: var(--my-color);
+    transition: 0.5s;
+  }
+  .prev:active,
+  .next:active {
+    background-color: rgba(120, 118, 118, 0.8);
+  }
+  .dot:active {
+    cursor: pointer;
+    background-color: var(--my-color);
+  }
+  .more-button:active {
+    scale: 0.95;
+    box-shadow: 0 0 0 4px var(--my-color);
+  }
+  .post_choose_we:active .post_choose_we_img {
+    border-bottom: 4px solid var(--my-color);
+  }
+  /* .card:active {
+    transform: translateY(-3%) rotateX(20deg) translateZ(0);
+    box-shadow: -0.1rem 5rem 10rem 1rem rgba(127, 126, 126, 0.92);
+  }
+  
+  .card:active .image > img {
+    opacity: 0.5;
+  }
+  .card:active .details {
+    transition: 0.5s;
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  .card a:active {
+    background: inherit;
+  } */
+}

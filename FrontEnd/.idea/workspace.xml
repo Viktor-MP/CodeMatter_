@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3c9a878e-c057-417d-bd88-9a5678a179ec" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../CodeMatter" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2Ynhaqpknmo4YAEYraPbNe4iUSE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/samveltorosyan/projects/CodeMatter/FrontEnd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../CodeMatter/.nginx/ssl" />
+      <recent name="$PROJECT_DIR$/../CodeMatter" />
+      <recent name="$PROJECT_DIR$/../CodeMatter/frontend/src/media/soc-icons" />
+      <recent name="$PROJECT_DIR$/../CodeMatter/frontend" />
+      <recent name="$PROJECT_DIR$/../CodeMatter/bot" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../CodeMatter/frontend/src/media/soc-icons" />
+      <recent name="$PROJECT_DIR$/../CodeMatter/frontend/src/media" />
+      <recent name="$PROJECT_DIR$/../CodeMatter/frontend/src/.well-known/pki-validation" />
+      <recent name="$PROJECT_DIR$/../CodeMatter/frontend/src" />
+      <recent name="$PROJECT_DIR$/../CodeMatter" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name=".create_ssl.sh" type="ShConfigurationType" temporary="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/../CodeMatter/.nginx/ssl/.create_ssl.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/../CodeMatter/.nginx/ssl" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name=".create_ssl.sh" type="ShConfigurationType" temporary="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/../CodeMatter/.nginx/ssl/.create_ssl.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/../CodeMatter/.nginx/ssl" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Shell Script..create_ssl.sh" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3c9a878e-c057-417d-bd88-9a5678a179ec" name="Changes" comment="" />
+      <created>1701167318649</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701167318649</updated>
+      <workItem from="1701167321603" duration="2361000" />
+      <workItem from="1701169774896" duration="35219000" />
+      <workItem from="1701368955397" duration="3333000" />
+      <workItem from="1701466105972" duration="1202000" />
+      <workItem from="1701638170163" duration="110683000" />
+      <workItem from="1702296836208" duration="8180000" />
+      <workItem from="1702416238189" duration="1766000" />
+      <workItem from="1702488697637" duration="599000" />
+      <workItem from="1702494741611" duration="1200000" />
+      <workItem from="1702515408529" duration="10964000" />
+      <workItem from="1702627844938" duration="15250000" />
+      <workItem from="1702674212716" duration="1556000" />
+      <workItem from="1702913060660" duration="4782000" />
+      <workItem from="1703084833496" duration="6328000" />
+      <workItem from="1703123735918" duration="17828000" />
+      <workItem from="1703279599414" duration="6387000" />
+      <workItem from="1703333076974" duration="2422000" />
+      <workItem from="1703457195121" duration="2791000" />
+      <workItem from="1703503666528" duration="4851000" />
+      <workItem from="1703595016208" duration="49241000" />
+      <workItem from="1703952138256" duration="1299000" />
+      <workItem from="1703960896373" duration="17696000" />
+      <workItem from="1704202454484" duration="3582000" />
+      <workItem from="1704228019831" duration="10874000" />
+      <workItem from="1704398006885" duration="20360000" />
+      <workItem from="1704647173718" duration="3576000" />
+      <workItem from="1704651529139" duration="72000" />
+      <workItem from="1704652016257" duration="583000" />
+      <workItem from="1704652693983" duration="9000" />
+      <workItem from="1704652759415" duration="882000" />
+      <workItem from="1704653747522" duration="8483000" />
+      <workItem from="1704712169516" duration="3411000" />
+      <workItem from="1704726123206" duration="9304000" />
+      <workItem from="1704746041386" duration="14362000" />
+      <workItem from="1704826669655" duration="14047000" />
+      <workItem from="1704907535420" duration="1178000" />
+      <workItem from="1704921482443" duration="856000" />
+      <workItem from="1704923996837" duration="3122000" />
+      <workItem from="1704998687649" duration="32532000" />
+      <workItem from="1705182869644" duration="5756000" />
+      <workItem from="1705418824478" duration="10727000" />
+      <workItem from="1705518535087" duration="5275000" />
+      <workItem from="1705683229062" duration="1474000" />
+      <workItem from="1705689541502" duration="41473000" />
+      <workItem from="1705938349041" duration="19421000" />
+      <workItem from="1706109114645" duration="6601000" />
+      <workItem from="1706293222022" duration="13497000" />
+      <workItem from="1706531732118" duration="4003000" />
+      <workItem from="1706723767069" duration="14016000" />
+      <workItem from="1707009669322" duration="8592000" />
+      <workItem from="1707350086308" duration="9453000" />
+      <workItem from="1707439924755" duration="2046000" />
+      <workItem from="1707693360660" duration="1339000" />
+      <workItem from="1707877882201" duration="2603000" />
+      <workItem from="1707929146161" duration="2000" />
+      <workItem from="1707953018623" duration="16017000" />
+      <workItem from="1708037309933" duration="9401000" />
+      <workItem from="1708102008301" duration="818000" />
+      <workItem from="1708102972648" duration="36000" />
+      <workItem from="1708103009468" duration="40000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

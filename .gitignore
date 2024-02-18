@@ -1,0 +1,13 @@
+frontend/node_modules
+docker-compose
+BackEnd
+Bot
+FrontEnd/db
+FrontEnd/node_modules
+.nginx
+.vsc
+.env.backend
+.env.bot
+.env.frontend
+.env.postgres
+/FrontEnd/global/.env.js

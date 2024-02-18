@@ -1,0 +1,177 @@
+@media only screen and (max-width: 1180px) {
+  :root {
+    --grid-template: 2;
+    --choose-we: 80vw;
+    --my-border-radius: 6px;
+  }
+
+  header {
+    height: 7rem;
+  }
+
+  .curses .fast-connect {
+    display: flex;
+  }
+
+  .curses {
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+    background-color: #000;
+  }
+  .listHiding {
+    display: block;
+  }
+
+  .container-reg,
+  .makingBlack {
+    padding-top: 3rem;
+    width: 100%;
+    background-color: var(--my-background-collor);
+    border-radius: calc(var(--my-border-radius) * 4);
+  }
+  .container-reg input,
+  .typeReg {
+    width: 60%;
+  }
+
+  .prev {
+    left: 8rem;
+  }
+  .next {
+    right: 8rem;
+  }
+
+  .dot-box {
+    right: 10%;
+    top: 6rem;
+  }
+
+  .formContent input,
+  .formContent button {
+    padding: 0 5rem;
+    width: 70vw;
+  }
+  .event {
+    width: 60vw;
+    height: 60vw;
+  }
+
+  .imgContent p {
+    font-size: 2rem;
+  }
+
+  .imgContent h2 {
+    font-size: 2.5rem;
+  }
+
+  .imgContent {
+    top: 50%;
+    transform: translateY(-40%);
+    width: 70vw;
+  }
+
+  .content_img {
+    width: 70%;
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  :root {
+    --grid-template: 1.5;
+  }
+
+  .progress-bar-containe {
+    position: relative;
+  }
+
+  .progress-bar-containe .progress-bar {
+    min-width: 7rem;
+    height: 7rem;
+    font-size: 2rem;
+    /* position: absolute;
+    top: -1.3rem;
+    right: 0; */
+  }
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer_website {
+    text-align: right;
+  }
+  .row > * {
+    margin: 2rem 0;
+  }
+  .row > ul {
+    align-items: center;
+  }
+
+  .soc_images a {
+    margin: 0 2rem;
+  }
+
+  .footer_form_group,
+  .footer_info {
+    justify-content: space-between;
+    width: 60%;
+  }
+
+  .text-bottom {
+    font-size: 2.5rem;
+  }
+  .instruction p {
+    font-size: 2rem;
+  }
+  .text-top p:first-child {
+    font-size: 2.5rem;
+  }
+  .button-ui {
+    top: 88%;
+    flex-direction: column;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  :root {
+    --grid-template: 0.9;
+  }
+
+  .prev {
+    top: calc(55% - 5rem);
+    left: 1rem;
+  }
+  .next {
+    top: calc(55% - 5rem);
+    right: 1rem;
+  }
+
+  .footer_info {
+    flex-direction: column;
+  }
+  .imgContent {
+    width: 85vw;
+  }
+
+  .footer_contacts,
+  .footer_website {
+    margin: 2rem 0;
+    text-align: center;
+  }
+  .footer_form_group,
+  .footer_info {
+    justify-content: space-between;
+    width: 50%;
+  }
+  .content_img {
+    width: 90%;
+  }
+  .about_company {
+    height: 40vh;
+  }
+}

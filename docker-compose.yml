@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  web:
+    image: node:latest
+    container_name: Node
+    working_dir: /FrontEnd
+    volumes:
+      - ./FrontEnd:/FrontEnd
+    command: "npm start"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - nginx
+  bot:
+    build: Bot/.
+    container_name: Bot
+    restart: always
+    command: python3 loader.py
+    env_file:
+      - .env.bot
+    ports:
+      - '8443:3001'
+    networks:
+      - bot_net
+    volumes:
+      - ./.nginx/ssl:/etc/ssl/certs
+      - ./Bot:/app
+    depends_on:
+      - nginx
+      - web
+  django:
+    build: BackEnd/.
+    command: python3 /app/CodeMatter/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./BackEnd:/BackEnd
+    ports:
+      - "8000:8000"
+    networks:
+      - admin_net
+    depends_on:
+      - nginx
+      - web
+      - bot
+  nginx:
+    image: nginx:latest
+    container_name: Nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./.nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./.nginx/ssl/:/etc/ssl/certs/
+
+networks:
+  bot_net:
+    driver: bridge
+  admin_net:
+    driver: bridge

@@ -1,0 +1,5 @@
+const TOKEN = "6593284112:AAFOnCNBj9BXPOdCGQQM3D_oJ7js24feCi4"
+
+export {
+    TOKEN
+}

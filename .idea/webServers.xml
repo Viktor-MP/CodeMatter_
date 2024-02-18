@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b9384c89-4226-475c-b86e-2388b9ea1d01" name="Ds">
+        <fileTransfer rootFolder="/home/ubuntu" accessType="SFTP" host="codematter.am" port="22" sshConfigId="ae667ccd-2f7e-4b50-b3ef-90bd93020c96" sshConfig="ubuntu@codematter.am:22 agent" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
