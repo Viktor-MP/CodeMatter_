@@ -11,3 +11,10 @@ FrontEnd/node_modules
 .env.frontend
 .env.postgres
 /FrontEnd/global/.env.js
+
+.DS_Store
+.idea
+FrontEnd/.idea
+FrontEnd/src/.idea
+FrontEnd/src/.DS_Store
+FrontEnd/src/.well-known/pki-validation
