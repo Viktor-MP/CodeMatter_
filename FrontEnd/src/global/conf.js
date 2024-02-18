@@ -1,4 +1,4 @@
-import {TOKEN} from '.env.js'
+import {TOKEN} from './enviro.js'
 
 const languages = [
     { name: 'EN', state: true },
