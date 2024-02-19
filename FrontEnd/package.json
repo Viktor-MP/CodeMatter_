@@ -1,4 +1,7 @@
 {
+  "type": "module",
+  "moduleResolution": "Node",
+
   "scripts": {
     "start": "npm install && node -r dotenv/config server.js localhost 3000"
   },

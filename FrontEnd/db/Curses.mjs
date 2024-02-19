@@ -1,11 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
-// const sequelize = require('./index')
+import {Sequelize, DataTypes} from 'sequelize'
+import sequelize from 'index.mjs'
 
-const sequelize = new Sequelize('postgres://Sam:alias42@16.171.151.148:5432/Api', {
-    logging: false,
-});
-
-// Define Curses model
 const Curses = sequelize.define('Curses', {
     state: {
         type: DataTypes.BOOLEAN,
@@ -93,7 +88,6 @@ const Maps = sequelize.define('Maps', {
     tableName: "main_maps"
 });
 
-// Define associations
 Curses.hasMany(Faqs, {foreignKey: 'curse_id', onDelete: 'CASCADE'});
 Faqs.belongsTo(Curses, {
     foreignKey: 'curse_id' // Assuming 'curseId' is the foreign key column in Faqs referencing Curses
@@ -104,6 +98,6 @@ Maps.belongsTo(Curses, {
     foreignKey: 'curse_id' // Assuming 'curseId' is the foreign key column in Faqs referencing Curses
 });
 
-// Sync all defined models to the database
 
-module.exports = { Curses, Faqs, Maps, sequelize };
+// module.exports = { Curses, Faqs, Maps, sequelize }
+export {Curses, Faqs, Maps, sequelize}

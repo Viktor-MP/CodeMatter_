@@ -1,9 +1,17 @@
-const express = require('express');
-const path = require('path');
+import express from "express"
+import path from "path"
+import {Curses, Faqs, Maps} from './db/Curses.mjs'
+// import { Teachers, Pluses, Feedbacks, Events, MainFaqs } from './db/Outer.js'
+
 const app = express();
 const port = 3000;
-const { Curses, Faqs, Maps } = require('./db/Curses')
-const { Teachers, Pluses, Feedbacks, Events, MainFaqs } = require('./db/Outer')
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
 app.use(express.static(path.join(__dirname, 'src')));
 app.set('trust proxy', true);

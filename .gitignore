@@ -5,7 +5,7 @@ Bot
 .vsc
 .env.backend
 .env.bot
-.env.frontend
+FrontEnd/db/.env.frontend
 .env.postgres
 FrontEnd/src/global/enviro.js
 docker-compose.yml
