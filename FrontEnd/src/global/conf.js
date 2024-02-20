@@ -6,8 +6,8 @@ const languages = [
     { name: 'RU', state: false },
 ]
 const socIcons = {
-    facebook: '../media/soc-icons/ico-facebook.webp',
-    linkedin: '../media/soc-icons/ico-linkedin.webp',
+    facebook_url: '../media/soc-icons/ico-facebook.webp',
+    linkedin_url: '../media/soc-icons/ico-linkedin.webp',
 }
 
 const pageNavigation = [
@@ -726,7 +726,6 @@ const teachers_conf = [
                 url: "https://www.linkedin.com/in/samvel-torosyan",
                 icon: socIcons['linkedin'],
                 alt: 'linkedin'
-
             },
         ]
     },
@@ -864,6 +863,7 @@ export {
     teachers_conf,
     events_conf,
     pluses_conf,
+    socIcons,
     posts_conf,
     logos_conf,
     faqs_conf,

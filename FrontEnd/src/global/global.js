@@ -100,7 +100,6 @@ const creatingListOfTargets = (nav, listTargets, leng) => {
 };
 
 const create_faq = (faqs) => {
-    console.log(faqs)
     let p = true;
     faqs.map((faq, ide) => {
         let faqBox = document.createElement("div");
@@ -167,7 +166,7 @@ const options = {
     threshold: 0.1
 };
 
-window.addEventListener("beforeunload", () => window.scrollTo(0, 0))
+// window.addEventListener("beforeunload", () => window.scrollTo(0, 0))
 
 
 const interSection_entrys = (entrys) => {
