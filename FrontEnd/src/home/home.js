@@ -11,7 +11,8 @@ import {
     teachers_conf,
     feedbacks_conf,
     pageNavigation,
-    logos_conf
+    logos_conf,
+    socIcons,
 } from "../global/conf.js"
 
 import {
@@ -42,6 +43,7 @@ const prev = document.querySelector('.prev')
 const next = document.querySelector('.next')
 let progress_bar
 const teachers_section = document.querySelector('.trainers')
+let teacherConf = []
 
 const box = document.createElement('div');
 
@@ -328,7 +330,8 @@ const create_curse = (post, inputCurse) => {
     root.style.setProperty('--my-peples-min', post.people_count.min);
     root.style.setProperty('--my-peples-max', post.people_count.max);
 
-    console.log(root)
+
+    // console.log(root)
     if (postBox.offsetTop - scrollY - 10 < window.innerHeight + 10) {
         root.style.setProperty('--animation-start-curses', 100)
     }
@@ -405,51 +408,24 @@ next.addEventListener('click', () => (create_curse_change_handler(1)))
 create_faq(faqs_conf)
 
 const create_teachers_box = (teachers) => {
-    teachers.map((teach) => {
-
-        const card = document.createElement('div')
-        const img_div = document.createElement('div')
-        const img = document.createElement('img')
-        const details = document.createElement('div')
-        const span = document.createElement('span')
-        const ul = document.createElement('ul')
-
-        card.className = 'card'
-        img_div.className = 'image'
-
-        img.src = teach.img_path
-        img.alt = teach.as
-        ul.className = 'details'
-
-        span.innerText = teach.as
-
-        const nameLi = document.createElement('li')
-        const asLi = document.createElement('li')
-
-        nameLi.innerText = teach.name
-        asLi.innerText = teach.as
-        ul.append(nameLi, asLi)
-        const li = document.createElement('li')
-        teach.socs.map((fa) => {
-
-            const a = document.createElement('a')
-            const iconImg = document.createElement('img')
-
-            a.href = fa.url
-
-            iconImg.src = fa.icon
-            iconImg.alt =
-
-                a.appendChild(iconImg)
-            li.appendChild(a)
-            ul.appendChild(li)
-        })
-
-        img_div.appendChild(img)
+    teachers_section.innerHTML = ''
 
 
-        card.append(img_div, ul)
-        teachers_section.appendChild(card)
+    teachers.map(teacher => {
+        const filterdUrl = Object.keys(teacher).filter(el => teacher[el] !== 'none' && el.endsWith('_url'))
+        const cardDiv = document.createElement('div')
+        cardDiv.className = 'card'
+        cardDiv.innerHTML = `
+                <div class='image'>
+                    <img src='${teacher.image_path}'  alt='${teacher._as}'>
+                </div>
+                <ul  class='details'>
+                    <li>${teacher.name}</li>
+                    <li>${teacher._as}</li>
+                    <li>${filterdUrl.map(fil => `<a target='_blank' href="${teacher[fil]}"> <img width="100%" src="${socIcons[fil]}" alt='${fil}Icon'> </a>`)}</li>
+                </ul>         
+        `
+        teachers_section.appendChild(cardDiv)
     })
 }
 
@@ -461,7 +437,24 @@ observer.observe(choose_we)
 observer.observe(feedbacks)
 observHeading.observe(heading)
 // progress_barObserver.observe(progress_bar)
-create_teachers_box(teachers_conf)
+
+const sciletton = (cout, className) => {
+    for (let i = 0; i< cout; i++) {
+        const cardDiv = document.createElement('div')
+        cardDiv.className = className
+        teachers_section.appendChild(cardDiv)
+    }
+    
+}
+
+sciletton(2, 'card_scillet')
+
+fetch('https://codematter.am/get_teachers')
+.then(res => res.json())
+.then(data =>  create_teachers_box(data))
+// console.log(teachers_conf, teacherConf)
+// teacherConf.length>0 && console.log(teachers_conf, teacherConf)
+// create_teachers_box(teachers_conf, true)
 
 // creatingListOfTargets(black_h2, footerWebsite, "en")
 creatingListOfTargets(pageNavigation, footerWebsite, 'en')
