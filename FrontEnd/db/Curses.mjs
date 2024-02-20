@@ -1,5 +1,5 @@
 import {Sequelize, DataTypes} from 'sequelize'
-import sequelize from 'index.mjs'
+import {sequelize} from './connect/index.mjs'
 
 const Curses = sequelize.define('Curses', {
     state: {

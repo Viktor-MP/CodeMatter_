@@ -1,9 +1,5 @@
 import {Sequelize, DataTypes} from 'sequelize'
-// const sequelize = require('./index')
-const sequelize = new Sequelize('postgres://Sam:alias42@16.171.151.148:5432/Api', {
-    logging: false,
-});
-
+import {sequelize} from './connect/index.mjs'
 
 const Teachers = sequelize.define('Teachers', {
     name: {
@@ -119,4 +115,4 @@ const MainFaqs = sequelize.define('MainFaqs', {
     tableName: "main_mainfaqs"
 });
 
-module.exports = { Teachers, Pluses, Feedbacks, Events, MainFaqs };
+export { Teachers, Pluses, Feedbacks, Events, MainFaqs };

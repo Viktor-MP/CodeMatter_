@@ -1,10 +1,15 @@
 import express from "express"
 import path from "path"
+import { fileURLToPath } from 'url';
 import {Curses, Faqs, Maps} from './db/Curses.mjs'
-// import { Teachers, Pluses, Feedbacks, Events, MainFaqs } from './db/Outer.js'
+import { Teachers, Pluses, Feedbacks, Events, MainFaqs } from './db/Outer.mjs'
 
 const app = express();
 const port = 3000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

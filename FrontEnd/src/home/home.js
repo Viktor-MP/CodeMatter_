@@ -449,7 +449,7 @@ const sciletton = (cout, className) => {
 
 sciletton(2, 'card_scillet')
 
-fetch('https://codematter.am/get_teachers')
+fetch('http://localhost:3000/get_teachers')
 .then(res => res.json())
 .then(data =>  create_teachers_box(data))
 // console.log(teachers_conf, teacherConf)
