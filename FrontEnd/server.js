@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'src/home/home.html'));
 });
 
-app.get('/get_teachers', (req, res) => {
+app.get('/api-v1/get_teachers', (req, res) => {
     try {
         Teachers.findAll().then(result => {
             let json_data = []
@@ -39,7 +39,7 @@ app.get('/get_teachers', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/get_pluses', (req, res) => {
+app.get('/api-v1/get_pluses', (req, res) => {
     try {
         Pluses.findAll().then(result => {
             let json_data = []
@@ -53,7 +53,7 @@ app.get('/get_pluses', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/get_feedbacks', (req, res) => {
+app.get('/api-v1/get_feedbacks', (req, res) => {
     try {
         Feedbacks.findAll().then(result => {
             let json_data = []
@@ -67,7 +67,7 @@ app.get('/get_feedbacks', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/get_events', (req, res) => {
+app.get('/api-v1/get_events', (req, res) => {
     try {
         Events.findAll().then(result => {
             let json_data = []
@@ -81,7 +81,7 @@ app.get('/get_events', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/get_main_faqs', (req, res) => {
+app.get('/api-v1/get_main_faqs', (req, res) => {
     try {
         MainFaqs.findAll().then(result => {
             let json_data = []
@@ -95,7 +95,7 @@ app.get('/get_main_faqs', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/get_curses', (req, res) => {
+app.get('/api-v1/get_curses', (req, res) => {
     try {
         Curses.findAll().then(result => {
             let json_data = []
@@ -109,7 +109,7 @@ app.get('/get_curses', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/get_curse_maps', (req, res) => {
+app.get('/api-v1/get_curse_maps', (req, res) => {
     try {
         Maps.findAll({
             where: {
@@ -127,7 +127,7 @@ app.get('/get_curse_maps', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/get_curse_faqs', (req, res) => {
+app.get('/api-v1/get_curse_faqs', (req, res) => {
     try {
         Faqs.findAll({
             where: {

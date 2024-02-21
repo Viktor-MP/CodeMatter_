@@ -270,9 +270,6 @@ create_company_logos(logos_conf)
 // console.log(mailContainer)
 
 
-
-
-
 const close_or_open = (e) => {
     e.type === 'mouseover' ? closedOpen = true : closedOpen = false;
     closed_language.style.display = closedOpen ? 'flex' : 'none'
@@ -353,7 +350,9 @@ const create_curse = (post, inputCurse) => {
 
 
     fetch("../svg/more-button.html").then((res) => res.text())
-        .then((text) => { more.innerHTML = text })
+        .then((text) => {
+            more.innerHTML = text
+        })
         .catch((e) => console.error(e));
     // sessionStorage.setItem('id', JSON.stringify(post))
     img.src = post.path
@@ -430,28 +429,25 @@ const create_teachers_box = (teachers) => {
 }
 
 
-
-
-
 observer.observe(choose_we)
 observer.observe(feedbacks)
 observHeading.observe(heading)
 // progress_barObserver.observe(progress_bar)
 
 const sciletton = (cout, className) => {
-    for (let i = 0; i< cout; i++) {
+    for (let i = 0; i < cout; i++) {
         const cardDiv = document.createElement('div')
         cardDiv.className = className
         teachers_section.appendChild(cardDiv)
     }
-    
+
 }
 
 sciletton(2, 'card_scillet')
 
-fetch('http://localhost:3000/get_teachers')
-.then(res => res.json())
-.then(data =>  create_teachers_box(data))
+fetch('https://codematter.am/api-v1/get_teachers')
+    .then(res => res.json())
+    .then(data => create_teachers_box(data))
 // console.log(teachers_conf, teacherConf)
 // teacherConf.length>0 && console.log(teachers_conf, teacherConf)
 // create_teachers_box(teachers_conf, true)
