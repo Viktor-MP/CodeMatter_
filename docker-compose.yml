@@ -9,7 +9,9 @@ services:
       - ./FrontEnd:/FrontEnd
     command: "npm start"
     ports:
+      - "9000:9000"
       - "3000:3000"
+      - "8080:8080"
     depends_on:
       - nginx
   bot:

@@ -1,14 +1,11 @@
-import express from "express"
-import path from "path"
-import { fileURLToPath } from 'url';
-import {Curses, Faqs, Maps} from './db/Curses.mjs'
-import { Teachers, Pluses, Feedbacks, Events, MainFaqs } from './db/Outer.mjs'
+const express = require("express")
+const path = require('path')
+const {websocket} = require('./chat.js')
+const { Curses, Faqs, Maps } = require('./db/Curses.js')
+const { Teachers, Pluses, Feedbacks, Events, MainFaqs } = require('./db/Outer.js')
 
 const app = express();
 const port = 3000;
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -145,4 +142,11 @@ app.get('/api-v1/get_curse_faqs', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.listen(port, () => {console.log(`Server is running on port ${port}`);});
+
+app.post('/api-v1/send_message', (req, res) => {
+    console.log(req.query)
+    console.log(req.json)
+});
+
+websocket.listen(8080, () => {console.log('Server is running on port 8080')});
+app.listen(3000, () => {console.log(`Server is running on port 3000`);});
