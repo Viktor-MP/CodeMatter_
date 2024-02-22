@@ -6,6 +6,8 @@ Bot
 .env.backend
 .env.bot
 FrontEnd/db/.env.frontend
+FrontEnd/webhook_cert.pem
+FrontEnd/webhook_pkey.pem
 .env.postgres
 FrontEnd/src/global/enviro.js
 docker-compose.yml
