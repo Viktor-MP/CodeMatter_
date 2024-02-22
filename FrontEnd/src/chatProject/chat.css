@@ -1,0 +1,126 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background_color: rgb(223, 221, 221);
+    --background_color_hover:rgb(194, 194, 194);
+    --bg_color_btn: rgb(99, 99, 99);
+    --color: white;
+}
+html {
+    font-size: clamp(12px, 1.2vw, 28px);
+}
+/* width */
+::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    margin: 2rem;
+    background-color: black;
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 1rem;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border: solid black 3px;
+
+    width: 0.6rem;
+    background: var(--background_color); 
+    border-radius: 1rem;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--background_color_hover); 
+  }
+
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.map_globe {
+    width: 40%;
+} 
+.chat_globe {
+    width: 55%;
+}
+
+.map_globe,
+.chat_globe {
+    /* resize: horizontal; */
+    background-color: var(--background_color);
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.map_globe h2,
+.mapGide {
+    padding: 1rem 2rem;
+}
+
+.gideLevel p {
+    padding: 0.3rem 1rem;
+}
+
+
+.chat_globe {
+    position: relative;
+}
+
+.chat.start {
+    width:  100%;
+    height: 8rem;
+    position:absolute;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.startChat_btn {
+    transition: all 0.6s;
+    line-height: 3rem;
+    width: 30%;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color);
+    background-color: var(--bg_color_btn);
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    
+}
+
+.startChat_btn[type=text]{
+    padding-left: 1rem;
+    border-radius: 1rem;
+    width: 80%;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor:text;
+    
+ 
+}
+.startChat_btn[type=text] ~ span {
+    background-image: url(../media/soc-icons/send.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left:  -50px ;
+    z-index: 2;
+   float: right;
+    width: 2rem;
+    height: 2rem;
+}

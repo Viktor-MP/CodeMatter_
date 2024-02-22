@@ -1,0 +1,31 @@
+{
+    "Junior Front-End Developer": {
+      "HTML/CSS": "Strong understanding",
+      "JavaScript": "Basic proficiency",
+      "Responsive Design": "Knowledge",
+      "Version Control": "Basic understanding (e.g., Git)"
+    },
+    "Mid-Level Front-End Developer": {
+      "Advanced HTML/CSS": "Proficiency",
+      "JavaScript Frameworks/Libraries": "Experience with React, Angular, or Vue.js",
+      "AJAX and APIs": "Understanding of asynchronous requests and API integration",
+      "Browser Developer Tools": "Effective usage for debugging",
+      "Build Tools": "Familiarity with tools like Webpack, Gulp, or Grunt",
+      "Cross-Browser Compatibility": "Knowledge of addressing compatibility issues"
+    },
+    "Senior Front-End Developer": {
+      "Advanced JavaScript": "Mastery, including ES6+ features and design patterns",
+      "Performance Optimization": "Proficiency in optimizing web performance",
+      "Accessibility": "Implementation of web accessibility standards (WCAG)",
+      "Testing": "Experience with testing frameworks (e.g., Jest) and TDD",
+      "UX/UI Design Principles": "Understanding of UX and UI design principles",
+      "Responsive Web Design": "Expertise in creating seamless user experiences"
+    },
+    "Full-Stack Developer (Front-End Emphasis)": {
+      "Back-End Knowledge": "Understanding of back-end technologies and databases",
+      "API Design": "Proficiency in designing and working with APIs (RESTful or GraphQL)",
+      "Security": "Awareness of web security best practices",
+      "DevOps": "Familiarity with deployment processes and CI, cloud services knowledge"
+    }
+  }
+  
