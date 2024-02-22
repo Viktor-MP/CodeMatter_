@@ -1,11 +1,17 @@
 const express = require("express")
 const path = require('path')
 const {websocket} = require('./chat.js')
-const { Curses, Faqs, Maps } = require('./db/Curses.js')
-const { Teachers, Pluses, Feedbacks, Events, MainFaqs } = require('./db/Outer.js')
-
+const {Curses, Faqs, Maps} = require('./db/Curses.js')
+const {Teachers, Pluses, Feedbacks, Events, MainFaqs} = require('./db/Outer.js')
+const axios = require("axios");
+const cld = require("cld");
+const punycode = require("punycode");
 const app = express();
 const port = 3000;
+
+
+
+
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -31,7 +37,8 @@ app.get('/api-v1/get_teachers', (req, res) => {
             })
             res.json(json_data)
         })
-    } catch (error) {``
+    } catch (error) {
+        ``
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -45,7 +52,8 @@ app.get('/api-v1/get_pluses', (req, res) => {
             })
             res.json(json_data)
         })
-    } catch (error) {``
+    } catch (error) {
+        ``
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -59,7 +67,8 @@ app.get('/api-v1/get_feedbacks', (req, res) => {
             })
             res.json(json_data)
         })
-    } catch (error) {``
+    } catch (error) {
+        ``
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -73,7 +82,8 @@ app.get('/api-v1/get_events', (req, res) => {
             })
             res.json(json_data)
         })
-    } catch (error) {``
+    } catch (error) {
+        ``
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -87,7 +97,8 @@ app.get('/api-v1/get_main_faqs', (req, res) => {
             })
             res.json(json_data)
         })
-    } catch (error) {``
+    } catch (error) {
+        ``
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -101,7 +112,8 @@ app.get('/api-v1/get_curses', (req, res) => {
             })
             res.json(json_data)
         })
-    } catch (error) {``
+    } catch (error) {
+        ``
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -119,7 +131,8 @@ app.get('/api-v1/get_curse_maps', (req, res) => {
             })
             res.json(json_data)
         })
-    } catch (error) {``
+    } catch (error) {
+        ``
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -137,16 +150,19 @@ app.get('/api-v1/get_curse_faqs', (req, res) => {
             })
             res.json(json_data)
         })
-    } catch (error) {``
+    } catch (error) {
+        ``
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+const { detect } = require('langdetect');
 
-app.post('/api-v1/send_message', (req, res) => {
-    console.log(req.query)
-    console.log(req.json)
-});
+// Now you can call the detect function
+console.log(detect("running"));
+// Detect language
 
-websocket.listen(8080, () => {console.log('Server is running on port 8080')});
-app.listen(3000, () => {console.log(`Server is running on port 3000`);});
+
+
+// websocket.listen(8080, () => {console.log('Server is running on port 8080')});
+app.listen(3004, () => {console.log(`Server is running on port 3000`)});

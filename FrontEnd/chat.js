@@ -3,16 +3,19 @@ const fs = require('fs');
 const WebSocket = require('ws');
 const axios = require('axios');
 const cld = require('cld');
+const OpenAI = require("openai");
+require("dotenv").config();
 
-require('dotenv').config()
-
-const websocket = https.createServer({
-    cert: fs.readFileSync('./webhook_cert.pem'), // SSL certificate
-    key: fs.readFileSync('./webhook_pkey.pem') // Private key
+const openai = new OpenAI({
+    apiKey: process.env.GPT_TOKEN,
 });
 
-const wss = new WebSocket.Server({server: websocket});
+const websocket = https.createServer({
+//     cert: fs.readFileSync('./webhook_cert.pem'), // SSL certificate
+//     key: fs.readFileSync('./webhook_pkey.pem') // Private key
+});
 
+const wss = new WebSocket.Server({port: 8082});
 
 const translate = async (message, lang_from, lang_to) => {
     try {
@@ -21,7 +24,7 @@ const translate = async (message, lang_from, lang_to) => {
             url: 'https://translate-plus.p.rapidapi.com/translate',
             headers: {
                 'content-type': 'application/json',
-                'X-RapidAPI-Key': process.env.GPT_TOKEN,
+                'X-RapidAPI-Key': process.env.TR_TOKEN,
                 'X-RapidAPI-Host': 'translate-plus.p.rapidapi.com'
             },
             data: {
@@ -36,86 +39,44 @@ const translate = async (message, lang_from, lang_to) => {
     }
 }
 
-const GPT_4 = async (message) => {
+const GPT_GET_TEXT = async (messages) => {
     try {
-        const GPT_4 = await axios.request({
-            method: 'POST',
-            url: 'https://open-ai21.p.rapidapi.com/conversationgpt35',
-            headers: {
-                'content-type': 'application/json',
-                'X-RapidAPI-Key': process.env.GPT_TOKEN,
-                'X-RapidAPI-Host': 'open-ai21.p.rapidapi.com'
-            },
-            data: {
-                messages: [
-                    {
-                        role: 'user',
-                        content: message
-                    }
-                ],
-                web_access: false,
-                system_prompt: '',
-                temperature: 0.9,
-                top_k: 5,
-                top_p: 0.9,
-                max_tokens: 256
-            }
-        })
-        return GPT_4.data.result
-    } catch (error) {
-        return GPT_4_SPORT(message)
-    }
-}
-
-const GPT_4_SPORT = async (message) => {
-    try {
-        const GPT_4 = await axios.request({
-            method: 'POST',
-            url: 'https://chatgpt-api8.p.rapidapi.com/',
-            headers: {
-                'content-type': 'application/json',
-                'X-RapidAPI-Key': process.env.GPT_TOKEN,
-                'X-RapidAPI-Host': 'chatgpt-api8.p.rapidapi.com'
-            },
-            data: [
-                {
-                    content: message,
-                    role: 'user'
-                }
-            ]
-        })
-        return GPT_4.data.text
-    } catch (error) {
-        console.error(error);
+        const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: messages,
+            temperature: 0,
+            max_tokens: 1000,
+        });
+        return response.choices[0].message
+    } catch (err) {
+        console.log(err.message)
     }
 }
 
 
 wss.on('connection', function connection(ws) {
     console.log('Client connected');
-
     ws.on('message', function incoming(message) {
-        let data = JSON.parse(message)
-        cld.detect(data.text).then((detect_lang) => {
-            let lang = detect_lang.languages[0].code
-            console.log("User text: ", data.text)
-            if (lang === "hy" || lang === "ru") {
-                translate(data.text, lang, 'en').then((translate_text) => {
-                    console.log(`Translate to ${lang}: `, translate_text.translations.translation)
-                    GPT_4_SPORT(translate_text.translations.translation).then((GPT_text) => {
-                        console.log(`AI Default text: ${lang}`, GPT_text)
-                        translate(GPT_text, 'en', lang).then((send_text) => {
-                            console.log(`AI text translate to : ${lang}`, send_text.translations.translation)
-                            ws.send(send_text.translations.translation)
-                        })
-                    })
+        message = JSON.parse(message)
+        let messages = message.messages
+        // console.log(messages)
+
+        let user_last_message = messages[messages.length - 1].content
+            // console.log("USER MESS: ", user_last_message)
+            translate(user_last_message, 'hy', 'en').then((translate_text) => {
+            let user_message_en = translate_text.translations.translation
+            // console.log(`Translate to en: `, user_message_en)
+            messages[messages.length - 1].content = user_message_en
+            GPT_GET_TEXT(messages).then((GPT_text) => {
+                // console.log(`AI Default text: en`, GPT_text)
+                messages.push(GPT_text)
+                translate(GPT_text.content, 'en', 'hy').then((send_text) => {
+                    let answer = send_text.translations.translation
+                    // console.log(`AI text translate to : ${lang}`, )
+                    message["answer"] = answer
+                    ws.send(JSON.stringify(message))
                 })
-            } else if (lang === "en") {
-                GPT_4_SPORT(data.text).then((GPT_text) => {
-                    console.log("AI text: ", GPT_text)
-                    ws.send(GPT_text)
-                })
-            }
+            })
         })
     });
 
