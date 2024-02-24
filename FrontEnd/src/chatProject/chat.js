@@ -103,6 +103,8 @@ chatStart_btn.addEventListener("click", (e) => {
 
 })
 
+
+
 fetch(soruse)
 .then(res => res.json())
 .then(data => chatGptData(data))
