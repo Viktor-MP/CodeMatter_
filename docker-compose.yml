@@ -7,13 +7,15 @@ services:
     working_dir: /FrontEnd
     volumes:
       - ./FrontEnd:/FrontEnd
+    env_file:
+      - FrontEnd/.env
     command: "npm start"
     ports:
-      - "9000:9000"
       - "3000:3000"
       - "8080:8080"
     depends_on:
       - nginx
+    restart: always
   bot:
     build: Bot/.
     container_name: Bot
@@ -37,6 +39,7 @@ services:
     command: python3 /app/CodeMatter/manage.py runserver 0.0.0.0:8000
     volumes:
       - ./BackEnd:/BackEnd
+    restart: always
     ports:
       - "8000:8000"
     networks:

@@ -7,7 +7,6 @@ const axios = require("axios");
 const cld = require("cld");
 const punycode = require("punycode");
 const app = express();
-const port = 3000;
 
 
 
@@ -156,13 +155,8 @@ app.get('/api-v1/get_curse_faqs', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-const { detect } = require('langdetect');
-
-// Now you can call the detect function
-console.log(detect("running"));
-// Detect language
 
 
 
-// websocket.listen(8080, () => {console.log('Server is running on port 8080')});
-app.listen(3004, () => {console.log(`Server is running on port 3000`)});
+websocket.listen(8080, () => {console.log('Server is running on port 8080')});
+app.listen(3000, () => {console.log(`Server is running on port 3000`)});
