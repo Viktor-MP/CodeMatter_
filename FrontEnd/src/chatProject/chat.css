@@ -48,19 +48,29 @@ main {
 
 }
 
+.resizer {
+    width: 0.7rem;
+    cursor: ew-resize;
+}
+
 .map_globe {
     width: 40%;
+    display: flex;
+    justify-content: space-between;
+    
 } 
 .chat_globe {
     width: 55%;
 }
-
+.mapContainer {
+    overflow: auto;
+    width: 100%;
+}
 .map_globe,
 .chat_globe {
     /* resize: horizontal; */
     background-color: var(--background_color);
     max-height: 100vh;
-    overflow-y: auto;
 }
 
 .map_globe h2,
