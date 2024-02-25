@@ -2,7 +2,8 @@
 
 
 const socket_chanal = (url) => {
-    const ws = new WebSocket(url, 'protocolOne');
+  let ws = new WebSocket(url, ["soap", "wamp"]);
+    // const ws = new WebSocket(url, 'protocolOne');
 
     ws.onopen = (e) => {
       console.log(e,"opend")
@@ -18,7 +19,6 @@ const socket_chanal = (url) => {
     ws.onclose = (e) => console.log(e, "onclose")
     ws.onerror = (e) => console.log("error", e)
     ws.onmessage = (e) => console.log(e)
-    console.log(ws)
 
 }
 
