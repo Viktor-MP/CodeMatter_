@@ -1,101 +1,15 @@
 import { socket_chanal } from "./socket.js"
-const soruse = './gpt.json'
+import setUpEvent from "./resizer/resizer.js"
+
+const soruse = './sourses/gpt.json'
+const chatSourse = './sourses/testChat.json'
 const personalMap = document.querySelector('#personalMap')
 const personalChat = document.querySelector('#personalChat')
 const resizer = document.querySelector('.resizer') 
 const chatStart_btn = document.querySelector('.startChat_btn')
-const windowWidth = window.innerWidth
-
-const getPersent = (eny) => {
-    return windowWidth * eny / 100
-}
-
-const getMiMa = {
-    min: 25,
-    max: 45,
-}
 
 
-// ====================therd way of dragging ====================================
 
-
-// Select the resizers
-
-// const bottom = document.querySelector("#resizable .resizer-bottom");
-
-//sides "t" (top),"r" (right),"b" (bottom),"l" (left)
-
-function setUpEvent(resizer, resizableChat, xOrY = "x") {
-
-  const isX = xOrY === "x";
-  const parentElement = resizer.parentElement  
-  // Define event handlers
-  const mouseDownHandler = (e) => {
-    // Store initial mouse position and width
-    resizer.parentInitialPosition = { x: e.pageX, y: e.pageY };
-    resizableChat.parentInitialPosition = { x: e.pageX, y: e.pageY };
-
-    const rect = parentElement.getBoundingClientRect();
-    const chatRect = resizableChat.getBoundingClientRect();
-
-    resizer.parentInitialDimension = {
-        w: parseInt(rect.width),
-        h: parseInt(rect.height)
-    };
-    resizableChat.parentInitialDimension = {
-        w: parseInt(chatRect.width),
-        h: parseInt(chatRect.height)
-    }
-
-    // Attach move and out events
-    resizer.addEventListener("mousemove", mouseMoveHandler);
-    resizer.addEventListener("mouseout", mouseMoveHandler);
-
-    // Detach down event to prevent accumulation
-    resizer.removeEventListener("mousedown", mouseDownHandler);
-  };
-
-  const mouseUpHandler = (e) => {
-    // Detach move and out events
-    resizer.removeEventListener("mousemove", mouseMoveHandler);
-    resizer.removeEventListener("mouseout", mouseMoveHandler);
-
-    // Reattach down event
-    resizer.addEventListener("mousedown", mouseDownHandler);
-  };
-
-  const mouseMoveHandler = (e) => {
-    const nextPosition = { x: e.pageX, y: e.pageY };
-    
-    if (nextPosition.x < getPersent(getMiMa.min) || nextPosition.x > getPersent(getMiMa.max) ) return;
-    
-    if (isX) {
-        const newWidthRes = resizableChat.parentInitialDimension.w - 
-        (nextPosition.x - resizableChat.parentInitialPosition.x);
-
-        const newWidth =
-        resizer.parentInitialDimension.w +
-        (nextPosition.x - resizer.parentInitialPosition.x);
-
-        resizableChat.style.width = newWidthRes + "px"
-        parentElement.style.width = newWidth + "px";
-    } else {
-      const newHeight =
-        resizer.parentInitialDimension.h +
-        (nextPosition.y - resizer.parentInitialPosition.y);
-      parentElement.style.height = newHeight + "px";
-    }
-   
-  };
-
-  // Attach initial down event
-  resizer.addEventListener("mousedown", mouseDownHandler);
-
-  // Attach up event to window to cover the case where mouse button is released outside the resizer
-  window.addEventListener("mouseup", mouseUpHandler);
-}
-setUpEvent(resizer, personalChat, "x");
-// setUpEvent(bottom, "y");
 
 // ======================================================================
 
@@ -153,14 +67,14 @@ const chatGptData = (data) => {
 
 
 chatStart_btn.addEventListener("click", (e) => {
-
     let type = e.currentTarget.type
     if (type !== 'text') {
         e.currentTarget.value = ''
         e.currentTarget.type = 'text'
     }
-
 })
+
+chatStart_btn.addEventListener('submit', () => console.log('hello'))
 
 
 
@@ -169,4 +83,77 @@ fetch(soruse)
 .then(data => chatGptData(data))
 
 
-socket_chanal('wss://codematter.am:8080/websocket')
+// fetch(chatSourse)
+// .then(res => res.json())
+// .then(data => console.log(data))
+
+
+setUpEvent(resizer, personalChat, "x");
+
+
+
+socket_chanal('wss://codematter.am:443/websocket')
+
+
+
+
+
+// const images = document.querySelectorAll("img");
+// const containers = document.querySelectorAll(".container");
+
+// images.forEach((image) => {
+//   image.addEventListener("dragstart", dragStart);
+//   image.addEventListener("dragend", dragEnd);
+// });
+
+// containers.forEach((container) => {
+//   container.addEventListener("dragover", dragOver);
+//   container.addEventListener("drop", drop);
+// });
+
+// function dragStart(event) {
+//   event.dataTransfer.setData("draggedImageId", event.target.id);
+//   setTimeout(() => event.target.classList.toggle("hidden"));
+// }
+
+// function dragEnd(event) {
+//   event.target.classList.toggle("hidden");
+// }
+
+// function dragOver(event) {
+//   event.preventDefault();
+// }
+
+// Element.prototype.insertChildAtIndex = function(child, index) {
+//     if (!index) index = 0
+//     console.log(this.children.length)
+//     if (index >= this.children.length) {
+//       this.appendChild(child)
+//     } else {
+//       this.insertBefore(child, this.children[index])
+//       for (let i = index; i < this.children.length; i++) {
+//         console.log(this.children[i])
+//         console.dir(child.parentElement.children)
+//         this.insertBefore(child.parentElement.children[i-1], this.children[i+1])
+
+
+//       }
+//     }
+//   }
+
+// function drop(event) {
+//   const draggedImageId = event.dataTransfer.getData("draggedImageId");
+//   const draggedImage = document.getElementById(draggedImageId);
+//    console.log(draggedImage)
+//   const fromContainer = draggedImage.parentNode;
+//   const toContainer = event.currentTarget;
+//   console.log(toContainer.firstElementChild)
+// //   parent.insertChildAtIndex(child, 2)
+//   if (toContainer == fromContainer) {
+//     console.log('hello')
+//     fromContainer.appendChild(toContainer.firstElementChild);
+    
+//     // toContainer.appendChild(draggedImage);
+//     toContainer.insertChildAtIndex(draggedImage, 0)
+//   }
+// }

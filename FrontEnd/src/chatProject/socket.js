@@ -15,10 +15,11 @@ const socket_chanal = (url) => {
         }
       ]
     })
-    }
+  }
+  ws.onmessage = (e) => console.log(e, 'message')
+
     ws.onclose = (e) => console.log(e, "onclose")
-    ws.onerror = (e) => console.log("error", e)
-    ws.onmessage = (e) => console.log(e)
+    ws.onerror = (e) => console.log(e, "error")
 
 }
 
