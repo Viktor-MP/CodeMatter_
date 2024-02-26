@@ -172,8 +172,8 @@ chatStart_btn.addEventListener("click", (e) => {
 
 
 
-fetch(soruse)
-.then(res => res.json())
-.then(data => chatGptData(data))
+// fetch(soruse)
+// .then(res => res.json())
+// .then(data => chatGptData(data))
 
-socket_chanal('wss://codematter.am:8080/websocket')
+socket_chanal('wss://codematter.am:443/websocket')

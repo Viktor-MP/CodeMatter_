@@ -12,7 +12,7 @@ services:
     command: "npm start"
     ports:
       - "3000:3000"
-      - "8080:8080"
+      - "3002:3002"
     depends_on:
       - nginx
     restart: always
