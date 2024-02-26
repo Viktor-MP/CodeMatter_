@@ -78,9 +78,9 @@ chatStart_btn.addEventListener('submit', () => console.log('hello'))
 
 
 
-// fetch(soruse)
-// .then(res => res.json())
-// .then(data => chatGptData(data))
+fetch(soruse)
+.then(res => res.json())
+.then(data => chatGptData(data))
 
 socket_chanal('wss://codematter.am:443/websocket')
 
