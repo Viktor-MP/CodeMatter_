@@ -1,116 +1,103 @@
+import { socket_chanal } from "./socket.js"
 const soruse = './gpt.json'
 const personalMap = document.querySelector('#personalMap')
-console.log(personalMap)
 const personalChat = document.querySelector('#personalChat')
+const resizer = document.querySelector('.resizer') 
 const chatStart_btn = document.querySelector('.startChat_btn')
-let mousState = false
-import { socket_chanal } from "./socket.js"
+const windowWidth = window.innerWidth
+
+const getPersent = (eny) => {
+    return windowWidth * eny / 100
+}
+
+const getMiMa = {
+    min: 25,
+    max: 45,
+}
 
 
-
-// let p = document.querySelector('p'); // element to make resizable
-
-// personalMap.addEventListener('click', function init() {
-//     personalMap.removeEventListener('click', init, false);
-//     personalMap.className = personalMap.className + ' resizable';
-//     let resizer = document.createElement('div');
-//     resizer.className = 'resizer';
-//     personalMap.appendChild(resizer);
-//     resizer.addEventListener('mousedown', initDrag, false);
-// }, false);
-
-let startX, startY, startWidth, startHeight, clientEX ;
+// ====================therd way of dragging ====================================
 
 
+// Select the resizers
 
-// personalMap.addEventListener('mousedown', function (e) {
-//     // Record the initial mouse position
-//     const initialX = e.clientX;
-//     // Function to handle mousemove event
-//     function handleMouseMove(event) {
-//         // Calculate the difference in mouse position
-//         const deltaX = event.clientX - initialX;
-        
-//         console.log('down')
-//         // Adjust the element's width based on the mouse movement
-//         personalMap.style.width = `${100 + deltaX}px`;
-//     }
+// const bottom = document.querySelector("#resizable .resizer-bottom");
 
-//     // Function to handle mouseup event
-//     function handleMouseUp() {
-//         // Remove the event listeners when the mouse is released
-//         document.removeEventListener('mousemove', handleMouseMove);
-//         document.removeEventListener('mouseup', handleMouseUp);
-//     }
+//sides "t" (top),"r" (right),"b" (bottom),"l" (left)
 
-//     // Attach event listeners for mousemove and mouseup
-//     document.addEventListener('mousemove', handleMouseMove);
-//     document.addEventListener('mouseup', handleMouseUp);
-// });
+function setUpEvent(resizer, resizableChat, xOrY = "x") {
 
-// const changeMouseState = (state) => {
-//     console.log(state)
-//     mousState = state
-// }
+  const isX = xOrY === "x";
+  const parentElement = resizer.parentElement  
+  // Define event handlers
+  const mouseDownHandler = (e) => {
+    // Store initial mouse position and width
+    resizer.parentInitialPosition = { x: e.pageX, y: e.pageY };
+    resizableChat.parentInitialPosition = { x: e.pageX, y: e.pageY };
 
-// document.documentElement.addEventListener('mousedown', () => changeMouseState(true))
-// document.documentElement.addEventListener('mouseup', () => changeMouseState(false))
+    const rect = parentElement.getBoundingClientRect();
+    const chatRect = resizableChat.getBoundingClientRect();
 
-
-
-
-const doDrag = (e) => {
-    console.log(e)
-    if (mousState) {
-
-
-        personalMap.style.width = (startWidth + e.clientX - startX) + 'px';
-        // personalMap.style.height = (startHeight + e.clientY - startY) + 'px';
-        console.log(e.clientX)
-        if (e.clientX > clientEX) {
-            stopDrag()
-        }
-        clientEX = e.clientX
+    resizer.parentInitialDimension = {
+        w: parseInt(rect.width),
+        h: parseInt(rect.height)
+    };
+    resizableChat.parentInitialDimension = {
+        w: parseInt(chatRect.width),
+        h: parseInt(chatRect.height)
     }
 
-    document.removeEventListener('mousemove', doDrag, false);
-    document.removeEventListener('mouseup', stopDrag, false);
+    // Attach move and out events
+    resizer.addEventListener("mousemove", mouseMoveHandler);
+    resizer.addEventListener("mouseout", mouseMoveHandler);
 
+    // Detach down event to prevent accumulation
+    resizer.removeEventListener("mousedown", mouseDownHandler);
+  };
+
+  const mouseUpHandler = (e) => {
+    // Detach move and out events
+    resizer.removeEventListener("mousemove", mouseMoveHandler);
+    resizer.removeEventListener("mouseout", mouseMoveHandler);
+
+    // Reattach down event
+    resizer.addEventListener("mousedown", mouseDownHandler);
+  };
+
+  const mouseMoveHandler = (e) => {
+    const nextPosition = { x: e.pageX, y: e.pageY };
+    
+    if (nextPosition.x < getPersent(getMiMa.min) || nextPosition.x > getPersent(getMiMa.max) ) return;
+    
+    if (isX) {
+        const newWidthRes = resizableChat.parentInitialDimension.w - 
+        (nextPosition.x - resizableChat.parentInitialPosition.x);
+
+        const newWidth =
+        resizer.parentInitialDimension.w +
+        (nextPosition.x - resizer.parentInitialPosition.x);
+
+        resizableChat.style.width = newWidthRes + "px"
+        parentElement.style.width = newWidth + "px";
+    } else {
+      const newHeight =
+        resizer.parentInitialDimension.h +
+        (nextPosition.y - resizer.parentInitialPosition.y);
+      parentElement.style.height = newHeight + "px";
+    }
+   
+  };
+
+  // Attach initial down event
+  resizer.addEventListener("mousedown", mouseDownHandler);
+
+  // Attach up event to window to cover the case where mouse button is released outside the resizer
+  window.addEventListener("mouseup", mouseUpHandler);
 }
-const stopDrag = (e) => {
-    document.removeEventListener('mousemove', doDrag, false);
-    document.removeEventListener('mouseup', stopDrag, false);
-}
+setUpEvent(resizer, personalChat, "x");
+// setUpEvent(bottom, "y");
 
-const initDrag = (e) => {
-   startX = e.clientX;
-   startY = e.clientY;
-   startWidth = parseInt(document.defaultView.getComputedStyle(personalMap).width, 10);
-   startHeight = parseInt(document.defaultView.getComputedStyle(personalMap).height, 10);
-   document.addEventListener('mousemove', doDrag, true);
-   document.addEventListener('mouseup', stopDrag, false);
-}
-
-
-
-const resize_PersonalMap_hendler = (element) => {
-    console.log(element)
-
-console.log(mousState)
-    element.addEventListener("mouseover", (e) => {
-        let clientWidth = e.currentTarget.offsetWidth
-        if (e.x >= clientWidth-10 && e.x <= clientWidth) {
-            console.log(true)
-            e.currentTarget.style.cursor = "w-resize"
-            initDrag(e)
-        }else {
-            e.currentTarget.style.cursor = "auto"
-            // e.currentTarget.removeEventListener("mousemove", mousMoveDrage);
-        }
-    })
-
-}
-resize_PersonalMap_hendler(personalMap)
+// ======================================================================
 
 const getKeysData = (obj) => {
     const keysObj = Object.keys(obj)
@@ -118,7 +105,12 @@ const getKeysData = (obj) => {
 }
 
 const chatGptData = (data) => {
+    const mapContainer = document.createElement('div')
+    mapContainer.className = 'mapContainer'
     const mapGide = document.createElement('div')
+    mapGide.innerHTML = `
+    <h2>Personal education map</h2>
+    `
     mapGide.className = 'mapGide'
 
     for (let key in data) {
@@ -133,7 +125,6 @@ const chatGptData = (data) => {
             par.innerText = keys
             gide.appendChild(par)
         }
-        
         mapGide.appendChild(gide)
         
 
@@ -150,12 +141,13 @@ const chatGptData = (data) => {
             par.innerText = keys
             gide.appendChild(par)
         }
-        
+  
         mapGide.appendChild(gide)
         
 
     }
-    personalMap.appendChild(mapGide)
+    mapContainer.appendChild(mapGide)
+    personalMap.insertAdjacentElement("afterbegin", mapContainer)
 
 }
 
@@ -177,3 +169,4 @@ chatStart_btn.addEventListener("click", (e) => {
 // .then(data => chatGptData(data))
 
 socket_chanal('wss://codematter.am:443/websocket')
+
