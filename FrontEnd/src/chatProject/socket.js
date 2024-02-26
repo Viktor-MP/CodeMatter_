@@ -1,9 +1,9 @@
 
+
 const socket_chanal = (url) => {
     const ws = new WebSocket(url)
     ws.onopen = function(e) {
-        alert("[open] Connection established");
-        alert("Sending to server");
+     
         ws.send(`{
             "messages": [
                 {
@@ -16,9 +16,10 @@ const socket_chanal = (url) => {
     `)
     }
     ws.onmessage = function (message) {
-        console.log(message)
+      console.log(JSON.stringify(message.data))
+        // console.log(  message.data)
     }
 }
 
 
-export { socket_chanal }
+export default socket_chanal

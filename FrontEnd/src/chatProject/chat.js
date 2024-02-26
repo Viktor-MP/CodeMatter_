@@ -1,4 +1,4 @@
-import { socket_chanal } from "./socket.js"
+import socket_chanal  from "./socket.js"
 import setUpEvent from "./resizer/resizer.js"
 
 const soruse = './sourses/gpt.json'

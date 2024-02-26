@@ -165,7 +165,7 @@ app.get('/api-v1/get_curse_faqs', (req, res) => {
 
 const { WebSocketServer } = require('ws')
 
-const sockserver = new WebSocketServer({ port: 443 })
+const sockserver = new WebSocketServer({ port: 3001 })
 
 sockserver.on('connection', ws => {
     console.log('New client connected!')
@@ -209,4 +209,4 @@ sockserver.on('connection', ws => {
 
 })
 // websocket.listen(3002, () => {console.log('Server is running on port 3002')});
-app.listen(3002, () => {console.log(`Server is running on port 3000`)});
+app.listen(3000, () => {console.log(`Server is running on port 3000`)});
