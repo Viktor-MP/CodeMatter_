@@ -8,6 +8,7 @@ Bot
 FrontEnd/db/.env.frontend
 FrontEnd/webhook_cert.pem
 FrontEnd/webhook_pkey.pem
+FrontEnd/db/.env
 .env.postgres
 FrontEnd/src/global/enviro.js
 docker-compose.yml
