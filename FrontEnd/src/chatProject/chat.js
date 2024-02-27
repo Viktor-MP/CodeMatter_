@@ -1,9 +1,10 @@
 import { socket_chanal } from "./socket.js"
-const soruse = './gpt.json'
+const sourse = './gptTest.json'
 const personalMap = document.querySelector('#personalMap')
 const personalChat = document.querySelector('#personalChat')
 const resizer = document.querySelector('.resizer') 
 const chatStart_btn = document.querySelector('.startChat_btn')
+const button_submit = document.querySelector(".sendChatIcon")
 const windowWidth = window.innerWidth
 
 const getPersent = (eny) => {
@@ -26,7 +27,7 @@ const getMiMa = {
 //sides "t" (top),"r" (right),"b" (bottom),"l" (left)
 
 function setUpEvent(resizer, resizableChat, xOrY = "x") {
-
+    console.log(resizer)
   const isX = xOrY === "x";
   const parentElement = resizer.parentElement  
   // Define event handlers
@@ -108,9 +109,9 @@ const chatGptData = (data) => {
     const mapContainer = document.createElement('div')
     mapContainer.className = 'mapContainer'
     const mapGide = document.createElement('div')
-    mapGide.innerHTML = `
-    <h2>Personal education map</h2>
-    `
+    // mapGide.innerHTML = `
+    // <h2>Personal education map</h2>
+    // `
     mapGide.className = 'mapGide'
 
     for (let key in data) {
@@ -153,20 +154,30 @@ const chatGptData = (data) => {
 
 
 chatStart_btn.addEventListener("click", (e) => {
-
+    socket_chanal(
+{
+"messages": [
+                {
+                    "role": "user",
+                    "content": "բարև"
+                }
+            ]
+})
     let type = e.currentTarget.type
     if (type !== 'text') {
         e.currentTarget.value = ''
         e.currentTarget.type = 'text'
     }
-
 })
 
 
 
-// fetch(soruse)
-// .then(res => res.json())
-// .then(data => chatGptData(data))
 
-socket_chanal('wss://codematter.am:443/websocket')
+
+button_submit.addEventListener('click',  () => console.log('hello'))
+console.log(sourse)
+fetch(sourse)
+.then(res => res.json())
+.then(data => chatGptData(data))
+
 

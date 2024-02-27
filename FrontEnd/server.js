@@ -208,5 +208,5 @@ sockserver.on('connection', ws => {
     ws.on('close', () => console.log('Client has disconnected!'))
 
 })
-// websocket.listen(3002, () => {console.log('Server is running on port 3002')});
+websocket.listen(3002, () => {console.log('Server is running on port 3002')});
 app.listen(3002, () => {console.log(`Server is running on port 3000`)});
