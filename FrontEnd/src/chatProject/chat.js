@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import { socket_chanal } from "./socket.js"
 const sourse = './gptTest.json'
+=======
+import socket_chanal  from "./socket.js"
+import setUpEvent from "./resizer/resizer.js"
+
+const soruse = './sourses/gpt.json'
+const chatSourse = './sourses/testChat.json'
+>>>>>>> 8877f7a65925aaba07a5a3329dee877955f640dc
 const personalMap = document.querySelector('#personalMap')
 const personalChat = document.querySelector('#personalChat')
 const resizer = document.querySelector('.resizer') 
 const chatStart_btn = document.querySelector('.startChat_btn')
+<<<<<<< HEAD
 const button_submit = document.querySelector(".sendChatIcon")
 const windowWidth = window.innerWidth
 
@@ -15,11 +24,13 @@ const getMiMa = {
     min: 25,
     max: 45,
 }
+=======
+>>>>>>> 8877f7a65925aaba07a5a3329dee877955f640dc
 
 
-// ====================therd way of dragging ====================================
 
 
+<<<<<<< HEAD
 // Select the resizers
 
 // const bottom = document.querySelector("#resizable .resizer-bottom");
@@ -98,6 +109,8 @@ function setUpEvent(resizer, resizableChat, xOrY = "x") {
 setUpEvent(resizer, personalChat, "x");
 // setUpEvent(bottom, "y");
 
+=======
+>>>>>>> 8877f7a65925aaba07a5a3329dee877955f640dc
 // ======================================================================
 
 const getKeysData = (obj) => {
@@ -154,6 +167,7 @@ const chatGptData = (data) => {
 
 
 chatStart_btn.addEventListener("click", (e) => {
+<<<<<<< HEAD
     socket_chanal(
 {
 "messages": [
@@ -163,6 +177,8 @@ chatStart_btn.addEventListener("click", (e) => {
                 }
             ]
 })
+=======
+>>>>>>> 8877f7a65925aaba07a5a3329dee877955f640dc
     let type = e.currentTarget.type
     if (type !== 'text') {
         e.currentTarget.value = ''
@@ -170,8 +186,16 @@ chatStart_btn.addEventListener("click", (e) => {
     }
 })
 
+chatStart_btn.addEventListener('submit', () => console.log('hello'))
 
 
+<<<<<<< HEAD
+=======
+
+fetch(soruse)
+.then(res => res.json())
+.then(data => chatGptData(data))
+>>>>>>> 8877f7a65925aaba07a5a3329dee877955f640dc
 
 
 button_submit.addEventListener('click',  () => console.log('hello'))
@@ -181,3 +205,77 @@ fetch(sourse)
 .then(data => chatGptData(data))
 
 
+// fetch(chatSourse)
+// .then(res => res.json())
+// .then(data => console.log(data))
+
+
+setUpEvent(resizer, personalChat, "x");
+
+
+
+socket_chanal('wss://codematter.am:443/websocket')
+
+
+
+
+
+// const images = document.querySelectorAll("img");
+// const containers = document.querySelectorAll(".container");
+
+// images.forEach((image) => {
+//   image.addEventListener("dragstart", dragStart);
+//   image.addEventListener("dragend", dragEnd);
+// });
+
+// containers.forEach((container) => {
+//   container.addEventListener("dragover", dragOver);
+//   container.addEventListener("drop", drop);
+// });
+
+// function dragStart(event) {
+//   event.dataTransfer.setData("draggedImageId", event.target.id);
+//   setTimeout(() => event.target.classList.toggle("hidden"));
+// }
+
+// function dragEnd(event) {
+//   event.target.classList.toggle("hidden");
+// }
+
+// function dragOver(event) {
+//   event.preventDefault();
+// }
+
+// Element.prototype.insertChildAtIndex = function(child, index) {
+//     if (!index) index = 0
+//     console.log(this.children.length)
+//     if (index >= this.children.length) {
+//       this.appendChild(child)
+//     } else {
+//       this.insertBefore(child, this.children[index])
+//       for (let i = index; i < this.children.length; i++) {
+//         console.log(this.children[i])
+//         console.dir(child.parentElement.children)
+//         this.insertBefore(child.parentElement.children[i-1], this.children[i+1])
+
+
+//       }
+//     }
+//   }
+
+// function drop(event) {
+//   const draggedImageId = event.dataTransfer.getData("draggedImageId");
+//   const draggedImage = document.getElementById(draggedImageId);
+//    console.log(draggedImage)
+//   const fromContainer = draggedImage.parentNode;
+//   const toContainer = event.currentTarget;
+//   console.log(toContainer.firstElementChild)
+// //   parent.insertChildAtIndex(child, 2)
+//   if (toContainer == fromContainer) {
+//     console.log('hello')
+//     fromContainer.appendChild(toContainer.firstElementChild);
+    
+//     // toContainer.appendChild(draggedImage);
+//     toContainer.insertChildAtIndex(draggedImage, 0)
+//   }
+// }

@@ -1,0 +1,41 @@
+{
+    "junior":{
+        "level" : "Junior level",
+        "knowledge": ["HTML", "CSS",  "Responsive Design", "JavaScript", "Git", "ReactJS"]
+    },
+    "middle": {
+        "level" : "Middle level",
+        "knowledge" : ["Advanced HTML/CSS:", "SASS", "TypeScript", 
+            {
+                "like": "Frameworks",
+                "frame": ["React.js", "Angular.js", "Vue.js"]
+            },
+            {
+                "like": "Asynchronous requests",
+                "frame": ["XML", "Fetch", "Axios", "AJAX"] 
+            }
+    ]
+    },
+    "senior": {
+        "level" :"Senior level",
+        "knowledge" : [
+            {
+                "like": "Advanced JavaScript",
+                "frame" : ["Closures", "Prototypes and Inheritance", "Promises", "ES6+ Features", "OOP"]
+
+            }, "Performance Optimization", "Accessibility", "Testing", "UX/UI Design Principles", "Responsive Web Design"]
+    },
+    "full_Stack" : {
+        "leve" : "Full-Stack level",
+        "knowledge" : [
+            {
+                "like" : "Server-side lenguages",
+                "knowledge" : ["Node", "Python", "Java", "GO"]
+            },
+            {
+                "like" : "API Design",
+                "knowledge" : ["RESTful", "GraphQL"]
+            }
+    ]
+    }
+}
