@@ -33,7 +33,7 @@ const mailContainer = document.querySelector('.curses')
 const show_event = document.querySelector('.show-event')
 const def_language = document.querySelector('.def_language')
 
-const feedbacks = document.querySelector('.feedbacks')// scroll bar x
+const feedbacks = document.querySelector('.feedbacks')
 const heading = document.querySelector('.about_company')
 
 const dotBox = document.createElement('div')
@@ -43,7 +43,6 @@ const prev = document.querySelector('.prev')
 const next = document.querySelector('.next')
 let progress_bar
 const teachers_section = document.querySelector('.trainers')
-let teacherConf = []
 
 const box = document.createElement('div');
 
@@ -67,13 +66,13 @@ let question = true
 let inputContent
 let dote_arr
 
-let black_h2 = Array.from(document.querySelectorAll('.category-name'))
 
 const create_feedback = (feeds) => {
     let div_feeds = document.createElement('div')
     div_feeds.className = 'scroll-bar'
 
     feeds.map((feed) => {
+        console.log(feed)
         let div_feed = document.createElement('div')
         div_feed.className = 'feed'
 
@@ -92,8 +91,6 @@ const create_feedback = (feeds) => {
 
     feedbacks.appendChild(div_feeds)
 }
-
-create_feedback(feedbacks_conf)
 
 
 const create_events = (event) => {
@@ -264,7 +261,6 @@ const make_languages = (langs) => {
     def_language.appendChild(closed_language)
 }
 
-create_pluses(pluses_conf)
 
 create_company_logos(logos_conf)
 // console.log(mailContainer)
@@ -294,129 +290,125 @@ const change = (lang, langs) => {
 // make_languages(JSON.parse(localStorage.getItem('lengs')) || languages)
 
 // ====================================
+const create_curses = (curses) => {
+    const create_curse = (post, inputCurse) => {
+        let boxContent = document.createElement('div')
+        boxContent.className = 'boxContent'
+        box.innerHTML = '';
+        let heading3 = document.createElement('h3');
+        heading3.className = 'coursTitle'
+        let textCont = document.createElement('div')
+        textCont.className = 'textCont'
+        let coursType = document.createElement('p');
+        coursType.className = 'coursType'
+        let paragraph = document.createElement('p');
+        let paragraph1 = document.createElement('p');
+        textCont.append(heading3, coursType, paragraph, paragraph1)
+        let more = document.createElement('a');
+        let img = document.createElement('img');
 
-const create_curse = (post, inputCurse) => {
+        let loading_div = document.createElement('div')
+        let div1 = document.createElement('div')
+        progress_bar = div1
+        let progress = document.createElement('progress')
+        let head = document.createElement('p')
 
-
-    let boxContent = document.createElement('div')
-    boxContent.className = 'boxContent'
-    box.innerHTML = '';
-    let heading3 = document.createElement('h3');
-    heading3.className = 'coursTitle'
-    let textCont = document.createElement('div')
-    textCont.className = 'textCont'
-    let coursType = document.createElement('p');
-    coursType.className = 'coursType'
-    let paragraph = document.createElement('p');
-    let paragraph1 = document.createElement('p');
-    textCont.append(heading3, coursType, paragraph, paragraph1)
-    let more = document.createElement('a');
-    let img = document.createElement('img');
-
-    let loading_div = document.createElement('div')
-    let div1 = document.createElement('div')
-    progress_bar = div1
-    let progress = document.createElement('progress')
-    let head = document.createElement('p')
-
-    loading_div.className = 'progress_bar_containe'
-    div1.className = "progress-bar progress-html"
-    head.innerText = 'Ազատ տեղերի առկայություն'
-    head.className = 'pa'
-    progress.id = "progress-html"
-    root.style.setProperty('--my-peples-min', post.people_count.min);
-    root.style.setProperty('--my-peples-max', post.people_count.max);
+        loading_div.className = 'progress_bar_containe'
+        div1.className = "progress-bar progress-html"
+        head.innerText = 'Ազատ տեղերի առկայություն'
+        head.className = 'pa'
+        progress.id = "progress-html"
+        root.style.setProperty('--my-peples-min', post.min_count_human);
+        root.style.setProperty('--my-peples-max', post.max_count_human);
 
 
-    // console.log(root)
-    if (postBox.offsetTop - scrollY - 10 < window.innerHeight + 10) {
-        root.style.setProperty('--animation-start-curses', 100)
+        // console.log(root)
+        if (postBox.offsetTop - scrollY - 10 < window.innerHeight + 10) {
+            root.style.setProperty('--animation-start-curses', 100)
+        }
+        div1.appendChild(progress)
+
+        heading3.innerText = post.name
+        coursType.innerText = post.curse_type
+        paragraph.innerText = post.teacher_name
+        paragraph1.innerText = post.profess
+        inputContent = heading3.innerText
+
+        question ? inputCurse.value = heading3.innerText : inputCurse.value = '';
+
+        let imgBox = document.createElement('div')
+        more.href = `../curses/curses.html?id=${post.id}`
+        loading_div.append(head, div1, more)
+
+
+        fetch("../svg/more-button.html").then((res) => res.text())
+            .then((text) => {
+                more.innerHTML = text
+            })
+            .catch((e) => console.error(e));
+        // sessionStorage.setItem('id', JSON.stringify(post))
+        img.src = `../${post.image}`
+        img.alt = post.name
+        imgBox.appendChild(img)
+        imgBox.className = 'box_image'
+        boxContent.append(textCont, loading_div)
+        box.append(boxContent, imgBox)
+    }
+
+    postBox.append(box, dotBox)
+
+    mailContainer.appendChild(mailRegistration(question))
+    const input_curses = document.querySelector('#extra-info')
+    const defButton_type = document.querySelector('.typeReg').children[0]
+    defButton_type.addEventListener('click', () => input_curses.value = inputContent)
+    const dot_click = (ind) => {
+        dote_arr.map((dote, i) => {
+            ind === i ? dote.style.backgroundColor = '#5ebb46' :
+                dote.style.backgroundColor = '#717171';
+        });
+
+        create_curse(curses[ind], input_curses)
+
+        curseCount = ind
+    }
+
+    const create_curse_change_handler = (count) => {
+        curseCount += count
+        curseCount >= curses.length ? curseCount = 0 :
+            curseCount < 0 ? curseCount = curses.length - 1 : '';
+        dot_click(curseCount)
     }
 
 
-    div1.appendChild(progress)
-
-    heading3.innerText = post.name
-    coursType.innerText = post.off_of
-    paragraph.innerText = post.post_text
-    paragraph1.innerText = post.prof
-    inputContent = heading3.innerText
-
-    question ? inputCurse.value = heading3.innerText : inputCurse.value = '';
-
-    let imgBox = document.createElement('div')
-    more.href = `../curses/curses.html?id=${post.id}`
-    loading_div.append(head, div1, more)
-
-
-    fetch("../svg/more-button.html").then((res) => res.text())
-        .then((text) => {
-            more.innerHTML = text
+    const create_dotes = (dotes) => {
+        // console.log(dotes)
+        dotes.map((dot, ind) => {
+            let coma = document.createElement('span')
+            coma.className = 'dot'
+            coma.addEventListener('click', () => dot_click(ind))
+            dotBox.appendChild(coma)
         })
-        .catch((e) => console.error(e));
-    // sessionStorage.setItem('id', JSON.stringify(post))
-    img.src = post.path
-    img.alt = post.name
-    imgBox.appendChild(img)
-    imgBox.className = 'box_image'
-    boxContent.append(textCont, loading_div)
-    box.append(boxContent, imgBox)
-}
+        dote_arr = Array.from(document.querySelectorAll('.dot'))
 
-postBox.append(box, dotBox)
+        create_curse_change_handler(0)
+    }
+    create_dotes(curses)
+    prev.addEventListener('click', () => (create_curse_change_handler(-1)))
+    next.addEventListener('click', () => (create_curse_change_handler(1)))
 
-mailContainer.appendChild(mailRegistration(question))
-const input_curses = document.querySelector('#extra-info')
-const defButton_type = document.querySelector('.typeReg').children[0]
-defButton_type.addEventListener('click', () => input_curses.value = inputContent)
-const dot_click = (ind) => {
-    dote_arr.map((dote, i) => {
-        ind === i ? dote.style.backgroundColor = '#5ebb46' :
-            dote.style.backgroundColor = '#717171';
-    });
-
-    create_curse(posts_conf[ind], input_curses)
-    curseCount = ind
-}
-
-const create_curse_change_handler = (count) => {
-    curseCount += count
-    curseCount >= posts_conf.length ? curseCount = 0 :
-        curseCount < 0 ? curseCount = posts_conf.length - 1 : '';
-    dot_click(curseCount)
 }
 
 
-const create_dotes = (dotes) => {
-    // console.log(dotes)
-    dotes.map((dot, ind) => {
-        let coma = document.createElement('span')
-        coma.className = 'dot'
-        coma.addEventListener('click', () => dot_click(ind))
-        dotBox.appendChild(coma)
-    })
-    dote_arr = Array.from(document.querySelectorAll('.dot'))
-
-    create_curse_change_handler(0)
-}
-
-create_dotes(posts_conf)
-prev.addEventListener('click', () => (create_curse_change_handler(-1)))
-next.addEventListener('click', () => (create_curse_change_handler(1)))
-
-create_faq(faqs_conf)
 
 const create_teachers_box = (teachers) => {
     teachers_section.innerHTML = ''
-
-
     teachers.map(teacher => {
         const filterdUrl = Object.keys(teacher).filter(el => teacher[el] !== 'none' && el.endsWith('_url'))
         const cardDiv = document.createElement('div')
         cardDiv.className = 'card'
         cardDiv.innerHTML = `
                 <div class='image'>
-                    <img src='${teacher.image_path}'  alt='${teacher._as}'>
+                    <img src='../${teacher.image}'  alt='${teacher._as}'>
                 </div>
                 <ul  class='details'>
                     <li>${teacher.name}</li>
@@ -440,21 +432,33 @@ const sciletton = (cout, className) => {
         cardDiv.className = className
         teachers_section.appendChild(cardDiv)
     }
-
 }
 
 sciletton(2, 'card_scillet')
 
+fetch('https://codematter.am/api-v1/get_curses')
+    .then(res => res.json())
+    .then(data => create_curses(data))
+
+fetch('https://codematter.am/api-v1/get_pluses')
+    .then(res => res.json())
+    .then(data => create_pluses(data))
+
+
 fetch('https://codematter.am/api-v1/get_teachers')
     .then(res => res.json())
     .then(data => create_teachers_box(data))
-// console.log(teachers_conf, teacherConf)
-// teacherConf.length>0 && console.log(teachers_conf, teacherConf)
-// create_teachers_box(teachers_conf, true)
 
-// creatingListOfTargets(black_h2, footerWebsite, "en")
+fetch('https://codematter.am/api-v1/get_feedbacks')
+    .then(res => res.json())
+    .then(data => create_feedback(data))
+
+fetch('https://codematter.am/api-v1/get_main_faqs')
+    .then(res => res.json())
+    .then(data => create_faq(data))
+
+
 creatingListOfTargets(pageNavigation, footerWebsite, 'en')
-// scrollX_Sport(choose_we.firstElementChild)
 
 
 

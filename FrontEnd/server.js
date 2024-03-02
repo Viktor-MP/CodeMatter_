@@ -1,11 +1,7 @@
 const express = require("express")
 const path = require('path')
-const {translate, GPT_GET_TEXT} = require('./chat.js')
 const {Curses, Faqs, Maps} = require('./db/Curses.js')
 const {Teachers, Pluses, Feedbacks, Events, MainFaqs} = require('./db/Outer.js')
-const axios = require("axios");
-const cld = require("cld");
-const punycode = require("punycode");
 const app = express();
 const cors = require('cors');
 
@@ -163,50 +159,47 @@ app.get('/api-v1/get_curse_faqs', (req, res) => {
     }
 });
 
-const { WebSocketServer } = require('ws')
-
-const sockserver = new WebSocketServer({ port: 443 })
-
-sockserver.on('connection', ws => {
-    console.log('New client connected!')
-    ws.on('message', function incoming(message) {
-        message = JSON.parse(message)
-        let messages = message.messages
-
-        let user_last_message = messages[messages.length - 1].content
-        cld.detect(user_last_message).then((detect_lang) => {
-            let lang = detect_lang.languages[0].code
-            console.log("USER MESS: ", user_last_message)
-            if (lang === "hy") {
-                translate(user_last_message, lang, 'en').then((translate_text) => {
-                    let user_message_en = translate_text.google.text
-                    console.log(`Translate to en: `, user_message_en)
-                    messages[messages.length - 1].content = user_message_en
-                    console.log(user_last_message)
-                    GPT_GET_TEXT(messages).then((GPT_text) => {
-                        console.log(`AI Default text: en`, GPT_text)
-                        messages.push(GPT_text)
-                        translate(GPT_text.content, 'en', lang).then((send_text) => {
-                            console.log(send_text.google.text)
-                            message["answer"] = send_text.google.text
-                            ws.send(JSON.stringify(message))
-                        })
-                    })
-                })
-            } else if (lang === "en" || lang === "ru") {
-                GPT_GET_TEXT(messages).then((GPT_text) => {
-                    console.log("AI text: ", GPT_text.content)
-                    message["answer"] = GPT_text.content
-                    ws.send(JSON.stringify(message))
-                })
-            }
-        })
-    });
-    ws.onerror = function () {
-        console.log('websocket error')
-    }
-    ws.on('close', () => console.log('Client has disconnected!'))
-
-})
-websocket.listen(3002, () => {console.log('Server is running on port 3002')});
-app.listen(3002, () => {console.log(`Server is running on port 3000`)});
+// const { WebSocketServer } = require('ws')
+// const sockserver = new WebSocketServer({ port: 443 })
+// sockserver.on('connection', ws => {
+//     console.log('New client connected!')
+//     ws.on('message', function incoming(message) {
+//         message = JSON.parse(message)
+//         let messages = message.messages
+//
+//         let user_last_message = messages[messages.length - 1].content
+//         cld.detect(user_last_message).then((detect_lang) => {
+//             let lang = detect_lang.languages[0].code
+//             console.log("USER MESS: ", user_last_message)
+//             if (lang === "hy") {
+//                 translate(user_last_message, lang, 'en').then((translate_text) => {
+//                     let user_message_en = translate_text.google.text
+//                     console.log(`Translate to en: `, user_message_en)
+//                     messages[messages.length - 1].content = user_message_en
+//                     console.log(user_last_message)
+//                     GPT_GET_TEXT(messages).then((GPT_text) => {
+//                         console.log(`AI Default text: en`, GPT_text)
+//                         messages.push(GPT_text)
+//                         translate(GPT_text.content, 'en', lang).then((send_text) => {
+//                             console.log(send_text.google.text)
+//                             message["answer"] = send_text.google.text
+//                             ws.send(JSON.stringify(message))
+//                         })
+//                     })
+//                 })
+//             } else if (lang === "en" || lang === "ru") {
+//                 GPT_GET_TEXT(messages).then((GPT_text) => {
+//                     console.log("AI text: ", GPT_text.content)
+//                     message["answer"] = GPT_text.content
+//                     ws.send(JSON.stringify(message))
+//                 })
+//             }
+//         })
+//     });
+//     ws.onerror = function () {
+//         console.log('websocket error')
+//     }
+//     ws.on('close', () => console.log('Client has disconnected!'))
+//
+// })
+app.listen(3000, () => {console.log(`Server is running on port 3000`)});

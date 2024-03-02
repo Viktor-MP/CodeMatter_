@@ -1,8 +1,3 @@
-// import axios from "axios";
-// import OpenAI from '/node_mo'
-
-// import {response} from "express";
-
 const translate = (message, lang_from, lang_to) => {
     return fetch("https://api.edenai.run/v2/translation/automatic_translation", {
         method: 'POST',

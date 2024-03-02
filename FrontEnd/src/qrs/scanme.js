@@ -70,7 +70,10 @@ Promo code: ${generate_promo()}
 }
 
 create_company_logos(logos_conf)
-create_pluses(pluses_conf)
+fetch('https://codematter.am/api-v1/get_pluses')
+    .then(res => res.json())
+    .then(data => create_pluses(data))
+
 observer.observe(choose_we)
 creatingListOfTargets(pageNavigation, footerWebsite, 'en')
 

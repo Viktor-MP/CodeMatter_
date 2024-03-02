@@ -25,8 +25,8 @@ const Curses = sequelize.define('Curses', {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    offline: {
-        type: DataTypes.BOOLEAN,
+    curse_type: {
+        type: DataTypes.STRING(255),
         allowNull: false
     },
     teacher_name: {
@@ -37,16 +37,16 @@ const Curses = sequelize.define('Curses', {
         type: DataTypes.STRING(255),
         allowNull: false
     },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     price: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    image_path: {
+    image: {
         type: DataTypes.STRING(255),
-        allowNull: false
-    },
-    description: {
-        type: DataTypes.TEXT,
         allowNull: false
     },
     week_days: {

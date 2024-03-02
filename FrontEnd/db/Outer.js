@@ -1,11 +1,6 @@
 const {Sequelize, DataTypes} = require('sequelize')
 const {sequelize} = require('./connect/index.js')
 
-// require('dotenv').config()
-//
-// const sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
-//     logging: false,
-// });
 
 const Teachers = sequelize.define('Teachers', {
     name: {
@@ -16,7 +11,7 @@ const Teachers = sequelize.define('Teachers', {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    image_path: {
+    image: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
@@ -50,7 +45,7 @@ const Teachers = sequelize.define('Teachers', {
 });
 
 const Pluses = sequelize.define('Pluses', {
-    image_path: {
+    image: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },

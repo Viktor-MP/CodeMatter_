@@ -110,9 +110,9 @@ const create_faq = (faqs) => {
         faqBox.classList.add('hiden')
         faqQuest.innerHTML = `
             <span class='rote'>❯</span>
-            <span>${faq.harc}</span>            
+            <span>${faq.question}</span>            
         `;
-        faqUnswer.innerText = faq.patasxan;
+        faqUnswer.innerText = faq.answer;
 
         const changeClasses = (arg1, arg2, targ) => {
             targ.classList.remove(arg1)
@@ -147,7 +147,7 @@ const create_pluses = (pluses) => {
         let p = document.createElement("p");
 
         div.className = "post_choose_we";
-        img.src = plus.img;
+            img.src = `../${plus.image}`;
         img.alt = plus.header;
         img.style.width = "100%";
         img.className = "post_choose_we_img";

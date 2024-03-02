@@ -4,9 +4,11 @@ services:
   web:
     image: node:latest
     container_name: Node
+    restart: always
     working_dir: /FrontEnd
     volumes:
       - ./FrontEnd:/FrontEnd
+      - ./media:/FrontEnd/src/media
     env_file:
       - FrontEnd/.env
     command: "npm start"
@@ -15,7 +17,21 @@ services:
       - "3002:3002"
     depends_on:
       - nginx
+  django:
+    build: BackEnd/.
+    container_name: DjangoAdmin
     restart: always
+    command: python3 /BackEnd/CodeMatter/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./BackEnd:/BackEnd
+      - ./media:/BackEnd/media
+    ports:
+      - "8000:8000"
+    networks:
+      - admin_net
+    depends_on:
+      - nginx
+      - web
   bot:
     build: Bot/.
     container_name: Bot
@@ -33,21 +49,7 @@ services:
     depends_on:
       - nginx
       - web
-
-  django:
-    build: BackEnd/.
-    command: python3 /app/CodeMatter/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./BackEnd:/BackEnd
-    restart: always
-    ports:
-      - "8000:8000"
-    networks:
-      - admin_net
-    depends_on:
-      - nginx
-      - web
-      - bot
+      - django
   nginx:
     image: nginx:latest
     container_name: Nginx
