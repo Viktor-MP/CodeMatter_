@@ -1,0 +1,18 @@
+[
+    {
+        "level" : "Junior Front-End Developer",
+        "knowledge": ["HTML", "CSS",  "Responsive Design", "JavaScript", "Version Control"]
+    },
+    {
+        "level" : "Mid-Level Front-End Developer",
+        "knowledge" : ["Advanced HTML/CSS:", "CSS Preprocessors", "TypeScript",  "Frameworks", "Libraries", "Asynchronous requests", "Promise"]
+    },
+    {
+        "level" :"Senior Front-End Developer",
+        "knowledge" : [ "Performance Optimization", "Accessibility", "Testing", "UX/UI Design Principles", "Responsive Web Design", "Advanced JavaScript"]
+    },
+    {
+        "level" : "Full-Stack Developer",
+        "knowledge" : ["Server-side languages", "API Design", "Security", "DevOps"]
+    }
+]
