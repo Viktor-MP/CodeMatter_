@@ -1,0 +1,47 @@
+
+
+
+
+main {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.resizer_ {
+    width: 0.7rem;
+    cursor: ew-resize;
+}
+
+.personalMap_ {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    max-height: 100vh;
+    min-height: 100vh;
+
+    h2 {
+        text-align: center;
+    }
+    ._gideCard_ {
+        padding: 0.5rem 0;
+        p {
+            padding: 0.5rem 1rem;
+        }
+    }
+    ._mapGide_ {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+    }
+  
+    ._mapContainer_ {
+        overflow: auto;
+        width: 100%;
+    }
+    
+} 
+
+
+
+
+
