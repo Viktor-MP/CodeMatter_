@@ -37,7 +37,6 @@ const mapDataHendler = (datas: DeveloperLevel[])  => {
           <h2>Personal education map</h2>
 
           {mapData && (mapDataHendler(mapData))}
-          {/* {mapData && (mapDataHendler(mapData))} */}
 
    
         </div>
