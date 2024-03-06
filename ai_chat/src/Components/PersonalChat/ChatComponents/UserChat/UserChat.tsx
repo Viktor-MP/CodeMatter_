@@ -35,10 +35,7 @@ const UserChat: FC<PersonType> = ({ className }) => {
    .then(res => {
   res &&  gptGetResponse(res.text)
 
-  })
-   
-
-        
+  })        
   }
 
 

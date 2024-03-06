@@ -20,7 +20,7 @@ const translateReq = {
     }
 }
 
-
+console.log(translateReq.method)
 const gpt_get_Req = {
     url: 'https://api.openai.com/v1/chat/completions',
     method: "POST",
