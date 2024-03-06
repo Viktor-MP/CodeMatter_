@@ -1,33 +1,63 @@
-import { FC, useEffect, useState ,Dispatch, SetStateAction }  from "react";
+import { FC, useEffect, useState }  from "react";
+import { gptGetResponse, translateMessage } from "./translate";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
 import { useAppSelector } from "../../../ReduxToolkit/app_hooks";
 import { getMessageState } from "./UserChatMessage";
 import { ResponseData } from "./typesUserChat";
 import "./UserChat.scss";
-import fetchData from "../../../../AxiosRequest/AxiosReques";
-// import { Dispatch } from "@reduxjs/toolkit";
+
 
 const UserChat: FC<PersonType> = ({ className }) => {
-  const [chat, setChat] = useState<ResponseData>()
-  // const [chat, setChat]: [ResponseData | null | undefined, Dispatch<SetStateAction<ResponseData | null | undefined>>] = useState(null);
+  const [chat, setChat] = useState<ResponseData >()
 
-  
-  const reduxMessage = useAppSelector(getMessageState);
 
-  
+  const reduxMessage = useAppSelector(getMessageState).message;
+
+  const getPosts = async (url: string) => {
+    const res : Response = await fetch(url);
+    const posts : ResponseData = await res.json();
+    setChat(posts);
+  }
+
+
+
+  const chatGPT_message_hendler = (chatMessages: ResponseData, newUserMessage: string ) => {
+    const newChat = JSON.parse(JSON.stringify(chatMessages))
+    newChat.messages.push({
+      content:newUserMessage,
+      role: "user"
+    })
+    setChat(newChat)
+    const lastMessage = newChat.messages[newChat.messages.length - 1].content
+    console.log(lastMessage)
+   translateMessage(lastMessage, "hy", "en")
+   .then(res => {
+  res &&  gptGetResponse(res.text)
+
+  })
+   
+
+        
+  }
+
+
   useEffect(() => {
-    console.log('hello')
-      fetchData('./sourses/testChat.json')
-      // .then (data => setChat(data))
+   chat &&  chatGPT_message_hendler(chat, reduxMessage)
+  }, [reduxMessage] )
+
+
+  useEffect(() => {
+    getPosts('./sourses/testChat.json')
 
   }, [])
-chat && console.log(chat)
-  // console.log(reduxMessage)
+
 
   return (
     <div className={className}>
-      <div className="_chat_"></div>
+      <div className="_chat_">
+
+      </div>
     </div>
   );
 };
