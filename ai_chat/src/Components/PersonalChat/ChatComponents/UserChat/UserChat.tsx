@@ -17,6 +17,7 @@ const UserChat: FC<PersonType> = ({ className }) => {
 
   
   useEffect(() => {
+    console.log('hello')
       fetchData('./sourses/testChat.json')
       // .then (data => setChat(data))
 
