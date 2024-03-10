@@ -8,39 +8,38 @@
 
 
 ._chatContainer_ {
-    height: 90%;
+    height: 90vh;
     font-size: 1.2rem;
-    // background-image: linear-gradient(red, blue)
-
+    overflow-y: auto;
 }
 
 
 
 ._chat_ {
     padding: 1rem 2rem;
-    overflow-y: auto;
-    height: 90vh;
-    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
 }
 
 
 ._message {
+
     clear: both;
     max-width: 40%;
     border-radius: 2rem;
     line-height: 1.3rem;
-    
+
     margin: 1rem;
     padding: 1rem 1.5rem;
 }
 
 ._userMess {
-    float: right;
+    align-self: flex-end;
     text-align: end;
     background-image: var(--user_mass_bg);
 }
 
 ._assistMess {
-    float: left;
+    align-self: flex-start;
     background-image: var(--assist_mass_bg) ;
 }

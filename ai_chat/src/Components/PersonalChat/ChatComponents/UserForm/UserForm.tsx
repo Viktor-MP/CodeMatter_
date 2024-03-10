@@ -21,7 +21,6 @@ const UserForm: FC<PersonType> = ({ className }) => {
     setInputType(inputTypes[0]);
     setInputValue("");
   };
-console.log(inputType)
 
   const sendingDataMessage = (e: any) => {
     // console.dir(e.target.localName)
@@ -57,7 +56,6 @@ console.log(inputType)
         
         className="startChat_btn"
         type = {inputType}
-        // value = { inputValue }
         defaultValue = {inputValue}
       />
       <span className="sendChatIcon" onClick={clickSend}></span>
