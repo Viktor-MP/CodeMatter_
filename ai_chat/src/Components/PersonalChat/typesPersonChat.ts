@@ -1,4 +1,9 @@
 
 export interface formDataType {
-    message: string
+    message: string,
+    state: boolean
+}
+
+export interface startDataType {
+    chat: boolean
 }

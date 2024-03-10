@@ -1,23 +1,26 @@
-
-
-import axios, { AxiosResponse, AxiosError } from 'axios';
-import { DeveloperLevel } from '../Components/PersonalMap/typesPersonMap';
-// Define a type for the data you expect to receive
-
+import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios';
+// import { DeveloperLevel } from '../Components/PersonalMap/typesPersonMap';
+// import { Message, ResponseData } from '../Components/PersonalChat/ChatComponents/UserChat/typesUserChat';
 
 // Example function to fetch data using Axios
-const fetchData = async (url: string) => {
+const fetchData = async (url: string, method: 'GET' | 'POST' = 'GET', data?: any) => {
+  const config: AxiosRequestConfig = {
+    method,
+    url,
+    data,
+  };
+
   try {
-    // Make a GET request
-    const response: AxiosResponse<DeveloperLevel[]> = await axios.get(url);
+    // Make a request
+    const response: AxiosResponse<any> = await axios(config);
 
     // Access the data
-    const data = response.data;
-    return data
+    const responseData = response.data;
+    return responseData;
     // Do something with the data
   } catch (error: any) {
     // Handle 
-    console.log(error)
+    console.log(error);
     if (axios.isAxiosError(error)) {
       const axiosError: AxiosError = error;
       console.error('Axios error:', axiosError.message);
@@ -27,4 +30,5 @@ const fetchData = async (url: string) => {
   }
 };
 
-export default fetchData
+export default fetchData;
+

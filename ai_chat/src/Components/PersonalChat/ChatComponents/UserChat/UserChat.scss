@@ -1,4 +1,41 @@
+:root {
+    --user_bg: rgb(23, 225, 23);
+    --assist_bg: rgb(135, 135, 135);
+    --user_mass_bg: linear-gradient(to left, var(--user_bg), var(--assist_bg) );
+    --assist_mass_bg: linear-gradient(to left, var(--assist_bg),var(--user_bg) );
+
+}
+
+
 ._chatContainer_ {
     height: 90%;
+    font-size: 1.3rem;
     // background-image: linear-gradient(red, blue)
+
+}
+
+
+
+._chat_ {
+    height: 100%;
+}
+
+
+._message {
+    width: 30%;
+    padding: 1rem 1.5rem;
+    // background-color: rgb(69, 201, 201);
+    border-radius: 2rem;
+    clear: both;
+}
+
+._userMess {
+    float: right;
+    text-align: end;
+    background-image: var(--user_mass_bg);
+}
+
+._assistMess {
+    float: left;
+    background-image: var(--assist_mass_bg) ;
 }

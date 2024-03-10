@@ -1,59 +1,105 @@
 import { FC, useEffect, useState }  from "react";
-import { gptGetResponse, translateMessage } from "./translate";
+import fetchData from "../../../../AxiosRequest/AxiosReques";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
-import { useAppSelector } from "../../../ReduxToolkit/app_hooks";
+import { ResponseData, myMessage } from "./typesUserChat";
+import { useAppSelector, useChatSelector } from "../../../ReduxToolkit/app_hooks";
 import { getMessageState } from "./UserChatMessage";
-import { ResponseData } from "./typesUserChat";
-import "./UserChat.scss";
+import { getStartState } from "./ChatStart";
 
+import "./UserChat.scss";
 
 const UserChat: FC<PersonType> = ({ className }) => {
   const [chat, setChat] = useState<ResponseData >()
+  const [chatTalk, setChatTalk] = useState<myMessage[]>([])
+  const [messageId, setMessageId] = useState<number>(1)
 
 
-  const reduxMessage = useAppSelector(getMessageState).message;
+  const reduxMessage = useAppSelector(getMessageState);
 
-  const getPosts = async (url: string) => {
-    const res : Response = await fetch(url);
-    const posts : ResponseData = await res.json();
-    setChat(posts);
+
+  const changChatTalk  = (role: "user" | "assistant", content: string)  => {
+
+    if (role === 'user') {
+      console.log(role)
+
+      const newChat = JSON.parse(JSON.stringify(chat))
+      setChat(newChat)
+
+      newChat.messages.push({
+         content: content,
+         role: role,
+       })
+    } else {
+      console.log(role)
+    }
+
+      setChatTalk([
+        ...chatTalk,
+        {
+          content: content,
+          role: role,
+          id: messageId,
+        }
+      ]) 
+   
+    setMessageId(pr => ++pr)
+  }
+  
+  const sendData = (data: ResponseData) => {
+    fetchData("https://codematter.am/api-v1/openAi", "POST", data)
+    .then( res => changChatTalk("assistant", res.answer))
   }
 
 
+  useEffect(() => {
+    if (chatTalk.length > 0 && chatTalk[chatTalk.length - 1].role === 'user') {
+      console.log(chat, "chat") 
+      console.log(chatTalk, "ChatTalk")
+      chat &&  sendData(chat) 
+    }
+  
+  }, [chatTalk])
 
-  const chatGPT_message_hendler = (chatMessages: ResponseData, newUserMessage: string ) => {
-    const newChat = JSON.parse(JSON.stringify(chatMessages))
-    newChat.messages.push({
-      content:newUserMessage,
-      role: "user"
+  useEffect(() => { // it works only ones!
+    reduxMessage.state && chat && changChatTalk("assistant", chat.answer)
+  }, [reduxMessage.state])
+
+
+  useEffect(() => {
+
+   !chat && fetchData('./sourses/testChat.json')
+    .then(data => {
+      setChat(data) // storing the data json
     })
-    setChat(newChat)
-    const lastMessage = newChat.messages[newChat.messages.length - 1].content
-    console.log(lastMessage)
-   translateMessage(lastMessage, "hy", "en")
-   .then(res => {
-  res &&  gptGetResponse(res.text)
+    
+    // console.log(chat)
+    reduxMessage.message && changChatTalk("user", reduxMessage.message)
+  }, [reduxMessage.message])
 
-  })        
+  const ChatTalkDrow_hendler = () => {
+    // console.log(chatTalk)
+    // if () {
+      // console.log
+    return  chatTalk.length === 0 ?    <>baylus Samo</> : 
+          <>
+
+            {chatTalk.map(chat => {
+              console.log(chat)
+             return <p className={`${
+                  chat.role === "user" ? '_userMess' : '_assistMess'
+            } _message`}   key={chat.id}> { chat.content }</p>
+            })}
+          </>
+ 
+    
   }
-
-
-  useEffect(() => {
-   chat &&  chatGPT_message_hendler(chat, reduxMessage)
-  }, [reduxMessage] )
-
-
-  useEffect(() => {
-    getPosts('./sourses/testChat.json')
-
-  }, [])
 
 
   return (
     <div className={className}>
       <div className="_chat_">
-
+        <ChatTalkDrow_hendler />
       </div>
     </div>
   );

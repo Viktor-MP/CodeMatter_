@@ -8,9 +8,7 @@
 /node_modules
 /.pnp
 .pnp.js
-src/chatSours.ts
-./src/chatSours.ts
-/src/chatSours.ts
+
 
 
 

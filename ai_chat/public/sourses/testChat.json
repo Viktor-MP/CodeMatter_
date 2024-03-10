@@ -1,13 +1,9 @@
 { 
     "messages": [
         {
-            "role": "user",
-            "content": "բարև"
-        },
-        {
             "role": "assistant",
-            "content": "Hello! How can I assist you today?"
+            "content": "Hello! How can I assist you?"
         }
     ],
-    "answer": "Բարեւ Ձեզ! Ինչպե՞ս կարող եմ օգնել ձեզ այսօր:"
+    "answer": "Բարև Ձեզ! Ինչպե՞ս կարող եմ ձեզ օգնել:"
 }

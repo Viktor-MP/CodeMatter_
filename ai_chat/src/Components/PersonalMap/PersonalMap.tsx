@@ -22,7 +22,6 @@ useEffect(() => {
 
 
 const mapDataHendler = (datas: DeveloperLevel[])  => {
-  console.log(datas[0].level)
   return datas.map(data => <div className='_gideCard_' key={data.level}>
     <h3> {data.level} </h3>
     {data.knowledge.map(know => <p key={know}> {know} </p>)}

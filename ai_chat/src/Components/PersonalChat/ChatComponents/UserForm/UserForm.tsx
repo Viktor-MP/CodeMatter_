@@ -1,8 +1,11 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import { formDataType } from "../../typesPersonChat";
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
+import { useAppDispatch , useDispatchChat} from "../../../ReduxToolkit/app_hooks";
 import { sendMessage } from "../UserChat/UserChatMessage";
-import { useAppDispatch } from "../../../ReduxToolkit/app_hooks";
+import { startChat } from "../UserChat/ChatStart";
+import { factory } from "typescript";
+import { fail } from "assert";
 
 const UserForm: FC<PersonType> = ({ className }) => {
   const inputTypes: string[] = ["text", "button"];
@@ -10,11 +13,22 @@ const UserForm: FC<PersonType> = ({ className }) => {
   const [inputValue, setInputValue] = useState<string>("Start");
   const [formData, setFormData] = useState<formDataType>({
     message: "",
+    state: false
   });
-  const reduxDespetch = useAppDispatch();
 
+
+  const reduxDespetch = useAppDispatch();
+  const reduxStartDespaetch = useDispatchChat()
+
+
+  // console.log(reduxStartDespaetch(startChat({chat: true})))
+  
   const changingType: React.ComponentProps<"input">["onClick"] = (e) => {
-    console.dir(e.target);
+    formData.state = true
+    reduxDespetch(sendMessage({
+      message: '',
+      state: formData.state,
+    }));
     setInputType(inputTypes[0]);
     setInputValue("");
   };
@@ -24,17 +38,20 @@ const UserForm: FC<PersonType> = ({ className }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const sendingDataMessage = (data: any) => {
-    reduxDespetch(sendMessage(data));
+  const sendingDataMessage = (data: string) => {
+    reduxDespetch(sendMessage({
+      message: data,
+      state: formData.state
+    }));
   };
 
   const submitSend: React.ComponentProps<"form">["onSubmit"] = (e) => {
     e.preventDefault();
-    sendingDataMessage(formData);
+    sendingDataMessage(formData.message);
   };
 
   const clickSend: React.ComponentProps<"span">["onClick"] = () => {
-    sendingDataMessage(formData);
+    sendingDataMessage(formData.message);
   };
 
   return (
