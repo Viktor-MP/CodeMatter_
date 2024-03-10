@@ -9,7 +9,7 @@
 
 ._chatContainer_ {
     height: 90%;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     // background-image: linear-gradient(red, blue)
 
 }
@@ -17,16 +17,21 @@
 
 
 ._chat_ {
-    height: 100%;
+    padding: 1rem 2rem;
+    overflow-y: auto;
+    height: 90vh;
+    max-height: 90vh;
 }
 
 
 ._message {
-    width: 30%;
-    padding: 1rem 1.5rem;
-    // background-color: rgb(69, 201, 201);
-    border-radius: 2rem;
     clear: both;
+    max-width: 40%;
+    border-radius: 2rem;
+    line-height: 1.3rem;
+    
+    margin: 1rem;
+    padding: 1rem 1.5rem;
 }
 
 ._userMess {

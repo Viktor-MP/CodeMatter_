@@ -21,7 +21,7 @@ const UserChat: FC<PersonType> = ({ className }) => {
   const changChatTalk  = (role: "user" | "assistant", content: string)  => {
 
     if (role === 'user') {
-      console.log(role)
+      // console.log(role)
 
       const newChat = JSON.parse(JSON.stringify(chat))
       setChat(newChat)
@@ -31,7 +31,7 @@ const UserChat: FC<PersonType> = ({ className }) => {
          role: role,
        })
     } else {
-      console.log(role)
+      // console.log(role)
     }
 
       setChatTalk([
@@ -54,8 +54,8 @@ const UserChat: FC<PersonType> = ({ className }) => {
 
   useEffect(() => {
     if (chatTalk.length > 0 && chatTalk[chatTalk.length - 1].role === 'user') {
-      console.log(chat, "chat") 
-      console.log(chatTalk, "ChatTalk")
+      // console.log(chat, "chat") 
+      // console.log(chatTalk, "ChatTalk")
       chat &&  sendData(chat) 
     }
   
@@ -85,7 +85,7 @@ const UserChat: FC<PersonType> = ({ className }) => {
           <>
 
             {chatTalk.map(chat => {
-              console.log(chat)
+              // console.log(chat)
              return <p className={`${
                   chat.role === "user" ? '_userMess' : '_assistMess'
             } _message`}   key={chat.id}> { chat.content }</p>
