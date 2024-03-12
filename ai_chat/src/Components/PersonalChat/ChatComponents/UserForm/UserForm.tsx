@@ -1,7 +1,7 @@
 import React, { FC, useRef, useState } from "react";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
-import { useAppDispatch , useDispatchChat} from "../../../ReduxToolkit/app_hooks";
+import { useAppDispatch } from "../../../ReduxToolkit/app_hooks";
 import { sendMessage } from "../UserChat/UserChatMessage";
 
 import "../../../../App.css"

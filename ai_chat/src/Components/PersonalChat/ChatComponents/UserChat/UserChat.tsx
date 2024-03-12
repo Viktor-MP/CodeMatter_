@@ -3,7 +3,7 @@ import fetchData from "../../../../AxiosRequest/AxiosReques";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
 import { ResponseData, myMessage } from "./typesUserChat";
-import { useAppSelector, useChatSelector } from "../../../ReduxToolkit/app_hooks";
+import { useAppSelector } from "../../../ReduxToolkit/app_hooks";
 import { getMessageState } from "./UserChatMessage";
 import ChatMessage from "../Message/ChatMessage";
 // import { getStartState } from "./ChatStart";

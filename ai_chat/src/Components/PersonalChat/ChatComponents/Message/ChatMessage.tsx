@@ -9,7 +9,7 @@ const elPosition = {
 }
 
 
-const ChatMessage: FC <chatMessageType> = ({ key, className, chat  })  => {
+const ChatMessage: FC <chatMessageType> = ({  className, chat  })  => {
     // const eventType = React.MouseEvent<HTMLButtonElement>
     const toolTypes : string[] = ['_hiden_tools', '_show_tools']
 
@@ -30,8 +30,6 @@ const ChatMessage: FC <chatMessageType> = ({ key, className, chat  })  => {
         ) => {
 
         e.preventDefault();
-      
-        let mouseX, mouseY;
         
         'view' in e && 'screenLeft' in e.view && console.log(e.view.screenLeft)
         'clientX' in e && console.log(e.clientX, e.clientY)
@@ -55,10 +53,9 @@ const ChatMessage: FC <chatMessageType> = ({ key, className, chat  })  => {
     
 
     // <Card className={${classes["rsCard"]} ${classes["sowcase"]}}
-    console.log(chat.id)
-    console.log()
-    return (
-        <div key = {key}    onContextMenu = {openExtraTools }
+    // console.log(chat.id)
+    // console.log()
+    return ( <div    onContextMenu = {openExtraTools }
                 onBlur = { openExtraTools } 
                 className={`${className} _message`}
                 tabIndex={0}  >

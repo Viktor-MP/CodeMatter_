@@ -7,8 +7,7 @@ export interface pose {
 }
 
 export interface chatMessageType {
-    chat: myMessage;
-    className: string;
-    key: number;
+    chat: myMessage
+    className: string
 }
 
