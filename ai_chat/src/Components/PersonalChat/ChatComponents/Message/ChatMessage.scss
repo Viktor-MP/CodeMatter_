@@ -1,0 +1,73 @@
+
+
+
+._chat_ {
+    padding: 2rem 2rem 10vh ;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+._message {
+    // position: relative;
+    cursor:default;
+
+    clear: both;
+    max-width: 40%;
+    border-radius: 2rem;
+    line-height: 1.3rem;
+    font-weight: 550;
+    margin: 1rem;
+    padding: 1rem 1.5rem;
+}
+
+._userMess {
+    align-self: flex-end;
+    text-align: end;
+    background-color: var(--user_bg);
+}
+
+._assistMess {
+    align-self: flex-start;
+    color: var(--color);
+    background-color: var(--assist_bg) ;
+}
+
+
+._hiden_tools {
+    display: none;
+}
+._show_tools {
+    right: 0;
+    bottom: 0;
+    display: block;
+}
+
+.defTool {
+    position: absolute;
+    padding: 1rem;
+    // border:solid  rgb(255, 25, 0) 3px;
+    box-shadow: 4px 4px 14px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 4px 4px 14px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 14px 0px rgba(0,0,0,0.75);
+    width: max-content;
+    height: max-content;
+    background-color: rgb(216, 214, 214);
+    color: var(--assist_bg);
+    border-radius: 10%;
+
+    p {
+        // border: solid var(--assist_bg) 2px;
+        width: 100%;
+        padding: 0.5rem 1rem;
+    }
+    p:hover {
+        border-radius: 10%;
+        background-color: inherit ;
+        box-shadow: 3px 1px 63px -6px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 3px 1px 63px -6px rgba(0,0,0,0.75);
+        -moz-box-shadow: 3px 1px 63px -6px rgba(0,0,0,0.75);
+        
+    }
+}

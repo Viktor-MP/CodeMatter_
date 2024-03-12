@@ -4,12 +4,13 @@ import { PersonType } from "../../../PersonalMap/typesPersonMap";
 import { useAppDispatch , useDispatchChat} from "../../../ReduxToolkit/app_hooks";
 import { sendMessage } from "../UserChat/UserChatMessage";
 
-
+import "../../../../App.css"
 const UserForm: FC<PersonType> = ({ className }) => {
   const inputTypes: string[] = ["text", "button"];
   const inputMessage = useRef<HTMLInputElement | null>(null);
   const [inputType, setInputType] = useState<string>(inputTypes[1]);
   const [inputValue, setInputValue] = useState<string>("Start");
+
 
   const reduxDespetch = useAppDispatch();
 

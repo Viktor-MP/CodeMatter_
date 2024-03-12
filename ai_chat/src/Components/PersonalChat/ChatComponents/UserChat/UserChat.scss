@@ -1,45 +1,12 @@
-:root {
-    --user_bg: rgb(23, 225, 23);
-    --assist_bg: rgb(135, 135, 135);
-    --user_mass_bg: linear-gradient(to left, var(--user_bg), var(--assist_bg) );
-    --assist_mass_bg: linear-gradient(to left, var(--assist_bg),var(--user_bg) );
-
-}
 
 
 ._chatContainer_ {
     height: 90vh;
     font-size: 1.2rem;
     overflow-y: auto;
+    position: relative;
 }
 
 
 
-._chat_ {
-    padding: 1rem 2rem;
-    display: flex;
-    flex-direction: column;
-}
 
-
-._message {
-
-    clear: both;
-    max-width: 40%;
-    border-radius: 2rem;
-    line-height: 1.3rem;
-
-    margin: 1rem;
-    padding: 1rem 1.5rem;
-}
-
-._userMess {
-    align-self: flex-end;
-    text-align: end;
-    background-image: var(--user_mass_bg);
-}
-
-._assistMess {
-    align-self: flex-start;
-    background-image: var(--assist_mass_bg) ;
-}

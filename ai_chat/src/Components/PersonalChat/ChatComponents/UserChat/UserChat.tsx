@@ -5,24 +5,25 @@ import { PersonType } from "../../../PersonalMap/typesPersonMap";
 import { ResponseData, myMessage } from "./typesUserChat";
 import { useAppSelector, useChatSelector } from "../../../ReduxToolkit/app_hooks";
 import { getMessageState } from "./UserChatMessage";
+import ChatMessage from "../Message/ChatMessage";
 // import { getStartState } from "./ChatStart";
 
 import "./UserChat.scss";
+import Typing from "../Typing/Typing";
 
 const UserChat: FC<PersonType> = ({ className }) => {
-  const [height, setHeight] = useState(0);
+  
   const [chat, setChat] = useState<ResponseData >()
+  const [typing, setTyping] = useState(false)
   const [chatTalk, setChatTalk] = useState<myMessage[]>([])
   const [messageId, setMessageId] = useState<number>(1)
   const myComponentRef = useRef<HTMLDivElement>(null);
-
+  
   const reduxMessage = useAppSelector(getMessageState);
 
   const changChatTalk  = (role: "user" | "assistant", content: string)  => {
 
     if (role === 'user') {
-      // console.log(role)
-
       const newChat = JSON.parse(JSON.stringify(chat))
       setChat(newChat)
 
@@ -47,23 +48,19 @@ const UserChat: FC<PersonType> = ({ className }) => {
   const sendData = (data: ResponseData) => {
     fetchData("https://codematter.am/api-v1/openAi", "POST", data)
     .then( res => changChatTalk("assistant", res.answer))
+    .catch( err => console.log(err))
   }
-  myComponentRef.current && console.log(myComponentRef.current?.parentElement?.clientHeight)
-  // container.scrollHeight
-  myComponentRef.current && console.log(myComponentRef.current.clientHeight)
-  console.log(height)
 
   useEffect(() => {
-    
+    const refCur = myComponentRef.current
+    setTyping(false)
     if (chatTalk.length > 0 && chatTalk[chatTalk.length - 1].role === 'user') {
       chat &&  sendData(chat) 
+      setTyping(!typing)
     }
 
-    if (myComponentRef.current) {
-      // Scroll to the bottom
-    }
-    myComponentRef.current &&
-    myComponentRef.current.scrollIntoView
+    refCur &&
+    refCur.scrollIntoView
       ({ 
       behavior: 'smooth', block: 'end', inline: 'nearest'
     });
@@ -86,32 +83,32 @@ const UserChat: FC<PersonType> = ({ className }) => {
     reduxMessage.message && changChatTalk("user", reduxMessage.message)
   }, [reduxMessage.message])
 
-  const let_chat_scroll = (e: any) => {
-
-  }
 
   const ChatTalkDrow_hendler = () => {
 
-    return  chatTalk.length === 0 ?    <>baylus Samo</> : 
+    return  chatTalk.length === 0 ?
+          <>baylus Samo </> : 
           <>
-
             {chatTalk.map(chat => {
-              // console.log(chat)
-             return <p className={`
-             ${chat.role === "user" ? '_userMess' : '_assistMess'}
-              _message
-              `}   key={chat.id}> { chat.content }</p>
+              console.log(chat.id)
+             return  <>
+              <ChatMessage  key={chat.id}  
+              className={`${chat.role === "user" ? '_userMess' : '_assistMess'}`}
+              chat = {chat} />
+             </>
+            
+             
             })}
           </>
+
  
-    
-  }
-
-
+}
   return (
-    <div className={className}>
+    <div  className={className}>
       <div  ref={myComponentRef} className="_chat_">
-        <ChatTalkDrow_hendler  />
+          <ChatTalkDrow_hendler  />
+          { typing && <Typing />}
+
       </div>
     </div>
   );

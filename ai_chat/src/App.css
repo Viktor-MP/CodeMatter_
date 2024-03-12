@@ -8,7 +8,14 @@
   --background_color: rgb(223, 221, 221);
   --background_color_hover: rgb(194, 194, 194);
   --bg_color_btn: rgb(99, 99, 99);
-  --color: white;
+  --color: #ffffff;
+
+
+  --user_bg: rgb(27, 234, 27);
+  --assist_bg: rgb(00, 00, 00);
+  --user_mass_bg: linear-gradient(to left, var(--user_bg), var(--assist_bg) );
+  --assist_mass_bg: linear-gradient(to left, var(--assist_bg),var(--user_bg) );
+
 }
 
 /* width */
@@ -39,7 +46,7 @@
 }
 
 html {
-  font-size: clamp(12px, 1vw, 28px);
+  font-size: clamp(12px, 0.6vw, 28px);
 }
 
 .App {
