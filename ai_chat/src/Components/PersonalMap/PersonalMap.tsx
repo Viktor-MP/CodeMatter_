@@ -40,7 +40,7 @@ const mapDataHendler = (datas: DeveloperLevel[])  => {
    
         </div>
       </div>
-      <div className="resizer_"></div>
+      {/* <div className="resizer_"></div> */}
     </section>
   )
 }

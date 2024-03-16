@@ -91,13 +91,10 @@ const UserChat: FC<PersonType> = ({ className }) => {
           <>
             {chatTalk.map(chat => {
               console.log(chat.id)
-             return  <>
-              <ChatMessage  key={chat.id}  
+             return  <ChatMessage  key={chat.id}  
               className={`${chat.role === "user" ? '_userMess' : '_assistMess'}`}
               chat = {chat} />
-             </>
-            
-             
+
             })}
           </>
 

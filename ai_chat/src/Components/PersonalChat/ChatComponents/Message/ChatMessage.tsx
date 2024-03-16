@@ -10,7 +10,6 @@ const elPosition = {
 
 
 const ChatMessage: FC <chatMessageType> = ({  className, chat  })  => {
-    // const eventType = React.MouseEvent<HTMLButtonElement>
     const toolTypes : string[] = ['_hiden_tools', '_show_tools']
 
     const [tools,setTools] = useState(toolTypes[0])
@@ -31,44 +30,42 @@ const ChatMessage: FC <chatMessageType> = ({  className, chat  })  => {
 
         e.preventDefault();
         
-        'view' in e && 'screenLeft' in e.view && console.log(e.view.screenLeft)
-        'clientX' in e && console.log(e.clientX, e.clientY)
-        // 'pageX' in e &&  {mouseX : e.clientX, mouseY : e.clientY}
+        // e.stopImmediatePropagation();
         
-        
-        const target =  e.currentTarget as HTMLDivElement;
-        console.dir(target)
-
     
-     
-        "pageX" in e  &&   setElPose({
-                left: e.clientX - target.clientWidth,
-                top: e.clientY
-            })
+        if ('pageX' in e && tools === toolTypes[0]) {
 
-        "pageX" in e ?
-         setTools(toolTypes[1]):
-         setTools(toolTypes[0]);
+            const target =  e.currentTarget as HTMLDivElement;
+            const mouseX = e.pageX - target.getBoundingClientRect().left;
+            const mouseY = e.pageY - target.getBoundingClientRect().top;            
+            setElPose({
+                left: mouseX,
+                top: mouseY
+            })
+            setTools(toolTypes[1])
+        } else {
+            setTools(toolTypes[0])
+        }
+
     }
     
-
-    // <Card className={${classes["rsCard"]} ${classes["sowcase"]}}
-    // console.log(chat.id)
-    // console.log()
-    return ( <div    onContextMenu = {openExtraTools }
+    return (
+            <div  
+                onContextMenu = {openExtraTools }
                 onBlur = { openExtraTools } 
                 className={`${className} _message`}
                 tabIndex={0}  >
 
+                <p> {chat.content} </p>
 
-            <p> {chat.content} </p>
-            <div className = { `${tools}   defTool `}  style= {rc} >
+                <div   className = { `${tools}   defTool `}  style  = {rc} >
                     <p>Delete</p>
                     <p>Edit</p>
                     <p>Copy text</p>
+                </div>
+
             </div>
-        </div>
-        )
+            )
 }
 
 export default ChatMessage
