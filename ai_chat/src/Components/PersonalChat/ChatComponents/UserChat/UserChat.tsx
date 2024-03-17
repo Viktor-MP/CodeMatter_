@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState }  from "react";
 import fetchData from "../../../../AxiosRequest/AxiosReques";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
-import { ResponseData, myMessage } from "./typesUserChat";
+import { ResponseData, myMessage, chatStart } from "./typesUserChat";
 import { useAppSelector } from "../../../ReduxToolkit/app_hooks";
 import { getMessageState } from "./UserChatMessage";
 import ChatMessage from "../Message/ChatMessage";
@@ -13,10 +13,10 @@ import Typing from "../Typing/Typing";
 
 const UserChat: FC<PersonType> = ({ className }) => {
   
-  const [chat, setChat] = useState<ResponseData >()
+  const [chat, setChat] = useState<ResponseData >(chatStart)
   const [typing, setTyping] = useState(false)
   const [chatTalk, setChatTalk] = useState<myMessage[]>([])
-  const [messageId, setMessageId] = useState<number>(1)
+  const [messageId, setMessageId] = useState<number>(0)
   const myComponentRef = useRef<HTMLDivElement>(null);
   
   const reduxMessage = useAppSelector(getMessageState);
@@ -51,6 +51,8 @@ const UserChat: FC<PersonType> = ({ className }) => {
     .catch( err => console.log(err))
   }
 
+  console.log('hello')
+
   useEffect(() => {
     const refCur = myComponentRef.current
     setTyping(false)
@@ -61,9 +63,7 @@ const UserChat: FC<PersonType> = ({ className }) => {
 
     refCur &&
     refCur.scrollIntoView
-      ({ 
-      behavior: 'smooth', block: 'end', inline: 'nearest'
-    });
+    ({ behavior: 'smooth', block: 'end', inline: 'nearest'});
 
   }, [chatTalk])
 
@@ -72,19 +72,12 @@ const UserChat: FC<PersonType> = ({ className }) => {
   }, [reduxMessage.state])
 
 
-
   useEffect(() => {
-
-   !chat && fetchData('./sourses/testChat.json')
-    .then(data => {
-      setChat(data) // storing the data json
-    })
-    
     reduxMessage.message && changChatTalk("user", reduxMessage.message)
   }, [reduxMessage.message])
 
 
-  const ChatTalkDrow_hendler = () => {
+  const ChatTalkDrowHendler = () => {
 
     return  chatTalk.length === 0 ?
           <>baylus Samo </> : 
@@ -103,7 +96,8 @@ const UserChat: FC<PersonType> = ({ className }) => {
   return (
     <div  className={className}>
       <div  ref={myComponentRef} className="_chat_">
-          <ChatTalkDrow_hendler  />
+
+          <ChatTalkDrowHendler  />
           { typing && <Typing />}
 
       </div>
