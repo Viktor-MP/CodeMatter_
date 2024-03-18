@@ -16,7 +16,7 @@ const UserForm: FC<PersonType> = ({ className }) => {
 
   const changingType: React.ComponentProps<"input">["onClick"] = (e) => {
     reduxDespetch(sendMessage({
-      message: '',
+      message: "",
       state: true,
     }));
     setInputType(inputTypes[0]);
@@ -35,7 +35,7 @@ const UserForm: FC<PersonType> = ({ className }) => {
       message: mess,
       state: true
     }));
-    path.value = ''
+    path.value = ""
 
   };
 

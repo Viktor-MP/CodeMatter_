@@ -10,7 +10,7 @@ const elPosition = {
 
 
 const ChatMessage: FC <chatMessageType> = ({  className, chat  })  => {
-    const toolTypes : string[] = ['_hiden_tools', '_show_tools']
+    const toolTypes : string[] = ["_hiden_tools", "_show_tools"]
 
     const [tools,setTools] = useState(toolTypes[0])
     const [elPose, setElPose] = useState<pose>(elPosition)
@@ -33,7 +33,7 @@ const ChatMessage: FC <chatMessageType> = ({  className, chat  })  => {
         // e.stopImmediatePropagation();
         
     
-        if ('pageX' in e && tools === toolTypes[0]) {
+        if ("pageX" in e && tools === toolTypes[0]) {
 
             const target =  e.currentTarget as HTMLDivElement;
             const mouseX = e.pageX - target.getBoundingClientRect().left;

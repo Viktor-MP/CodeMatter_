@@ -1,7 +1,7 @@
 import { PersonType } from "../PersonalMap/typesPersonMap"
 // import { formDataType } from "./typesPersonChat"
 
-import React, {FC } from 'react'
+import React, {FC } from "react"
 import UserForm from "./ChatComponents/UserForm/UserForm"
 import UserChat from "./ChatComponents/UserChat/UserChat"
 

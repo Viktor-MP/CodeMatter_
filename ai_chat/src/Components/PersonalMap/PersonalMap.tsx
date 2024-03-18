@@ -1,10 +1,10 @@
 
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
 import "./PersonalMap.scss"
-import { FC } from 'react'
-import { PersonType, DeveloperLevel } from './typesPersonMap'
-import fetchData from '../../AxiosRequest/AxiosReques'
+import { FC } from "react"
+import { PersonType, DeveloperLevel } from "./typesPersonMap"
+import fetchData from "../../AxiosRequest/AxiosReques"
 
 
 
@@ -15,14 +15,14 @@ const [mapData,setMapData] = useState<DeveloperLevel[]>()
 useEffect(() => {
     fetchData("./sourses/map.json")
     .then(data => setMapData(data) )
-    .catch(error => console.error('Error fetching data:', error));
+    .catch(error => console.error("Error fetching data:", error));
  }, [])
 
 
 
 
 const mapDataHendler = (datas: DeveloperLevel[])  => {
-  return datas.map(data => <div className='_gideCard_' key={data.level}>
+  return datas.map(data => <div className="_gideCard_" key={data.level}>
     <h3> {data.level} </h3>
     {data.knowledge.map(know => <p key={know}> {know} </p>)}
     </div>)
@@ -32,7 +32,7 @@ const mapDataHendler = (datas: DeveloperLevel[])  => {
   return (
     <section className={className}>
       <div className="_mapContainer_">
-        <div className='_mapGide_'>
+        <div className="_mapGide_">
           <h2>Personal education map</h2>
 
           {mapData && (mapDataHendler(mapData))}

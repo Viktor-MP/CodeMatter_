@@ -21,7 +21,7 @@ interface Message {
 const  chatStart: ResponseData = {
     answer:"Բարև Ձեզ! Ինչպե՞ս կարող եմ ձեզ օգնել:",
     messages: [
-        {role: 'assistant', content: 'Hello! How can I assist you?'},
+        {role: "assistant", content: "Hello! How can I assist you?"},
     ]
 }
 
