@@ -15,13 +15,17 @@
     position: relative;
     cursor:default;
 
-    clear: both;
-    max-width: 50%;
+
     border-radius: 2rem;
     line-height: 1.3rem;
     font-weight: 550;
     margin: 1rem;
     padding: 1rem 1.5rem;
+    max-width: 50%;
+    pre {
+        white-space: wrap;
+        // word-wrap: break-word;
+    }    
 }
 
 ._userMess {

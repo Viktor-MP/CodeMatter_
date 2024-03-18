@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from "react";
+import React, { FC, FormEvent, MouseEvent, useRef, useState } from "react";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
 import { useAppDispatch } from "../../../ReduxToolkit/app_hooks";
@@ -11,31 +11,27 @@ const UserForm: FC<PersonType> = ({ className }) => {
   const [inputType, setInputType] = useState<string>(inputTypes[1]);
   const [inputValue, setInputValue] = useState<string>("Start");
 
-
+  const reduxMessageContent = {
+    message: "",
+    state: true
+  }
+  
   const reduxDespetch = useAppDispatch();
 
   const changingType: React.ComponentProps<"input">["onClick"] = (e) => {
-    reduxDespetch(sendMessage({
-      message: "",
-      state: true,
-    }));
+    reduxDespetch(sendMessage(reduxMessageContent));
     setInputType(inputTypes[0]);
     setInputValue("");
   };
 
-  const sendingDataMessage = (e: any) => {
-    // console.dir(e.target.localName)
-    let path;
-    e.target.localName === "span" ? 
-    path = e.target.previousSibling :
-    path = e.target[0];
+  const sendingDataMessage = (e: MouseEvent<HTMLSpanElement> | FormEvent<HTMLFormElement>) => {
 
-    let mess = inputMessage.current?.value
-    mess && reduxDespetch(sendMessage({
-      message: mess,
-      state: true
-    }));
-    path.value = ""
+    let mess = inputMessage.current?.value || ""
+    reduxMessageContent.message = mess
+    mess && reduxDespetch(sendMessage(reduxMessageContent));
+    
+    if (inputMessage.current) 
+    inputMessage.current.value = ""; // Set inputMessage.current value to empty string
 
   };
 
