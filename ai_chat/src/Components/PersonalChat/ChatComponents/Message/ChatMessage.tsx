@@ -56,7 +56,7 @@ const ChatMessage: FC <chatMessageType> = ({  className, chat  })  => {
                 className={`${className} _message`}
                 tabIndex={0}  >
 
-                <p> {chat.content} </p>
+                <pre> {chat.content} </pre>
 
                 <div   className = { `${tools}   defTool `}  style  = {rc} >
                     <p>Delete</p>
