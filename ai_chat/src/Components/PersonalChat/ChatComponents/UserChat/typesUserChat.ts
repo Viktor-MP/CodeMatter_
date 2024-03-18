@@ -11,9 +11,18 @@ interface Message {
   }
   
  export interface ResponseData {
-    messages: Message[];
     answer: string;
+    messages: Message[];
   }
 
 
   
+
+const  chatStart: ResponseData = {
+    answer:"Բարև Ձեզ! Ինչպե՞ս կարող եմ ձեզ օգնել:",
+    messages: [
+        {role: "assistant", content: "Hello! How can I assist you?"},
+    ]
+}
+
+export {chatStart} 
