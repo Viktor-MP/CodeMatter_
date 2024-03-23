@@ -1,12 +1,12 @@
-import { FC, useState, CSSProperties, MouseEvent, FocusEvent } from "react";
+import { FC, useState, CSSProperties, MouseEvent, FocusEvent, useRef } from "react";
 import {
   chatMessageType,
+  toolsDrowType,
   toolsObjType,
   messageStyle,
   elPosition,
   toolsObj,
   pose,
-  toolsDrowType,
 } from "./chatMessageType";
 
 import "./ChatMessage.scss";
@@ -16,17 +16,32 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat }) => {
 
   const [toolsView, setToolsView] = useState(toolTypes[0]);
   const [elPose, setElPose] = useState<pose>(elPosition);
+  let  curentRef = useRef<HTMLDivElement>(null)
 
   const rcStyle: CSSProperties = {
     left: elPose.left,
     top: elPose.top,
   };
 
+  const DrowTools: FC<toolsDrowType>= ({tools}) => {
+    // console.log(tools);
+    const newTool = <div  className={` ${toolsView}  defTool`} style={rcStyle}>
+                          {tools.map(tool => <p key={tool.id}  onClick={tool.action}>{tool.name}</p>)}
+                    </div>
+    
+    return newTool;
+  };
+
   const openExtraTools = (
     e: MouseEvent<HTMLDivElement> | FocusEvent<HTMLDivElement>
   ) => {
     e.preventDefault();
-    console.log(toolsObj);
+    // if (curentRef.current) {
+    //   console.log(curentRef.current)
+    //   const newTool = drowTools(toolsObj)
+    //   // curentRef.current.appendChild() 
+
+    // }
 
     if ("pageX" in e && toolsView === toolTypes[0]) {
       const target = e.currentTarget as HTMLDivElement;
@@ -42,18 +57,12 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat }) => {
     }
   };
 
-  const DrowTools: FC<toolsDrowType>= ({tools}) => {
-    console.log(tools);
-    
-    return (
-            <ul  className={` ${toolsView}  defTool`} style={rcStyle}>
-                {tools.map(tool => <li key={tool.id}  onClick={tool.action}>{tool.name}</li>)}
-            </ul>
-            );
-  };
-  console.log(chat)
+
+
+
   return (
     <div
+      ref = {curentRef}
       onContextMenu={openExtraTools}
       onBlur={openExtraTools}
       className={`${className} _message`}

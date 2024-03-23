@@ -27,18 +27,26 @@ const UserChat: FC<PersonType> = ({ className }) => {
     setTyping(false);
   }
 
-  const changChatTalk  = (role: "user" | "assistant", content: string)  => {
 
+  const copyObj = (obj: object) => {
+    return JSON.parse(JSON.stringify(obj));
+
+
+  }
+
+  const changChatTalk  = (role: "user" | "assistant", content: string)  => {
+    setTyping(false)
     if (role === "user") {
-      const newChat = JSON.parse(JSON.stringify(chat));
+      const newChat = copyObj(chat)
+      
+      newChat.messages.push({
+        content: content,
+        role: role,
+      });
       setTyping(true);
       setChat(newChat);
+      // console.log(chat)
       sendData(chat);
-
-      newChat.messages.push({
-         content: content,
-         role: role,
-       });
     };
 
       setChatTalk([
@@ -56,13 +64,14 @@ const UserChat: FC<PersonType> = ({ className }) => {
    
     setMessageId(pr => ++pr);
   };
+
+  console.log(chatTalk)
   
   const sendData = (data: ResponseData) => {
     fetchData("https://codematter.am/api-v1/openAi", "POST", data)
     .then( res => changChatTalk("assistant", res.answer))
     .catch( err => {console.log(err,  "hello error"); hendlError() });
   };
-
 
 
   useEffect(() => { // it works only ones!
@@ -76,7 +85,7 @@ const UserChat: FC<PersonType> = ({ className }) => {
 
 
   const ChatTalkDrowHendler = () => {
-
+    // console.log(chatTalk)
     return  chatTalk.length === 0 ?
           <></> : 
           <>
@@ -85,10 +94,10 @@ const UserChat: FC<PersonType> = ({ className }) => {
               className={`${chat.role === "user" ? "_userMess" : "_assistMess"}`}
               chat = {chat} />
             })}
-          </>
-
- 
+          </> 
 }
+
+
   return (
     <div  className={className}>
       <div  ref={myComponentRef} className="_chat_">
