@@ -11,7 +11,7 @@ import ChatMessage from "../Message/ChatMessage";
 import "./UserChat.scss";
 import Typing from "../Typing/Typing";
 
-const UserChat: FC<PersonType> = ({ className }) => {
+const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   
   const [chat, setChat] = useState<ResponseData >(chatStart);
   const [typing, setTyping] = useState(false);
@@ -23,7 +23,24 @@ const UserChat: FC<PersonType> = ({ className }) => {
 
   
   
-  const hendlError = () => setTyping(false);
+  const hendlError = (err: Error, role:"assistant") => {
+    console.log(err)
+    
+    if (err.message === "Network Error") {
+      setMessageId(prevId => prevId += 1)
+
+      const errorInfo =  {
+        content: "Please chek your connection",
+        role: role,
+        id: messageId,
+      }
+      // console.log(chatTalk)
+      alert(errorInfo.content)
+      // setChatTalk( prev => [ ...prev, errorInfo ])
+
+    }
+    setTyping(false)
+  };
   const copyObj = (obj: object) => JSON.parse(JSON.stringify(obj));
 
 
@@ -31,7 +48,8 @@ const UserChat: FC<PersonType> = ({ className }) => {
 
   const changChatTalk  = (role: "user" | "assistant", content: string)  => {
     setTyping(false)
-    
+    console.log(content)
+
     if (role === "user") {
       const newChat = copyObj(chat)
       newChat.messages.push({
@@ -55,10 +73,9 @@ const UserChat: FC<PersonType> = ({ className }) => {
   const sendData = (data: ResponseData) => {
     fetchData("https://codematter.am/api-v1/openAi", "POST", data)
     .then( res => changChatTalk("assistant", res.answer))
-    .catch( err => {console.log(err,  "hello error"); hendlError()});
+    .catch( err => hendlError(err, "assistant"));
   };
 
-  console.log(chat)
 
   useEffect(() => { 
     // I made it hear to change rendering keys corectly
@@ -87,7 +104,11 @@ const UserChat: FC<PersonType> = ({ className }) => {
   const ChatTalkDrowHendler = () => {
 
     return  chatTalk.length === 0 ?
-          <></> : 
+          <div className = "intro">
+                  <img width="50%" src = "./media/ai_chatIcons/web1.webp" alt = "icon" />
+                  <p>Hi there!</p>
+                  <p>Click the <b>“{buttonValue}”</b> button and let’s learn coding</p>
+          </div> : 
           <>
             {chatTalk.map(chat => {
              return  <ChatMessage  key={chat.id}  
@@ -101,7 +122,7 @@ const UserChat: FC<PersonType> = ({ className }) => {
 
   return (
     <div  className={className}>
-      <div  ref={myComponentRef} className="_chat_">
+      <div  ref={myComponentRef} className= {reduxMessage.state ? "_chat_": "_chatIntro_"}>
 
           <ChatTalkDrowHendler  />
           { typing && <Typing  />}

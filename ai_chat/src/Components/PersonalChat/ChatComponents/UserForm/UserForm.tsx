@@ -6,13 +6,12 @@ import { sendMessage } from "../UserChat/UserChatMessage";
 
 import "../../../../App.css"
 import Topics from "../Topics/Topics";
-const UserForm: FC<PersonType> = ({ className }) => {
+const UserForm: FC<PersonType> = ({ className, buttonValue }) => {
   const inputTypes: string[] = ["text", "button"];
   const inputMessage = useRef<HTMLInputElement | null>(null);
   const [inputType, setInputType] = useState<string>(inputTypes[1]);
-  const [inputValue, setInputValue] = useState<string>("Start");
+  const [inputValue, setInputValue] = useState<string>(buttonValue);
   
-
   const reduxMessageContent = {
     message: "",
     state: true
@@ -33,12 +32,12 @@ const UserForm: FC<PersonType> = ({ className }) => {
     mess && reduxDespetch(sendMessage(reduxMessageContent));
     
     if (inputMessage.current) 
-    inputMessage.current.value = ""; // Set inputMessage.current value to empty string
+    inputMessage.current.value = ""; 
+    // Set inputMessage.current value to empty string
 
   };
 
   const submitSend: React.ComponentProps<"form">["onSubmit"] = (e) => {
-    console.log(e)
     e.preventDefault();
     sendingDataMessage(e);
   };
@@ -46,18 +45,18 @@ const UserForm: FC<PersonType> = ({ className }) => {
   const clickSend: React.ComponentProps<"span">["onClick"] = (e) => {
     sendingDataMessage(e);
   };
-  console.log(!!inputValue)
+
   return (
     <section className={className} >
       {<Topics drowingSate = {!inputValue} anim = { !inputValue?  "show": ""}/>}
       <form onSubmit={submitSend} className="_messageContainer">
 
         <input
+          autoFocus
           ref = {inputMessage}
-          onClick={(e) => changingType(e)}
-          name="message"
-
-          className="startChat_btn"
+          onClick = {(e) => changingType(e)}
+          name = "message"
+          className = "startChat_btn"
           type = {inputType}
           defaultValue = {inputValue}
           />

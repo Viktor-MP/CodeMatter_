@@ -7,7 +7,7 @@ const Topics:FC <topyc> = ({drowingSate, anim}) => {
     const [animStart, setAnimStart] = useState(false)
     
     useEffect(() => {
-       anim && setTimeout(() => {setAnimStart(!animStart); console.log("hello")}, 5)
+       anim && setTimeout(() => {setAnimStart(!animStart)}, 5)
     }, [anim])
 
     return drowingSate ? 

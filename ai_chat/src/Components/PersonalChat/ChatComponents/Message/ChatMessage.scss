@@ -1,13 +1,6 @@
 
 
 
-._chat_ {
-    padding: 1rem 2rem 5rem;
-    display: flex;
-    flex-direction: column;
-
-
-}
 
 
 
@@ -22,8 +15,7 @@
     padding: 1rem 1.5rem;
     max-width: 50%;
     pre {
-        white-space: wrap;
-        // word-wrap: break-word;
+        text-wrap: wrap;
     }    
 }
 

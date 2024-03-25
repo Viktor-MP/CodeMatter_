@@ -8,4 +8,29 @@
 
 
 
+._chat_ {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+._chatIntro_ {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .intro {
+        display: flex;
+        flex-direction: column;
+        
+        justify-self: center;
+        align-items: center;
+    }
+}
+
+
+
+
 

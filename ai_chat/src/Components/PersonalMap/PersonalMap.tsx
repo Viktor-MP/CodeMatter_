@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react"
 import "./PersonalMap.scss"
 import { FC } from "react"
-import { PersonType, DeveloperLevel } from "./typesPersonMap"
+import { PersonMapType, DeveloperLevel } from "./typesPersonMap"
 import fetchData from "../../AxiosRequest/AxiosReques"
 
 
 
-const PersonalMap: FC <PersonType> = ({className}) => {
+const PersonalMap: FC <PersonMapType> = ({className}) => {
 const [mapData,setMapData] = useState<DeveloperLevel[]>()
 
  

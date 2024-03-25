@@ -2,7 +2,6 @@ import { FC, useState, CSSProperties, MouseEvent, FocusEvent, useRef } from "rea
 import {
   chatMessageType,
   toolsDrowType,
-  toolsObjType,
   messageStyle,
   elPosition,
   toolsObj,
@@ -16,8 +15,6 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet }) => {
 
   const [toolsView, setToolsView] = useState(toolTypes[0]);
   const [elPose, setElPose] = useState<pose>(elPosition);
-  const [dynamicElements, setDynamicElements] = useState<JSX.Element[]>([]);
-  console.log(dynamicElements)
   let  curentRef = useRef<HTMLDivElement>(null)
 
   const rcStyle: CSSProperties = {
@@ -31,7 +28,6 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet }) => {
       <div  className={` ${toolsView}  defTool`} style={rcStyle}>
           {tools.map(tool => <p key={tool.id}  onClick={tool.action}>{tool.name}</p>)}
       </div>
-    console.log(newTool)
     
     return newTool;
   };
