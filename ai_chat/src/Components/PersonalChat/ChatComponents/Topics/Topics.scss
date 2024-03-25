@@ -1,0 +1,40 @@
+
+
+._extraQuest {
+    padding: 1rem;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+
+  input {
+    width: 0%;
+    display: grid;
+    cursor: default;
+    }
+}
+
+.fromLeft {
+    justify-self: left;
+    text-align: left;
+}
+
+.fromRight {
+    justify-self: right;
+    text-align: right;
+}
+
+.show {
+    height: max-content;
+    align-items: center;
+    gap: 0.5rem;
+
+    input {
+        border-radius: 0.5rem;
+        padding: 1rem;
+        grid-template-rows: auto;
+        transition: all 0.6s ease;
+        width: 100%;
+    }
+    
+}

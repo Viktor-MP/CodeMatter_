@@ -5,11 +5,13 @@ import { useAppDispatch } from "../../../ReduxToolkit/app_hooks";
 import { sendMessage } from "../UserChat/UserChatMessage";
 
 import "../../../../App.css"
+import Topics from "../Topics/Topics";
 const UserForm: FC<PersonType> = ({ className }) => {
   const inputTypes: string[] = ["text", "button"];
   const inputMessage = useRef<HTMLInputElement | null>(null);
   const [inputType, setInputType] = useState<string>(inputTypes[1]);
   const [inputValue, setInputValue] = useState<string>("Start");
+  
 
   const reduxMessageContent = {
     message: "",
@@ -36,6 +38,7 @@ const UserForm: FC<PersonType> = ({ className }) => {
   };
 
   const submitSend: React.ComponentProps<"form">["onSubmit"] = (e) => {
+    console.log(e)
     e.preventDefault();
     sendingDataMessage(e);
   };
@@ -43,20 +46,24 @@ const UserForm: FC<PersonType> = ({ className }) => {
   const clickSend: React.ComponentProps<"span">["onClick"] = (e) => {
     sendingDataMessage(e);
   };
-
+  console.log(!!inputValue)
   return (
-    <form className={className} onSubmit={submitSend}>
-      <input
-        ref = {inputMessage}
-        onClick={(e) => changingType(e)}
-        name="message"
-        
-        className="startChat_btn"
-        type = {inputType}
-        defaultValue = {inputValue}
-      />
-      <span className="sendChatIcon" onClick={clickSend}></span>
-    </form>
+    <section className={className} >
+      {<Topics drowingSate = {!inputValue} anim = { !inputValue?  "show": ""}/>}
+      <form onSubmit={submitSend} className="_messageContainer">
+
+        <input
+          ref = {inputMessage}
+          onClick={(e) => changingType(e)}
+          name="message"
+
+          className="startChat_btn"
+          type = {inputType}
+          defaultValue = {inputValue}
+          />
+        <span className="sendChatIcon" onClick={clickSend}></span>
+      </form>
+    </section>
   );
 };
 

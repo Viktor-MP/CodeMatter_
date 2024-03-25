@@ -11,11 +11,13 @@ import {
 
 import "./ChatMessage.scss";
 
-const ChatMessage: FC<chatMessageType> = ({ className, chat }) => {
+const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet }) => {
   const toolTypes: string[] = ["_hiden_tools", "_show_tools"];
 
   const [toolsView, setToolsView] = useState(toolTypes[0]);
   const [elPose, setElPose] = useState<pose>(elPosition);
+  const [dynamicElements, setDynamicElements] = useState<JSX.Element[]>([]);
+  console.log(dynamicElements)
   let  curentRef = useRef<HTMLDivElement>(null)
 
   const rcStyle: CSSProperties = {
@@ -25,9 +27,11 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat }) => {
 
   const DrowTools: FC<toolsDrowType>= ({tools}) => {
     // console.log(tools);
-    const newTool = <div  className={` ${toolsView}  defTool`} style={rcStyle}>
-                          {tools.map(tool => <p key={tool.id}  onClick={tool.action}>{tool.name}</p>)}
-                    </div>
+    const newTool = 
+      <div  className={` ${toolsView}  defTool`} style={rcStyle}>
+          {tools.map(tool => <p key={tool.id}  onClick={tool.action}>{tool.name}</p>)}
+      </div>
+    console.log(newTool)
     
     return newTool;
   };
@@ -36,16 +40,14 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat }) => {
     e: MouseEvent<HTMLDivElement> | FocusEvent<HTMLDivElement>
   ) => {
     e.preventDefault();
-    // if (curentRef.current) {
-    //   console.log(curentRef.current)
-    //   const newTool = drowTools(toolsObj)
-    //   // curentRef.current.appendChild() 
 
-    // }
 
     if ("pageX" in e && toolsView === toolTypes[0]) {
+
       const target = e.currentTarget as HTMLDivElement;
-      const mouseX = e.pageX - target.getBoundingClientRect().left;
+      
+      let x =  target.dataset.id === "user" &&  110 || 0
+      const mouseX = e.pageX - target.getBoundingClientRect().left - x;
       const mouseY = e.pageY - target.getBoundingClientRect().top;
       setElPose({
         left: mouseX,
@@ -62,16 +64,17 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat }) => {
 
   return (
     <div
-      ref = {curentRef}
+      className={`${className} _message`}
       onContextMenu={openExtraTools}
       onBlur={openExtraTools}
-      className={`${className} _message`}
       style={messageStyle}
+      data-id={dataSet}
+      ref = {curentRef}
       tabIndex={0}
     >
       <pre> {chat.content} </pre>
 
-      {<DrowTools tools={toolsObj} />}
+      {<DrowTools tools={toolsObj}  />}
     </div>
   );
 };

@@ -19,6 +19,7 @@ export interface toolsObjType {
 export interface chatMessageType {
     chat: myMessage
     className: string
+    dataSet: string
 }
 
 export interface toolsDrowType {
