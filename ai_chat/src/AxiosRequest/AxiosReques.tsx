@@ -23,11 +23,13 @@ const fetchData = async (url: string, method: "GET" | "POST" = "GET", data?: any
     console.log(error);
     if (axios.isAxiosError(error)) {
       const axiosError: AxiosError = error;
+      throw axiosError
       // console.error("Axios error:", axiosError.message);
     } else {
+      throw error
       // console.error("Unexpected error:", error.message);
     }
-    throw error
+  
   }
 };
 

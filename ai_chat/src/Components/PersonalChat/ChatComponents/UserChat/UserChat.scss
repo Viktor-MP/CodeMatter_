@@ -22,11 +22,12 @@
     justify-content: center;
     align-items: center;
     .intro {
+        color: var(--color);
         display: flex;
         flex-direction: column;
-        
         justify-self: center;
         align-items: center;
+       
     }
 }
 

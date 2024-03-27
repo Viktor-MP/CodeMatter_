@@ -3,13 +3,14 @@ import fetchData from "../../../../AxiosRequest/AxiosReques";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
 import { ResponseData, myMessage, chatStart } from "./typesUserChat";
-import { useAppSelector } from "../../../ReduxToolkit/app_hooks";
+import { useAppSelector, useTopicSelector } from "../../../ReduxToolkit/app_hooks";
 import { getMessageState } from "./UserChatMessage";
 import ChatMessage from "../Message/ChatMessage";
 
 
 import "./UserChat.scss";
 import Typing from "../Typing/Typing";
+import { getTopicState } from "../Topics/TopicSlice";
 
 const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   
@@ -19,11 +20,13 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   const [messageId, setMessageId] = useState<number>(0);
   const myComponentRef = useRef<HTMLDivElement>(null);
 
+  // getting message from form component
   const reduxMessage = useAppSelector(getMessageState);
+  const reduxTopic = useTopicSelector(getTopicState);
 
+    console.log(reduxTopic)
   
-  
-  const hendlError = (err: Error, role:"assistant") => {
+  const handlerError = (err: Error, role:"assistant") => {
     console.log(err)
     
     if (err.message === "Network Error") {
@@ -73,12 +76,12 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   const sendData = (data: ResponseData) => {
     fetchData("https://codematter.am/api-v1/openAi", "POST", data)
     .then( res => changChatTalk("assistant", res.answer))
-    .catch( err => hendlError(err, "assistant"));
+    .catch( err => handlerError(err, "assistant"));
   };
 
 
   useEffect(() => { 
-    // I made it hear to change rendering keys corectly
+    // I made it hear to change rendering keys correctly
     reduxMessage.state &&  sendData(chat)
   }, [chat])
 
@@ -101,7 +104,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   }, [reduxMessage.message]);
 
 
-  const ChatTalkDrowHendler = () => {
+  const ChatTalkDrawHandler = () => {
 
     return  chatTalk.length === 0 ?
           <div className = "intro">
@@ -113,7 +116,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
             {chatTalk.map(chat => {
              return  <ChatMessage  key={chat.id}  
               className={`${chat.role === "user" ? "_userMess" : "_assistMess"}`}
-              dataSet = {`${chat.role === "user" ? "user" : "assistent"}`}
+              dataSet = {`${chat.role === "user" ? "user" : "assistant"}`}
               chat = {chat} />
             })}
           </> 
@@ -124,7 +127,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
     <div  className={className}>
       <div  ref={myComponentRef} className= {reduxMessage.state ? "_chat_": "_chatIntro_"}>
 
-          <ChatTalkDrowHendler  />
+          <ChatTalkDrawHandler  />
           { typing && <Typing  />}
 
       </div>

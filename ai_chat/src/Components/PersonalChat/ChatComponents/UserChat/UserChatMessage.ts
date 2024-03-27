@@ -1,8 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction ,createSlice} from "@reduxjs/toolkit";
 import type { RootState } from "../../../ReduxToolkit/app_store";
 import { formDataType } from "../../typesPersonChat";
-
 
 
 // Define the initial state using that type

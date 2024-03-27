@@ -4,6 +4,8 @@ import type
  { 
     RootState,
     AppDispatch,
+    TopicState,
+    AppTopicDispatch
  } 
  from "./app_store"
 
@@ -11,3 +13,5 @@ import type
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
+export const useTopicDispatch: () => AppTopicDispatch = useDispatch
+export const useTopicSelector: TypedUseSelectorHook<TopicState> = useSelector

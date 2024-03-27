@@ -3,9 +3,9 @@ import React, { FC, FormEvent, MouseEvent, useRef, useState } from "react";
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
 import { useAppDispatch } from "../../../ReduxToolkit/app_hooks";
 import { sendMessage } from "../UserChat/UserChatMessage";
-
-import "../../../../App.css"
 import Topics from "../Topics/Topics";
+import "../../../../App.css"
+
 const UserForm: FC<PersonType> = ({ className, buttonValue }) => {
   const inputTypes: string[] = ["text", "button"];
   const inputMessage = useRef<HTMLInputElement | null>(null);
@@ -17,10 +17,10 @@ const UserForm: FC<PersonType> = ({ className, buttonValue }) => {
     state: true
   }
   
-  const reduxDespetch = useAppDispatch();
+  const reduxDespatch = useAppDispatch();
 
   const changingType: React.ComponentProps<"input">["onClick"] = (e) => {
-    reduxDespetch(sendMessage(reduxMessageContent));
+    reduxDespatch(sendMessage(reduxMessageContent));
     setInputType(inputTypes[0]);
     setInputValue("");
   };
@@ -29,7 +29,7 @@ const UserForm: FC<PersonType> = ({ className, buttonValue }) => {
 
     let mess = inputMessage.current?.value || ""
     reduxMessageContent.message = mess
-    mess && reduxDespetch(sendMessage(reduxMessageContent));
+    mess && reduxDespatch(sendMessage(reduxMessageContent));
     
     if (inputMessage.current) 
     inputMessage.current.value = ""; 
@@ -48,7 +48,7 @@ const UserForm: FC<PersonType> = ({ className, buttonValue }) => {
 
   return (
     <section className={className} >
-      {<Topics drowingSate = {!inputValue} anim = { !inputValue?  "show": ""}/>}
+      {<Topics drawingSate = {!inputValue} anim = { !inputValue?  "show": ""}/>}
       <form onSubmit={submitSend} className="_messageContainer">
 
         <input

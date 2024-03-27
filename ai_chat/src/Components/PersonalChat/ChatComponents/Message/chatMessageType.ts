@@ -22,7 +22,7 @@ export interface chatMessageType {
     dataSet: string
 }
 
-export interface toolsDrowType {
+export interface toolsDrawType {
     tools: toolsObjType[]
 }
 

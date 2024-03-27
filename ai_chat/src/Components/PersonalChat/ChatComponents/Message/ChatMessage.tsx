@@ -1,7 +1,7 @@
 import { FC, useState, CSSProperties, MouseEvent, FocusEvent, useRef } from "react";
 import {
   chatMessageType,
-  toolsDrowType,
+  toolsDrawType,
   messageStyle,
   elPosition,
   toolsObj,
@@ -11,18 +11,18 @@ import {
 import "./ChatMessage.scss";
 
 const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet }) => {
-  const toolTypes: string[] = ["_hiden_tools", "_show_tools"];
+  const toolTypes: string[] = ["_hidden_tools", "_show_tools"];
 
   const [toolsView, setToolsView] = useState(toolTypes[0]);
   const [elPose, setElPose] = useState<pose>(elPosition);
-  let  curentRef = useRef<HTMLDivElement>(null)
+  let  currentRef = useRef<HTMLDivElement>(null)
 
   const rcStyle: CSSProperties = {
     left: elPose.left,
     top: elPose.top,
   };
 
-  const DrowTools: FC<toolsDrowType>= ({tools}) => {
+  const DrawTools: FC<toolsDrawType>= ({tools}) => {
     // console.log(tools);
     const newTool = 
       <div  className={` ${toolsView}  defTool`} style={rcStyle}>
@@ -65,12 +65,12 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet }) => {
       onBlur={openExtraTools}
       style={messageStyle}
       data-id={dataSet}
-      ref = {curentRef}
+      ref = {currentRef}
       tabIndex={0}
     >
       <pre> {chat.content} </pre>
 
-      {<DrowTools tools={toolsObj}  />}
+      {<DrawTools tools={toolsObj}  />}
     </div>
   );
 };
