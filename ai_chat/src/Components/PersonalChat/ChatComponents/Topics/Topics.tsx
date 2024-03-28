@@ -1,25 +1,59 @@
-import { FC, useEffect, useState } from "react"
-import { topicValues, topyc } from "./TopicTypes"
-import "./Topics.scss"
+import { type FC, useEffect, useState } from "react";
+import { topicValues, topic, topicType } from "./TopicTypes";
+
+import { useAppDispatch } from "../../../ReduxToolkit/app_hooks";
+import { sendTopic } from "../../../ReduxToolkit/UserSliceStor";
 
 
-const Topics:FC <topyc> = ({drowingSate, anim}) => {
-    const [animStart, setAnimStart] = useState(false)
+import classNames from "classnames";
+import "./Topics.scss";
+
+const Topics: FC<topic> = ({ drawingSate, anim }) => {
+  const [animStart, setAnimStart] = useState(false);
+  
+
+  const topicInfo: topicType = {
+    value: "",
+    id: 0
+  }
+  // console.log(reduxTopicDispatch(sendTopic(topicInfo)))
+  const reduxDespatch = useAppDispatch();
+
+  const sendTopicHandler = (value: string, id: number) => {
+    topicInfo.value = value
+    topicInfo.id = id
+    reduxDespatch(sendTopic(topicInfo))
     
-    useEffect(() => {
-       anim && setTimeout(() => {setAnimStart(!animStart); console.log("hello")}, 5)
-    }, [anim])
+  };
 
-    return drowingSate ? 
-        <div className = {`_extraQuest  ${animStart &&  anim}`}>
+  useEffect(() => {
+    anim &&
+      setTimeout(() => {
+        setAnimStart(!animStart);
+      }, 50);
+  }, [anim]);
 
-            {topicValues.map(topic => {
-                return <input className = {topic.id % 2 === 0? "fromRight": "fromLeft"}  type="text" readOnly={true} key={topic.id} value={topic.value} />
+  return drawingSate ? (
+    <div className={`_extraQuest  ${animStart && anim}`}>
+      {topicValues.map((topic) => {
+        return (
+          <div
+            role="button"  
+            onClick={() => sendTopicHandler(topic.value, topic.id)}
+            className={classNames({
+              ["fromRight"]: topic.id % 2 === 0,
+              ["fromLeft"]: topic.id % 2 !== 0,
             })}
+            key={topic.id}
+          >
+            {topic.value}
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <></>
+  );
+};
 
-
-        </div>: <></>;   
-}
-
-
-export default Topics
+export default Topics;

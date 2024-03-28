@@ -1,10 +1,37 @@
 
 
 ._chatContainer_ {
-    height: 80vh;
-    font-size: 1.2rem;
+    height: 75vh;
     overflow-y: auto;
+
 }
+
+
+
+._chat_ {
+    padding: 2rem 8%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+._chatIntro_ {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .intro {
+        color: var(--color);
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+        align-items: center;
+       
+    }
+}
+
 
 
 

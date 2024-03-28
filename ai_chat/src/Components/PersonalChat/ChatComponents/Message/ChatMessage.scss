@@ -1,13 +1,6 @@
 
 
 
-._chat_ {
-    padding: 1rem 2rem 5rem;
-    display: flex;
-    flex-direction: column;
-
-
-}
 
 
 
@@ -22,8 +15,7 @@
     padding: 1rem 1.5rem;
     max-width: 50%;
     pre {
-        white-space: wrap;
-        // word-wrap: break-word;
+        text-wrap: wrap;
     }    
 }
 
@@ -40,7 +32,7 @@
 }
 
 
-._hiden_tools {
+._hidden_tools {
     display: none;
 }
 ._show_tools {
@@ -53,7 +45,6 @@
     z-index: 2;
     position: absolute;
     padding: 1rem;
-    // border:solid  rgb(255, 25, 0) 3px;
     box-shadow: 4px 4px 14px 0px rgba(0,0,0,0.75);
     -webkit-box-shadow: 4px 4px 14px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 4px 4px 14px 0px rgba(0,0,0,0.75);
@@ -64,7 +55,6 @@
     border-radius: 10%;
 
     p {
-        // border: solid var(--assist_bg) 2px;
         width: 100%;
         padding: 0.5rem 1rem;
     }

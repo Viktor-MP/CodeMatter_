@@ -1,27 +1,21 @@
 
 
-
-
-main {
-    display: flex;
-    justify-content: space-between;
-
-}
-
 .resizer_ {
     width: 0.7rem;
     cursor: ew-resize;
 }
 
 .personalMap_ {
-    width: 35%;
+
     display: flex;
-    justify-content: space-between;
-    max-height: 100vh;
-    min-height: 100vh;
+
+    color: var(--color);
+    margin-left: 0;
+    transition: margin-left 0.6s;
+    width: 35%;
 
     h2 {
-        font-size: 2em;
+        font-size: 2rem;
         margin: 2rem 0;
     }
     ._gideCard_ {
@@ -32,7 +26,6 @@ main {
     }
     ._mapGide_ {
         padding: 1rem 2rem;
-        font-size: 1.2rem;
     }
   
     ._mapContainer_ {
@@ -46,3 +39,13 @@ main {
 
 
 
+.hide {
+    margin-left: -35%;
+}
+
+
+div.hamburger-react {
+    position: absolute !important;
+    left: 2rem;
+    top: 0.5rem;
+}
