@@ -6,15 +6,17 @@
 }
 
 .personalMap_ {
-    color: var(--color);
-    width: 35%;
+
     display: flex;
     justify-content: space-between;
     max-height: 100vh;
     min-height: 100vh;
 
+    color: var(--color);
+    width: 35%;
+
     h2 {
-        font-size: 2em;
+        font-size: 2rem;
         margin: 2rem 0;
     }
     ._gideCard_ {
@@ -25,7 +27,6 @@
     }
     ._mapGide_ {
         padding: 1rem 2rem;
-        font-size: 1.2rem;
     }
   
     ._mapContainer_ {

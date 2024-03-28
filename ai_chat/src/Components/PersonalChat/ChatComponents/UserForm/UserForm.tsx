@@ -1,8 +1,9 @@
 import React, { FC, FormEvent, MouseEvent, useRef, useState } from "react";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
+
 import { useAppDispatch } from "../../../ReduxToolkit/app_hooks";
-import { sendMessage } from "../UserChat/UserChatMessage";
+import { sendMessage } from "../../../ReduxToolkit/UserSliceStor";
 import Topics from "../Topics/Topics";
 import "../../../../App.css"
 
@@ -26,7 +27,7 @@ const UserForm: FC<PersonType> = ({ className, buttonValue }) => {
   };
 
   const sendingDataMessage = (e: MouseEvent<HTMLSpanElement> | FormEvent<HTMLFormElement>) => {
-
+    console.log(inputMessage.current)
     let mess = inputMessage.current?.value || ""
     reduxMessageContent.message = mess
     mess && reduxDespatch(sendMessage(reduxMessageContent));

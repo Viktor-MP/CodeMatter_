@@ -22,6 +22,5 @@
   },
   "include": [
     "src",
-    "src/Components/PersonalMap/typesPersonMap.ts"
   ]
 }

@@ -1,16 +1,16 @@
 import { FC, useEffect, useRef, useState }  from "react";
-import fetchData from "../../../../AxiosRequest/AxiosReques";
+import fetchData from "../../../../AxiosRequest/AxiosRequest";
 
 import { PersonType } from "../../../PersonalMap/typesPersonMap";
 import { ResponseData, myMessage, chatStart } from "./typesUserChat";
-import { useAppSelector, useTopicSelector } from "../../../ReduxToolkit/app_hooks";
-import { getMessageState } from "./UserChatMessage";
+
+import { getMessageState, getTopicState } from "../../../ReduxToolkit/UserSliceStor";
+import { useAppSelector } from "../../../ReduxToolkit/app_hooks";
+
 import ChatMessage from "../Message/ChatMessage";
-
-
-import "./UserChat.scss";
 import Typing from "../Typing/Typing";
-import { getTopicState } from "../Topics/TopicSlice";
+import classNames from "classnames";
+import "./UserChat.scss";
 
 const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   
@@ -22,9 +22,12 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
 
   // getting message from form component
   const reduxMessage = useAppSelector(getMessageState);
-  const reduxTopic = useTopicSelector(getTopicState);
+  const reduxTopic = useAppSelector(getTopicState);
 
-    console.log(reduxTopic)
+// console.log(reduxMessage)
+// console.log(reduxTopic)
+
+
   
   const handlerError = (err: Error, role:"assistant") => {
     console.log(err)
@@ -33,7 +36,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
       setMessageId(prevId => prevId += 1)
 
       const errorInfo =  {
-        content: "Please chek your connection",
+        content: "Please check your connection",
         role: role,
         id: messageId,
       }
@@ -51,7 +54,6 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
 
   const changChatTalk  = (role: "user" | "assistant", content: string)  => {
     setTyping(false)
-    console.log(content)
 
     if (role === "user") {
       const newChat = copyObj(chat)
@@ -104,6 +106,13 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   }, [reduxMessage.message]);
 
 
+
+  useEffect(() => {
+    // console.log(reduxMessage)
+    reduxTopic.value && changChatTalk("user", reduxTopic.value);
+    reduxTopic?.value &&  console.log(reduxTopic)
+  }, [reduxTopic?.value])
+
   const ChatTalkDrawHandler = () => {
 
     return  chatTalk.length === 0 ?
@@ -114,8 +123,11 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
           </div> : 
           <>
             {chatTalk.map(chat => {
-             return  <ChatMessage  key={chat.id}  
-              className={`${chat.role === "user" ? "_userMess" : "_assistMess"}`}
+             return  <ChatMessage  key={chat.id} 
+              className = {classNames({
+                ["_userMess"]: chat.role === "user",
+                ["_assistMess"]: chat.role !== "user",
+              }) } 
               dataSet = {`${chat.role === "user" ? "user" : "assistant"}`}
               chat = {chat} />
             })}

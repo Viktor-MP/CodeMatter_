@@ -1,27 +1,36 @@
 import { type FC, useEffect, useState } from "react";
-import { topicValues, topic } from "./TopicTypes";
-import {
-  useTopicDispatch,
-} from "../../../ReduxToolkit/app_hooks";
-import { sendTopic } from "./TopicSlice";
+import { topicValues, topic, topicType } from "./TopicTypes";
+
+import { useAppDispatch } from "../../../ReduxToolkit/app_hooks";
+import { sendTopic } from "../../../ReduxToolkit/UserSliceStor";
+
 
 import classNames from "classnames";
 import "./Topics.scss";
 
 const Topics: FC<topic> = ({ drawingSate, anim }) => {
   const [animStart, setAnimStart] = useState(false);
-  const reduxTopicDispatch = useTopicDispatch();
+  
+
+  const topicInfo: topicType = {
+    value: "",
+    id: 0
+  }
+  // console.log(reduxTopicDispatch(sendTopic(topicInfo)))
+  const reduxDespatch = useAppDispatch();
 
   const sendTopicHandler = (value: string, id: number) => {
-    reduxTopicDispatch(sendTopic({ value, id }));
-    console.log(value);
+    topicInfo.value = value
+    topicInfo.id = id
+    reduxDespatch(sendTopic(topicInfo))
+    
   };
 
   useEffect(() => {
     anim &&
       setTimeout(() => {
         setAnimStart(!animStart);
-      }, 5);
+      }, 50);
   }, [anim]);
 
   return drawingSate ? (
