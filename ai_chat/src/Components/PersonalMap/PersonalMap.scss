@@ -8,11 +8,10 @@
 .personalMap_ {
 
     display: flex;
-    justify-content: space-between;
-    max-height: 100vh;
-    min-height: 100vh;
 
     color: var(--color);
+    margin-left: 0;
+    transition: margin-left 0.6s;
     width: 35%;
 
     h2 {
@@ -40,3 +39,13 @@
 
 
 
+.hide {
+    margin-left: -35%;
+}
+
+
+div.hamburger-react {
+    position: absolute !important;
+    left: 2rem;
+    top: 0.5rem;
+}

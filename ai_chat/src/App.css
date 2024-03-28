@@ -52,4 +52,6 @@ html {
 .App {
   background-color: var(--background_color);
   display: flex;
+  height: 100vh;
+  position: relative;
 }
