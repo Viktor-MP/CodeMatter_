@@ -46,7 +46,7 @@
 }
 
 html {
-  font-size: clamp(14px, 1vw, 40px);
+  font-size: clamp(14px, 0.8vw, 40px);
 }
 
 .App {
