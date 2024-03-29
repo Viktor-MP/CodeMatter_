@@ -11,7 +11,7 @@ import "./Topics.scss";
 const Topics: FC<topic> = ({ drawingSate, anim }) => {
   const [animStart, setAnimStart] = useState(false);
   
-
+  
   const topicInfo: topicType = {
     value: "",
     id: 0
