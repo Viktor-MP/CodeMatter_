@@ -1,4 +1,4 @@
-import React, { DOMAttributes, FocusEvent, FocusEventHandler, useEffect, useState } from "react"
+import React, { DOMAttributes, FocusEvent, FocusEventHandler, useEffect, useRef, useState } from "react"
 import { FC } from "react"
 
 import { PersonMapType, DeveloperLevel } from "./typesPersonMap"
@@ -17,9 +17,11 @@ const [mapData,setMapData] = useState<DeveloperLevel[]>()
 
 
 const [width, setWidth] = useState<number>(window.innerWidth)
-let state = width < 1050? false : true
+let state = width < 1100? false : true
 const [bar, setBar] = useState<boolean>(state)
 const [burger, setBurger] = useState<boolean>(state)
+
+const sectionRef = useRef<HTMLDivElement>(null);
 
 
 
@@ -30,25 +32,23 @@ useEffect(() => {
     .catch(error => console.error("Error fetching data:", error));
  }, [])
 
+ 
 
  const burgerChanger = (e:  FocusEvent<HTMLElement, Element>) => {
-  console.log(e)
-  setBurger(!burger)
+  if (
+    !e.relatedTarget || 
+    !sectionRef.current?.contains(e.relatedTarget as Node)
+    ) {
+   !bar && burger &&  setBurger(!burger)
+  }
 }
 
  useEffect(() => {
 
-  const handleResize = () => {
-    setWidth(window.innerWidth);
-    
-  };
+  const handleResize = () => setWidth(window.innerWidth);
 
-  console.log(width, bar)
-  if (width < 1050) {
-    setBar(false)
-  } else {
-    setBar(true)
-  }
+  setBar(true)
+  width < 1100 &&  setBar(false)
   window.addEventListener("resize", handleResize);
 
   return () => {
@@ -73,14 +73,18 @@ const mapDataHandler = (data: DeveloperLevel[])  => {
 }
 
   return (
-    <section  data-width = {bar && "big"} onBlur={burgerChanger} className={classNames(className, {
+    <section  data-width = {bar && "big"} 
+    onBlur={burgerChanger}
+    ref={sectionRef}
+    className={classNames(className, {
       ["hideBar"]: !burger,
       ["showBar"]: burger,
     })}>
       <Hamburger  toggled={burger} toggle={setBurger}  direction="left" duration={0.4}  color="#1cea1c"  easing="ease-in"/>
 
-      <div  className="_mapContainer_">
+      <div   className="_mapContainer_">
         <div className="_mapGide_">
+
           <h2>Personal education map</h2>
 
           {mapData && (mapDataHandler(mapData))}

@@ -13,8 +13,7 @@
 
     .hamburger-react {
         position: absolute !important;
-    
-        left: 2rem;
+        
         top: 0.5rem;
     }
 
@@ -49,45 +48,45 @@
 
 
 
-// .person {
-//     .hamburger-react {
-//         display: none;
-//     }
-
-// }
-
-// .person.hide {
-//     .hamburger-react {
-//         display: flex;
-//     }
-// }
-
-
-.showBar[data-width = false] {
+.personalMap_.showBar[data-width = false] {
     z-index: 2;
     background-color: var(--background_color);
     position: absolute;
     width: max-content;
     max-width: 100%; 
+
+
+        
+    .hamburger-react {
+        right: 2rem;
+    }
+
 }
 
 
 
 .showBar[data-width = big] {
     margin-left: 0%;
-
-    
     .hamburger-react {
         display: none;
+    }
+}
+.showBar[data-width = false] {
+    
+    .hamburger-react {
+       right: 2rem;
     }
 }
 
 
 
+
 .hideBar {
     transition: margin-left 0s;
-
     margin-left: -35%;
-
+  
+    .hamburger-react {
+        left:2rem;
+     }
 }
 

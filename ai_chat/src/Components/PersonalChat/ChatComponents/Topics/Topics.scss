@@ -14,15 +14,16 @@
 
 .fromLeft {
   justify-self: left;
-  text-align: left;
+
 }
 
 .fromRight {
   justify-self: right;
-  text-align: right;
+
 }
 
 .show {
+  text-align: left;
   height: max-content;
   align-items: center;
   gap: 0.5rem;
