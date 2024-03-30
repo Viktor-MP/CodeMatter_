@@ -47,6 +47,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
     }
     setTyping(false)
   };
+  
   const copyObj = (obj: object) => JSON.parse(JSON.stringify(obj));
 
 
@@ -54,16 +55,14 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
 
   const changChatTalk  = (role: "user" | "assistant", content: string)  => {
     setTyping(false)
+    role === "user" && setTyping(true);
+    const newChat = copyObj(chat)
+    newChat.messages.push({
+      content: content,
+      role: role,
+    });
 
-    if (role === "user") {
-      const newChat = copyObj(chat)
-      newChat.messages.push({
-        content: content,
-        role: role,
-      });
-      setTyping(true);
-      setChat(newChat);
-    }
+    setChat(newChat);
     
     setMessageId(prevId => prevId += 1)
     const info =  {
@@ -71,11 +70,21 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
       role: role,
       id: messageId,
     }
+    
     setChatTalk( prev => [ ...prev, info ])
   };
 
+  const getManeContent = (data: ResponseData) => {
+    
+
+    fetchData("https://codematter.am/api-v1/openAi", "POST", data)
+    .then( res => changChatTalk("assistant", res.answer))
+    .catch( err => handlerError(err, "assistant"));
+  }
+
    
   const sendData = (data: ResponseData) => {
+    console.log(data)
     fetchData("https://codematter.am/api-v1/openAi", "POST", data)
     .then( res => changChatTalk("assistant", res.answer))
     .catch( err => handlerError(err, "assistant"));
@@ -84,11 +93,14 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
 
   useEffect(() => { 
     // I made it hear to change rendering keys correctly
-    reduxMessage.state &&  sendData(chat)
+    reduxMessage.state && typing &&  sendData(chat)
   }, [chat])
 
   useEffect(() => { 
     // scrolling down after any new message
+
+    console.log(chatTalk)
+    console.log(chat)
     const refCur = myComponentRef.current;
     refCur && refCur.scrollIntoView
     ({ behavior: "smooth", block: "end", inline: "end"});
@@ -101,7 +113,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
 
 
   useEffect(() => {
-    // sending user message
+   
     reduxMessage.message && changChatTalk("user", reduxMessage.message);
   }, [reduxMessage.message]);
 
