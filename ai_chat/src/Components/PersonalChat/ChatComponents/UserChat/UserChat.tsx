@@ -74,17 +74,30 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
     setChatTalk( prev => [ ...prev, info ])
   };
 
-  const getManeContent = (data: ResponseData) => {
-    
 
-    fetchData("https://codematter.am/api-v1/openAi", "POST", data)
-    .then( res => changChatTalk("assistant", res.answer))
-    .catch( err => handlerError(err, "assistant"));
+  const getJsonFromSTR = (str: string) => {
+    console.log(str)
+    const jsonStartEnd = "{}"
+    console.log(jsonStartEnd[0]);
+    
+    const strJson = str.slice(str.indexOf(jsonStartEnd[0]), str.lastIndexOf(jsonStartEnd[1]) +1  )
+      console.log(strJson)
+      // console.log(JSON.parse(strJson))
+  }
+
+  const getManeContent = (data: ResponseData) => {
+    let cont = copyObj(data)
+    let maneMean = {role:"user", content: "give me the mane meaning of all conversation and give me two common questions regarding to that conversation and give me that questions in a JSON file type and give it to me do not add anything in JSON except questions and make that json using all rules for that"}
+    cont.messages.push(maneMean)
+
+
+    fetchData("https://codematter.am/api-v1/openAi", "POST", cont)
+    .then( res =>  getJsonFromSTR(res.answer))
+    // .catch( err => handlerError(err, "assistant"));
   }
 
    
   const sendData = (data: ResponseData) => {
-    console.log(data)
     fetchData("https://codematter.am/api-v1/openAi", "POST", data)
     .then( res => changChatTalk("assistant", res.answer))
     .catch( err => handlerError(err, "assistant"));
@@ -97,10 +110,12 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   }, [chat])
 
   useEffect(() => { 
+    if (chat.messages.length % 4 === 0) {
+      console.log("make")
+      getManeContent(chat)
+    }
+    
     // scrolling down after any new message
-
-    console.log(chatTalk)
-    console.log(chat)
     const refCur = myComponentRef.current;
     refCur && refCur.scrollIntoView
     ({ behavior: "smooth", block: "end", inline: "end"});
@@ -109,6 +124,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   useEffect(() => {
      // it works only ones!
     reduxMessage.state && chat && changChatTalk("assistant", chat.answer);
+
   }, [reduxMessage.state]);
 
 
@@ -136,6 +152,8 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
           <>
             {chatTalk.map(chat => {
              return  <ChatMessage  key={chat.id} 
+             id = {chat.id}
+             confObj = {chatTalk}
               className = {classNames({
                 ["_userMess"]: chat.role === "user",
                 ["_assistMess"]: chat.role !== "user",

@@ -10,9 +10,8 @@ import {
 
 import "./ChatMessage.scss";
 
-const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet }) => {
+const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet , id, confObj}) => {
   const toolTypes: string[] = ["_hidden_tools", "_show_tools"];
-
   const [toolsView, setToolsView] = useState(toolTypes[0]);
   const [elPose, setElPose] = useState<pose>(elPosition);
   let  currentRef = useRef<HTMLDivElement>(null)
@@ -22,11 +21,12 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet }) => {
     top: elPose.top,
   };
 
-  const DrawTools: FC<toolsDrawType>= ({tools}) => {
+  const DrawTools: FC<toolsDrawType>= ({tools, conf }) => {
     // console.log(tools);
     const newTool = 
       <div  className={` ${toolsView}  defTool`} style={rcStyle}>
-          {tools.map(tool => <p key={tool.id}  onClick={tool.action}>{tool.name}</p>)}
+      
+          {tools.map(tool => <p key={tool.id}  onClick={() => tool.action(id, conf)}>{tool.name}</p>)}
       </div>
     
     return newTool;
@@ -70,7 +70,7 @@ const ChatMessage: FC<chatMessageType> = ({ className, chat, dataSet }) => {
     >
       <pre> {chat.content} </pre>
 
-      {<DrawTools tools={toolsObj}  />}
+      {<DrawTools tools={toolsObj} conf = {confObj}  />}
     </div>
   );
 };

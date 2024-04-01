@@ -5,7 +5,7 @@ export interface myMessage {
 }
 
 
-interface Message {
+export interface Message {
     role: "user" | "assistant";
     content: string;
   }

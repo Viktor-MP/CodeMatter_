@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { myMessage } from "../UserChat/typesUserChat";
+import { Message, myMessage } from "../UserChat/typesUserChat";
 
 
 export interface pose {
@@ -11,7 +11,7 @@ export interface toolsObjType {
     "id" : number;
     "name" :string;
     "usage" : boolean;
-    "action" : (e: React.MouseEvent<HTMLParagraphElement>) => void;
+    "action" : (id : number, conf: Message[]) => void;
 }
 
 
@@ -20,10 +20,13 @@ export interface chatMessageType {
     chat: myMessage
     className: string
     dataSet: string
+    id: number
+    confObj: Message[]
 }
 
 export interface toolsDrawType {
     tools: toolsObjType[]
+    conf: Message[]
 }
 
 
@@ -38,18 +41,24 @@ const messageStyle: CSSProperties = {
     boxShadow: "0px 0px 30px -10px rgba(0,0,0,0.79)"
 }
 
-const deleteMessage = (e: any) => {
-    console.log(e)
-    console.log(e.currentTarget)
-    console.log(e)
+const deleteMessage = (messId: number, conf: Message[]) => {
+    console.log(messId)
+    console.log(conf)
+
+
 }
-const eddetMessage = (e: any) => {
-    console.log(e)
+const editMessage = (messId: number, conf: Message[]) => {
+    console.log(messId)
+    console.log(conf)
+
 
 }
 
-const copyMessage = (e: any) => {
-    console.log(e)
+const copyMessage = (messId: number, conf: Message[]) => {
+
+    navigator.clipboard.writeText(conf[messId].content)
+    return "coped"
+
 }
 
 
@@ -59,19 +68,19 @@ const toolsObj: toolsObjType[] = [
         "id" : 0,
         "name" : "Delete",
         "usage" : true,
-        "action" : (e) => deleteMessage(e)
+        "action" : (id, conf) => deleteMessage(id, conf)
     },
     {
         "id" : 1,
-        "name" : "Eddet",
+        "name" : "Edit",
         "usage" : false,
-        "action" : (e) => eddetMessage(e)
+        "action" : (id, conf) => editMessage(id, conf)
     },
     {
         "id" : 2,
         "name" : "Copy text",
         "usage" : true,
-        "action" : (e) => copyMessage(e)
+        "action" : (id, conf) => copyMessage(id, conf)
     }
   ]
 
