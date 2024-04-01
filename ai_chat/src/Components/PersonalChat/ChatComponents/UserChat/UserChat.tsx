@@ -47,6 +47,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
     }
     setTyping(false)
   };
+  
   const copyObj = (obj: object) => JSON.parse(JSON.stringify(obj));
 
 
@@ -54,16 +55,14 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
 
   const changChatTalk  = (role: "user" | "assistant", content: string)  => {
     setTyping(false)
+    role === "user" && setTyping(true);
+    const newChat = copyObj(chat)
+    newChat.messages.push({
+      content: content,
+      role: role,
+    });
 
-    if (role === "user") {
-      const newChat = copyObj(chat)
-      newChat.messages.push({
-        content: content,
-        role: role,
-      });
-      setTyping(true);
-      setChat(newChat);
-    }
+    setChat(newChat);
     
     setMessageId(prevId => prevId += 1)
     const info =  {
@@ -71,8 +70,31 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
       role: role,
       id: messageId,
     }
+    
     setChatTalk( prev => [ ...prev, info ])
   };
+
+
+  const getJsonFromSTR = (str: string) => {
+    console.log(str)
+    const jsonStartEnd = "{}"
+    console.log(jsonStartEnd[0]);
+    
+    const strJson = str.slice(str.indexOf(jsonStartEnd[0]), str.lastIndexOf(jsonStartEnd[1]) +1  )
+      console.log(strJson)
+      // console.log(JSON.parse(strJson))
+  }
+
+  const getManeContent = (data: ResponseData) => {
+    let cont = copyObj(data)
+    let maneMean = {role:"user", content: "give me the mane meaning of all conversation and give me two common questions regarding to that conversation and give me that questions in a JSON file type and give it to me do not add anything in JSON except questions and make that json using all rules for that"}
+    cont.messages.push(maneMean)
+
+
+    fetchData("https://codematter.am/api-v1/openAi", "POST", cont)
+    .then( res =>  getJsonFromSTR(res.answer))
+    // .catch( err => handlerError(err, "assistant"));
+  }
 
    
   const sendData = (data: ResponseData) => {
@@ -84,10 +106,15 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
 
   useEffect(() => { 
     // I made it hear to change rendering keys correctly
-    reduxMessage.state &&  sendData(chat)
+    reduxMessage.state && typing &&  sendData(chat)
   }, [chat])
 
   useEffect(() => { 
+    if (chat.messages.length % 4 === 0) {
+      console.log("make")
+      getManeContent(chat)
+    }
+    
     // scrolling down after any new message
     const refCur = myComponentRef.current;
     refCur && refCur.scrollIntoView
@@ -97,11 +124,12 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
   useEffect(() => {
      // it works only ones!
     reduxMessage.state && chat && changChatTalk("assistant", chat.answer);
+
   }, [reduxMessage.state]);
 
 
   useEffect(() => {
-    // sending user message
+   
     reduxMessage.message && changChatTalk("user", reduxMessage.message);
   }, [reduxMessage.message]);
 
@@ -124,6 +152,8 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
           <>
             {chatTalk.map(chat => {
              return  <ChatMessage  key={chat.id} 
+             id = {chat.id}
+             confObj = {chatTalk}
               className = {classNames({
                 ["_userMess"]: chat.role === "user",
                 ["_assistMess"]: chat.role !== "user",

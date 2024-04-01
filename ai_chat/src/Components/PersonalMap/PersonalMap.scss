@@ -5,13 +5,23 @@
     cursor: ew-resize;
 }
 
+
+
 .personalMap_ {
+    overflow-y: auto;
+    max-height: 100vh;
 
-    display: flex;
+    .hamburger-react {
+        position: absolute !important;
+        
+        top: 0.5rem;
+    }
 
+
+
+
+    transition: margin-left 0.4s;
     color: var(--color);
-    margin-left: 0;
-    transition: margin-left 0.6s;
     width: 35%;
 
     h2 {
@@ -38,14 +48,45 @@
 
 
 
+.personalMap_.showBar[data-width = false] {
+    z-index: 2;
+    background-color: var(--background_color);
+    position: absolute;
+    width: max-content;
+    max-width: 100%; 
 
-.hide {
+
+        
+    .hamburger-react {
+        right: 2rem;
+    }
+
+}
+
+
+
+.showBar[data-width = big] {
+    margin-left: 0%;
+    .hamburger-react {
+        display: none;
+    }
+}
+.showBar[data-width = false] {
+    
+    .hamburger-react {
+       right: 2rem;
+    }
+}
+
+
+
+
+.hideBar {
+    transition: margin-left 0s;
     margin-left: -35%;
+  
+    .hamburger-react {
+        left:2rem;
+     }
 }
 
-
-div.hamburger-react {
-    position: absolute !important;
-    left: 2rem;
-    top: 0.5rem;
-}

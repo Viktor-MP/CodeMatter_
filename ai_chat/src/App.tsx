@@ -6,7 +6,7 @@ import PersonalChat from "./Components/PersonalChat/PersonalChat";
 function App() {
   return (
     <div className="App">
-      <PersonalMap  className="personalMap_"/>
+      <PersonalMap  className="personalMap_ person"/>
       <PersonalChat  className="personalChat_"/>
 
     </div>
