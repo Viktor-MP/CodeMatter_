@@ -1,11 +1,12 @@
 import { configureStore  } from "@reduxjs/toolkit";
-import { chatSlice } from "./UserSliceStor"
+import { chatSlice, chatTalkSlice } from "./UserSliceStor"
 import { topicSlice } from "./UserSliceStor";
 
 export const store = configureStore({
   reducer: {
     message: chatSlice.reducer,
     value: topicSlice.reducer,
+    talkId: chatTalkSlice.reducer,
   },
 });
 

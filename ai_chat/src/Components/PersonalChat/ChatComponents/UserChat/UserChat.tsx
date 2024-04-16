@@ -6,6 +6,7 @@ import { ResponseData, myMessage, chatStart } from "./typesUserChat";
 
 import {
     getMessageState,
+    getTalkState,
     getTopicState,
 } from "../../../ReduxToolkit/UserSliceStor";
 import { useAppSelector } from "../../../ReduxToolkit/app_hooks";
@@ -22,19 +23,20 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
     const [messageId, setMessageId] = useState<number>(0);
     const myComponentRef = useRef<HTMLDivElement>(null);
 
+    
     // getting message from form component
     const reduxMessage = useAppSelector(getMessageState);
     const reduxTopic = useAppSelector(getTopicState);
-
+    const reduxTalk = useAppSelector(getTalkState)
+    console.log(reduxTalk.talkId)
     const handlerError = (err: Error, role: "assistant") => {
-        console.log(err);
-
+    //   console.log(err)
         if (err.message === "Network Error") {
             setMessageId((prevId) => (prevId += 1));
 
             const errorInfo = {
                 content: "Please check your connection",
-                role: role,
+                role: role, 
                 id: messageId,
             };
             alert(errorInfo.content);
@@ -64,18 +66,19 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
         };
 
         setChatTalk((prev) => [...prev, info]);
+        
     };
 
     const getJsonFromSTR = (str: string) => {
-        console.log(str);
+        // console.log(str);
         const jsonStartEnd = "{}";
-        console.log(jsonStartEnd[0]);
+        // console.log(jsonStartEnd[0]);
 
         const strJson = str.slice(
             str.indexOf(jsonStartEnd[0]),
             str.lastIndexOf(jsonStartEnd[1]) + 1
         );
-        console.log(strJson);
+        // console.log(strJson);
         // console.log(JSON.parse(strJson))
     };
 
@@ -107,7 +110,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
 
     useEffect(() => {
         if (chat.messages.length % 4 === 0) {
-            console.log("make");
+            // console.log("make");
             getManeContent(chat);
         }
 
@@ -131,9 +134,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
     }, [reduxMessage.message]);
 
     useEffect(() => {
-        // console.log(reduxMessage)
         reduxTopic.value && changChatTalk("user", reduxTopic.value);
-        reduxTopic?.value && console.log(reduxTopic);
     }, [reduxTopic?.value]);
 
     const ChatTalkDrawHandler = () => {
