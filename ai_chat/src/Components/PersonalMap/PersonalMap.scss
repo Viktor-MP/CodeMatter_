@@ -1,28 +1,24 @@
-
-
 .resizer_ {
     width: 0.7rem;
     cursor: ew-resize;
 }
-
-
-
+$mapSize: 35;
 .personalMap_ {
     overflow-y: auto;
     max-height: 100vh;
-
     .hamburger-react {
-        position: absolute !important;
-        
-        top: 0.5rem;
+        display: none;
     }
+    // .hamburger-react {
+    //     position: absolute !important;
 
-
-
+    //     top: 0.5rem;
+    //     right: 0.5rem;
+    // }
 
     transition: margin-left 0.4s;
     color: var(--color);
-    width: 35%;
+    width: #{$mapSize} + "%";
 
     h2 {
         font-size: 2rem;
@@ -31,62 +27,80 @@
     ._gideCard_ {
         padding: 0.5rem 0;
         p {
-            padding: 0.5rem  0;
+            padding: 0.5rem 0;
         }
     }
     ._mapGide_ {
         padding: 1rem 2rem;
     }
-  
+
     ._mapContainer_ {
         overflow: auto;
         width: 100%;
     }
-    
-} 
+}
+
+// ===========  Burger and left bar animation  ==============
+// .personalMap_.showBar[data-width = false] {
+//     z-index: 2;
+//     background-color: var(--background_color);
+//     position: absolute;
+//     width: max-content;
+//     max-width: 100%;
+
+//     .hamburger-react {
+//         right: 2rem;
+//     }
+
+// }
+
+// .showBar[data-width = big] {
+//     margin-left: 0%;
+//     .hamburger-react {
+//         display: none;
+//     }
+// }
+// .showBar[data-width = false] {
+
+//     .hamburger-react {
+//        right: 2rem;
+//     }
+// }
+
+// .hideBar {
+//     transition: margin-left 0s;
+//     margin-left: -35%;
+
+//     .hamburger-react {
+//         left:2rem;
+//      }
+// }
+
+// ===========  Burger and left bar animation  ==============
+
+$breakpoint-xs: 480px;
+$breakpoint-s: 768px;
+$breakpoint-md: 1024px;
+$breakpoint-l: 1250px;
+$breakpoint-xl: 1900px;
+
+@media screen and (max-width: #{$breakpoint-l}) {
+    .personalMap_ {
+        margin-left: -#{$mapSize} + "%";
 
 
-
-
-.personalMap_.showBar[data-width = false] {
-    z-index: 2;
-    background-color: var(--background_color);
-    position: absolute;
-    width: max-content;
-    max-width: 100%; 
-
-
-        
-    .hamburger-react {
-        right: 2rem;
+        .hamburger-react {
+            position: absolute !important;
+            display: flex;
+            top: 0.5rem;
+            left: 0.5rem;
+        }
+      
     }
-
-}
-
-
-
-.showBar[data-width = big] {
-    margin-left: 0%;
-    .hamburger-react {
-        display: none;
+    .personalMap_.showBar {
+        margin-left: 0;
+        position: absolute;
+        width: max-content;
+        z-index: 3;
     }
 }
-.showBar[data-width = false] {
-    
-    .hamburger-react {
-       right: 2rem;
-    }
-}
-
-
-
-
-.hideBar {
-    transition: margin-left 0s;
-    margin-left: -35%;
-  
-    .hamburger-react {
-        left:2rem;
-     }
-}
-

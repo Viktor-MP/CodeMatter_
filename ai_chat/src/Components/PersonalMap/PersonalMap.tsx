@@ -43,24 +43,29 @@ useEffect(() => {
   }
 }
 
- useEffect(() => {
-
-  const handleResize = () => setWidth(window.innerWidth);
-
-  setBar(true)
-  width < 1100 &&  setBar(false)
-  window.addEventListener("resize", handleResize);
-
-  return () => {
-    window.removeEventListener("resize", handleResize);
-  };
-}, [width]);
 
 
-useEffect(() => {
-  setBurger(bar)
-}, [bar])
+// ===========  Burger and left bar animation  ==============
 
+//  useEffect(() => {
+
+//   const handleResize = () => setWidth(window.innerWidth);
+
+//   setBar(true)
+//   width < 1100 &&  setBar(false)
+//   window.addEventListener("resize", handleResize);
+
+//   return () => {
+//     window.removeEventListener("resize", handleResize);
+//   };
+// }, [width]);
+
+
+// useEffect(() => {
+//   setBurger(bar)
+// }, [bar])
+
+// ===========  Burger and left bar animation  ==============
 
 
 
@@ -73,7 +78,8 @@ const mapDataHandler = (data: DeveloperLevel[])  => {
 }
 
   return (
-    <section  data-width = {bar && "big"} 
+    <section  
+    // data-width = {bar && "big"} 
     onBlur={burgerChanger}
     ref={sectionRef}
     className={classNames(className, {
