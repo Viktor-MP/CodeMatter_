@@ -6,7 +6,9 @@
 }
 
 :root {
-  --background_color: #030303;
+  --background_color: #8a8787;
+  /* --background_color: #030303; */
+  --text_color: #030303;
   --background_color_hover: rgb(194, 194, 194);
   --bg_color_btn: #D9D9D9;
   --color: #ffffff;

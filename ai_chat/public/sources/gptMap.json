@@ -1,9 +1,142 @@
 [
     {
-      "HTML/CSS": "Strong understanding",
-      "JavaScript": "Basic proficiency",
-      "Responsive Design": "Knowledge",
-      "Version Control": "Basic understanding (e.g., Git)"
+        "level": "Junior Front-End Developer",
+        "id" : 1,
+        "knowledge": [
+            {
+                "name": "HTML",
+                "description": "Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser.",
+                "source": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+            },
+            {
+                "name": "CSS",
+                "description": "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in HTML.",
+                "source": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+            },
+            {
+                "name": "Responsive Design",
+                "description": "Responsive web design (RWD) is an approach to web design that makes web pages render well on a variety of devices and window or screen sizes.",
+                "source": "https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design"
+            },
+            {
+                "name": "JavaScript",
+                "description": "JavaScript is a programming language that enables interactive web pages and is an essential part of web development.",
+                "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+            },
+            {
+                "name": "Version Control",
+                "description": "Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later.",
+                "source": "https://docs.github.com/en/get-started/using-git/about-git"
+            }
+        ]
+    },
+    {
+        "level": "Mid-Level Front-End Developer",
+        "id" : 2,
+
+        "knowledge": [
+            {
+                "name": "Advanced HTML/CSS",
+                "description": "Advanced techniques in HTML and CSS.",
+                "source": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+                "source2": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+            },
+            {
+                "name": "CSS Preprocessors",
+                "description": "Tools that extend the capabilities of CSS.",
+                "source": "https://sass-lang.com/",
+                "source2": "https://stylus-lang.com/"
+            },
+            {
+                "name": "TypeScript",
+                "description": "A typed superset of JavaScript.",
+                "source": "https://www.typescriptlang.org/"
+            },
+            {
+                "name": "Frameworks",
+                "description": "Collections of pre-written code to aid in software development.",
+                "source": "https://reactjs.org/",
+                "source2": "https://angular.io/"
+            },
+            {
+                "name": "Libraries",
+                "description": "Reusable code modules that provide specific functionality.",
+                "source": "https://jquery.com/",
+                "source2": "https://lodash.com/"
+            },
+            {
+                "name": "Asynchronous requests",
+                "description": "Handling asynchronous operations in web development.",
+                "source": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+                "source2": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+            },
+            {
+                "name": "Promise",
+                "description": "A JavaScript object representing the eventual completion or failure of an asynchronous operation.",
+                "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+            }
+        ]
+    },
+    {
+        "level": "Senior Front-End Developer",
+        "id" : 3,
+        "knowledge": [
+            {
+                "name": "Performance Optimization",
+                "description": "Techniques to improve the performance of web applications.",
+                "source": "https://developers.google.com/web/fundamentals/performance"
+            },
+            {
+                "name": "Accessibility",
+                "description": "Ensuring web content is usable by as many people as possible, including those with disabilities.",
+                "source": "https://developer.mozilla.org/en-US/docs/Web/Accessibility"
+            },
+            {
+                "name": "Testing",
+                "description": "Processes and tools for verifying that software meets its requirements and behaves as expected.",
+                "source": "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Testing_your_JavaScript"
+            },
+            {
+                "name": "UX/UI Design Principles",
+                "description": "Guidelines and best practices for designing user interfaces and improving user experience.",
+                "source": "https://www.interaction-design.org/literature/topics/ui-design"
+            },
+            {
+                "name": "Responsive Web Design",
+                "description": "Design approach that ensures web applications render well on a variety of devices and window or screen sizes.",
+                "source": "https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design"
+            },
+            {
+                "name": "Advanced JavaScript",
+                "description": "In-depth knowledge and understanding of advanced JavaScript concepts.",
+                "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+            }
+        ]
+    },
+    {
+        "level": "Full-Stack Developer",
+        "id" : 4,
+        "knowledge": [
+            {
+                "name": "Server-side languages",
+                "description": "Languages used for server-side programming, such as Python, Node.js, Ruby, etc.",
+                "source": "https://developer.mozilla.org/en-US/docs/Learn/Server-side"
+            },
+            {
+                "name": "API Design",
+                "description": "Principles and best practices for designing APIs (Application Programming Interfaces).",
+                "source": "https://restfulapi.net/"
+            },
+            {
+                "name": "Security",
+                "description": "Methods and techniques to protect web applications from threats and vulnerabilities.",
+                "source": "https://owasp.org/"
+            },
+            {
+                "name": "DevOps",
+                "description": "Collaborative practices that aim to unify software development (Dev) and IT operations (Ops).",
+                "source": "https://aws.amazon.com/devops/what-is-devops/"
+            }
+        ]
     }
 ]
-  

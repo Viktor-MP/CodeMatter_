@@ -1,107 +1,107 @@
-import React, { DOMAttributes, FocusEvent, FocusEventHandler, useEffect, useRef, useState } from "react"
-import { FC } from "react"
+import React, { useEffect, useRef, useState } from "react";
+import { FC } from "react";
 
-import { PersonMapType, DeveloperLevel } from "./typesPersonMap"
-import fetchData from "../../AxiosRequest/AxiosRequest"
+import { PersonMapType, DeveloperLevel } from "./typesPersonMap";
+import fetchData from "../../AxiosRequest/AxiosRequest";
 
-import { Sling as Hamburger } from "hamburger-react"
+import { Sling as Hamburger } from "hamburger-react";
 
-import classNames from "classnames"
-import "./PersonalMap.scss"
-import "../../App.css"
+import classNames from "classnames";
+import "./PersonalMap.scss";
+import "../../App.css";
 
+const PersonalMap: FC<PersonMapType> = ({ className }) => {
+    const [mapData, setMapData] = useState<DeveloperLevel[]>();
 
+    const [width, setWidth] = useState<number>(window.innerWidth);
+    let state = width < 1100 ? false : true;
+    const [bar, setBar] = useState<boolean>(state);
+    const [burger, setBurger] = useState<boolean>(state);
 
-const PersonalMap: FC <PersonMapType> = ({className}) => {
-const [mapData,setMapData] = useState<DeveloperLevel[]>()
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const [shouldHandleBlur, setShouldHandleBlur] = useState(true);
 
+    useEffect(() => {
+        fetchData("./sources/gptMap.json")
+            .then((data) => setMapData(data))
+            .catch((error) => console.error("Error fetching data:", error));
+    }, []);
 
-const [width, setWidth] = useState<number>(window.innerWidth)
-let state = width < 1100? false : true
-const [bar, setBar] = useState<boolean>(state)
-const [burger, setBurger] = useState<boolean>(state)
+    // ===========  Burger and left bar animation  ==============
 
-const sectionRef = useRef<HTMLDivElement>(null);
+    //  useEffect(() => {
 
+    //   const handleResize = () => setWidth(window.innerWidth);
 
+    //   setBar(true)
+    //   width < 1100 &&  setBar(false)
+    //   window.addEventListener("resize", handleResize);
 
- 
-useEffect(() => {
-    fetchData("./sources/map.json")
-    .then(data => setMapData(data) )
-    .catch(error => console.error("Error fetching data:", error));
- }, [])
+    //   return () => {
+    //     window.removeEventListener("resize", handleResize);
+    //   };
+    // }, [width]);
 
- 
+    // useEffect(() => {
+    //     console.log(burger);
+    //     setBar(burger);
+    // }, [burger]);
 
- const burgerChanger = (e:  FocusEvent<HTMLElement, Element>) => {
-  if (
-    !e.relatedTarget || 
-    !sectionRef.current?.contains(e.relatedTarget as Node)
-    ) {
-   !bar && burger &&  setBurger(!burger)
-  }
-}
+    // ===========  Burger and left bar animation  ==============
 
+    const mapDataHandler = (data: DeveloperLevel[]) => {
+        // console.log(data);
+        return data.map((dat) => (
+            <div className="_gideCard_" key={dat.id}>
+                <h3> {dat.level} </h3>
+                {dat.knowledge.map((know) => {
+                    // console.log(know);
+                    return (
+                        <a
+                            href={know.source}
+                            rel="noreferrer"
+                            target="_blank"
+                            title={know.description}
+                            key={know.name}
+                        >
+                            {know.name}
+                        </a>
+                    );
+                })}
+            </div>
+        ));
+    };
+    // mapData && mapDataHandler(mapData)
+    return (
+        <section
+            // data-width = {bar && "big"}
+            ref={sectionRef}
+            className={classNames(className, {
+                ["hideBar"]: !burger,
+                ["showBar"]: burger,
+            })}
+        >
+            <Hamburger
+                toggled={burger}
+                toggle={setBurger}
+                direction="left"
+                duration={0.4}
+                color="#1cea1c"
+                easing="ease-in"
+            />
 
+            <div className="_mapContainer_">
+                <div className="_mapGide_">
+                    <h2>Personal education map</h2>
 
-// ===========  Burger and left bar animation  ==============
+                    {mapData && mapDataHandler(mapData)}
 
-//  useEffect(() => {
+                    {mapData && mapDataHandler(mapData)}
+                </div>
+            </div>
+            {/* <div className="resizer_"></div> */}
+        </section>
+    );
+};
 
-//   const handleResize = () => setWidth(window.innerWidth);
-
-//   setBar(true)
-//   width < 1100 &&  setBar(false)
-//   window.addEventListener("resize", handleResize);
-
-//   return () => {
-//     window.removeEventListener("resize", handleResize);
-//   };
-// }, [width]);
-
-
-// useEffect(() => {
-//   setBurger(bar)
-// }, [bar])
-
-// ===========  Burger and left bar animation  ==============
-
-
-
-
-const mapDataHandler = (data: DeveloperLevel[])  => {
-  return data.map(dat => <div className="_gideCard_" key={dat.level}>
-    <h3> {dat.level} </h3>
-    {dat.knowledge.map(know => <p key={know}> {know} </p>)}
-    </div>)
-}
-
-  return (
-    <section  
-    // data-width = {bar && "big"} 
-    onBlur={burgerChanger}
-    ref={sectionRef}
-    className={classNames(className, {
-      ["hideBar"]: !burger,
-      ["showBar"]: burger,
-    })}>
-      <Hamburger  toggled={burger} toggle={setBurger}  direction="left" duration={0.4}  color="#1cea1c"  easing="ease-in"/>
-
-      <div   className="_mapContainer_">
-        <div className="_mapGide_">
-
-          <h2>Personal education map</h2>
-
-          {mapData && (mapDataHandler(mapData))}
-
-          {mapData && (mapDataHandler(mapData))}
-   
-        </div>
-      </div>
-      {/* <div className="resizer_"></div> */}
-    </section>
-  )
-}
-
-export default PersonalMap
+export default PersonalMap;

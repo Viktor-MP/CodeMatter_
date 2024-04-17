@@ -6,37 +6,46 @@ $mapSize: 35;
 .personalMap_ {
     overflow-y: auto;
     max-height: 100vh;
-    .hamburger-react {
-        display: none;
-    }
-    // .hamburger-react {
-    //     position: absolute !important;
-
-    //     top: 0.5rem;
-    //     right: 0.5rem;
-    // }
+    display: flex;
+    flex-direction: column;
 
     transition: margin-left 0.4s;
     color: var(--color);
     width: #{$mapSize} + "%";
 
-    h2 {
-        font-size: 2rem;
-        margin: 2rem 0;
-    }
-    ._gideCard_ {
-        padding: 0.5rem 0;
-        p {
-            padding: 0.5rem 0;
-        }
-    }
-    ._mapGide_ {
-        padding: 1rem 2rem;
+    .hamburger-react {
+        display: none;
     }
 
+    h2 {
+        font-size: 2rem;
+        margin: 0rem 0 1rem 0.5rem;
+        width: 80%;
+
+    }
+    ._gideCard_ {
+        cursor: default;
+        padding: 0.8rem 0;
+        h3 {
+            margin: 0 0.5rem;
+        }
+        a {
+            min-width: max-content;
+            width: 50%;
+            display: block;
+            padding: 0.5rem;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 8px;
+        }
+        a:hover {
+            background-color:var(--background_color_hover);
+            color: var(--text_color);
+        }
+    }
     ._mapContainer_ {
-        overflow: auto;
-        width: 100%;
+        padding: 1rem 0;
+
     }
 }
 
@@ -87,20 +96,26 @@ $breakpoint-xl: 1900px;
 @media screen and (max-width: #{$breakpoint-l}) {
     .personalMap_ {
         margin-left: -#{$mapSize} + "%";
-
+        background-color: var(--background_color);
 
         .hamburger-react {
             position: absolute !important;
-            display: flex;
+            display: block;
             top: 0.5rem;
             left: 0.5rem;
         }
-      
     }
     .personalMap_.showBar {
         margin-left: 0;
         position: absolute;
         width: max-content;
         z-index: 3;
+
+
+        .hamburger-react {
+            position: sticky !important;
+
+            left: 80%;
+        }
     }
 }

@@ -1,7 +1,17 @@
 
+interface knowledgeTypes {
+  name : string;
+  description :string;
+  source :string;
+  source2? :string;
+
+}
+
+
 export interface DeveloperLevel  {
   level: string;
-  knowledge: string[];
+  id: number;
+  knowledge: knowledgeTypes[];
 }
 
 
