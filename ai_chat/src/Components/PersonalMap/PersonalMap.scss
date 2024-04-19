@@ -2,7 +2,7 @@
     width: 0.7rem;
     cursor: ew-resize;
 }
-$mapSize: 35;
+
 .personalMap_ {
     overflow-y: auto;
     max-height: 100vh;
@@ -11,17 +11,12 @@ $mapSize: 35;
 
     transition: margin-left 0.4s;
     color: var(--color);
-    width: #{$mapSize} + "%";
-
-    .hamburger-react {
-        display: none;
-    }
+    // width: var(--leftBar_width);
 
     h2 {
         font-size: 2rem;
         margin: 0rem 0 1rem 0.5rem;
         width: 80%;
-
     }
     ._gideCard_ {
         cursor: default;
@@ -39,83 +34,59 @@ $mapSize: 35;
             border-radius: 8px;
         }
         a:hover {
-            background-color:var(--background_color_hover);
+            background-color: var(--background_color_hover);
             color: var(--text_color);
         }
     }
     ._mapContainer_ {
         padding: 1rem 0;
-
     }
 }
 
-// ===========  Burger and left bar animation  ==============
-// .personalMap_.showBar[data-width = false] {
-//     z-index: 2;
-//     background-color: var(--background_color);
-//     position: absolute;
-//     width: max-content;
-//     max-width: 100%;
-
-//     .hamburger-react {
-//         right: 2rem;
-//     }
-
-// }
-
-// .showBar[data-width = big] {
-//     margin-left: 0%;
-//     .hamburger-react {
-//         display: none;
-//     }
-// }
-// .showBar[data-width = false] {
-
-//     .hamburger-react {
-//        right: 2rem;
-//     }
-// }
-
-// .hideBar {
-//     transition: margin-left 0s;
-//     margin-left: -35%;
-
-//     .hamburger-react {
-//         left:2rem;
-//      }
-// }
-
-// ===========  Burger and left bar animation  ==============
+.hamburger-react {
+    display: none;
+}
 
 $breakpoint-xs: 480px;
-$breakpoint-s: 768px;
+$breakpoint-s: 788px;
 $breakpoint-md: 1024px;
 $breakpoint-l: 1250px;
 $breakpoint-xl: 1900px;
 
 @media screen and (max-width: #{$breakpoint-l}) {
+    :root {
+        --barWidth: 45%;
+    }
+    .hamburger-react {
+        position: absolute !important;
+        display: block;
+        left: 0.5rem;
+        top: 0.5rem;
+        z-index: 4;
+    }
     .personalMap_ {
-        margin-left: -#{$mapSize} + "%";
+        width: var(--leftBar_width);
         background-color: var(--background_color);
+        z-index: 3;
+    }
+    .showBar {
+        margin-left: 0;
+    }
 
-        .hamburger-react {
-            position: absolute !important;
-            display: block;
-            top: 0.5rem;
-            left: 0.5rem;
-        }
+    .showBar ~ .hamburger-react {
+        left: 25% ;
+    }
+    .hideBar {
+        margin-left: var(--leftBar-width);
+    }
+}
+@media screen and (max-width: #{$breakpoint-s}) {
+    .showBar ~ .hamburger-react {
+        left: 80% ;
     }
     .personalMap_.showBar {
         margin-left: 0;
-        position: absolute;
-        width: max-content;
-        z-index: 3;
-
-
-        .hamburger-react {
-            position: sticky !important;
-
-            left: 80%;
-        }
+        position: absolute !important;
+        width: 100vw;
     }
 }

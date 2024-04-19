@@ -16,9 +16,13 @@ export interface DeveloperLevel  {
 
 
 export interface PersonMapType {
+  burgerState: boolean
   className: string;
 }
 
+export interface PersonalChatType {
+  className: string;
+}
 
 export interface PersonType {
   className: string;

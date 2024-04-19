@@ -28,7 +28,7 @@ const UserChat: FC<PersonType> = ({ className, buttonValue }) => {
     const reduxMessage = useAppSelector(getMessageState);
     const reduxTopic = useAppSelector(getTopicState);
     const reduxTalk = useAppSelector(getTalkState)
-    console.log(reduxTalk.talkId)
+    // console.log(reduxTalk.talkId)
     const handlerError = (err: Error, role: "assistant") => {
     //   console.log(err)
         if (err.message === "Network Error") {
